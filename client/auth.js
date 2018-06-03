@@ -1,29 +1,27 @@
-function authenticateUser(token) {
-  localStorage.setItem('token', token);
+function authenticateUser (token) {
+  localStorage.setItem('token', token)
 }
 
-
-function isUserAuthenticated() {
-  return localStorage.getItem('token') !== null;
+function isUserAuthenticated () {
+  return localStorage.getItem('token') !== null
 }
 
-
-function deauthenticateUser() {
+function deauthenticateUser () {
   var basePath = window.location.origin
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
+  localStorage.removeItem('token')
+  localStorage.removeItem('user')
   window.location = basePath + '/'
 }
 
-function getToken() {
-  return localStorage.getItem('token');
+function getToken () {
+  return localStorage.getItem('token')
 }
 
-function getUser() {
+function getUser () {
   return JSON.parse(localStorage.getItem('user'))
 }
 
-function checkResponse(res) {
+function checkResponse (res) {
   if (res.status === 401) {
     console.log('redirect')
   }

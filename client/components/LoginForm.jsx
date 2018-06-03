@@ -29,7 +29,7 @@ export class LoginForm extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
-		loginUser(this.state.user)
+    loginUser(this.state.user)
   }
 
   render () {
@@ -49,23 +49,10 @@ export class LoginForm extends React.Component {
     </form>
 
     return <div>
-			{/* TEST */}
+      {/* TEST */}
       {/* <NotificationSystem ref='notificationSystem' /> */}
       {form}
     </div>
   }
 }
 export default LoginForm
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//     Posts: state.Blogs.posts
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     AddBlog: (post) => dispatch(AddBlog(post))
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AddForm)
