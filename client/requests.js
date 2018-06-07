@@ -52,20 +52,20 @@ function getUsers () {
 function loginUser (data) {
   return axios.post(basePath + '/api/login', qs.stringify(data))
     .then(function (response) {
-        localStorage.setItem('token', response.data.token)
-        let user = {
-          username: response.data.user.username,
-          name: response.data.user.first_name + response.data.user.last_name,
-          email: response.data.user.email,
-          admin: response.data.user.admin,
-          id: response.data.user.id
-        }
-        localStorage.setItem('user', JSON.stringify(user))
-        if (user.admin) {
-          window.location = 'http://localhost:3000' + '/admin'
-        } else {
-          window.location = 'http://localhost:3000' + '/info'
-        }
+      localStorage.setItem('token', response.data.token)
+      let user = {
+        username: response.data.user.username,
+        name: response.data.user.first_name + response.data.user.last_name,
+        email: response.data.user.email,
+        admin: response.data.user.admin,
+        id: response.data.user.id
+      }
+      localStorage.setItem('user', JSON.stringify(user))
+      if (user.admin) {
+        window.location = 'http://localhost:3000' + '/admin'
+      } else {
+        window.location = 'http://localhost:3000' + '/info'
+      }
     })
     .catch(function (error) {
       window.location = 'http://localhost:3000' + '/error'

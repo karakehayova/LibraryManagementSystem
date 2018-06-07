@@ -10,6 +10,10 @@ module.exports = {
     path: path.join(__dirname, 'client/build'),
     filename: '[name].js'
   },
+  devServer: {
+    publicPath: '/',
+    historyApiFallback: true
+  },
   module: {
     loaders: [
       {
