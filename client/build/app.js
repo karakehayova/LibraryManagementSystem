@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 48);
+/******/ 	return __webpack_require__(__webpack_require__.s = 53);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -71,9 +71,9 @@
 /* WEBPACK VAR INJECTION */(function(process) {
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = __webpack_require__(50);
+  module.exports = __webpack_require__(55);
 } else {
-  module.exports = __webpack_require__(51);
+  module.exports = __webpack_require__(56);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
@@ -343,8 +343,8 @@ process.umask = function() { return 0; };
 "use strict";
 
 
-var bind = __webpack_require__(25);
-var isBuffer = __webpack_require__(54);
+var bind = __webpack_require__(27);
+var isBuffer = __webpack_require__(58);
 
 /*global toString:true*/
 
@@ -672,11 +672,11 @@ if (process.env.NODE_ENV !== 'production') {
   // By explicitly using `prop-types` you are opting into new development behavior.
   // http://fb.me/prop-types-in-prod
   var throwOnDirectAccess = true;
-  module.exports = __webpack_require__(88)(isValidElement, throwOnDirectAccess);
+  module.exports = __webpack_require__(79)(isValidElement, throwOnDirectAccess);
 } else {
   // By explicitly using `prop-types` you are opting into new production behavior.
   // http://fb.me/prop-types-in-prod
-  module.exports = __webpack_require__(89)();
+  module.exports = __webpack_require__(80)();
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
@@ -1292,7 +1292,7 @@ Router.childContextTypes = {
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(96);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp__ = __webpack_require__(87);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_path_to_regexp___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_path_to_regexp__);
 
 
@@ -1534,7 +1534,7 @@ module.exports = ReactPropTypesSecret;
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(3);
-var normalizeHeaderName = __webpack_require__(56);
+var normalizeHeaderName = __webpack_require__(60);
 
 var DEFAULT_CONTENT_TYPE = {
   'Content-Type': 'application/x-www-form-urlencoded'
@@ -1550,10 +1550,10 @@ function getDefaultAdapter() {
   var adapter;
   if (typeof XMLHttpRequest !== 'undefined') {
     // For browsers use XHR adapter
-    adapter = __webpack_require__(26);
+    adapter = __webpack_require__(28);
   } else if (typeof process !== 'undefined') {
     // For node use HTTP adapter
-    adapter = __webpack_require__(26);
+    adapter = __webpack_require__(28);
   }
   return adapter;
 }
@@ -2054,10 +2054,230 @@ var createTransitionManager = function createTransitionManager() {
 /* 24 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(53);
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LoginForm = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _requests = __webpack_require__(25);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var LoginForm = exports.LoginForm = function (_React$Component) {
+  _inherits(LoginForm, _React$Component);
+
+  function LoginForm(props) {
+    _classCallCheck(this, LoginForm);
+
+    var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
+
+    _this.state = {
+      user: {
+        username: '',
+        password: ''
+      }
+    };
+    _this.handleChange = _this.handleChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(LoginForm, [{
+    key: 'handleChange',
+    value: function handleChange(e) {
+      if (e) {
+        var target = e.target;
+        var value = target ? target.value : e.value;
+        var name = target ? target.name : '';
+        var fields = Object.assign({}, this.state.user);
+        fields[name] = value;
+        this.setState({
+          user: fields
+        });
+      }
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(e) {
+      e.preventDefault();
+      (0, _requests.loginUser)(this.state.user);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      var form = _react2.default.createElement(
+        'form',
+        { onSubmit: this.handleSubmit },
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Username'
+          ),
+          _react2.default.createElement('input', { type: 'text', className: 'form-control', value: this.state.user.username, name: 'username', required: true, onChange: this.handleChange })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement(
+            'label',
+            null,
+            'Password'
+          ),
+          _react2.default.createElement('input', { type: 'password', className: 'form-control', value: this.state.user.password, name: 'password', required: true, onChange: this.handleChange })
+        ),
+        _react2.default.createElement(
+          'button',
+          { type: 'submit', className: 'btn btn-warning' },
+          'Submit'
+        )
+      );
+
+      return _react2.default.createElement(
+        'div',
+        null,
+        form
+      );
+    }
+  }]);
+
+  return LoginForm;
+}(_react2.default.Component);
+
+exports.default = LoginForm;
 
 /***/ }),
 /* 25 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/* eslint-disable no-undef */
+var axios = __webpack_require__(26);
+var basePath = 'http://localhost:3001';
+var qs = __webpack_require__(75);
+
+var auth = __webpack_require__(34);
+
+function getUserByID(id) {
+  return axios.get(basePath + '/api/user/' + id).then(function (response) {
+    auth.checkResponse(response);
+    return response.data;
+  }).catch(function (error) {
+    window.location = 'http://localhost:3000' + '/';
+  });
+}
+
+function borrowBook(userID, bookID) {
+  return axios.put(basePath + '/api/borrow/book/' + bookID + '/user/' + userID).then(function (response) {
+    auth.checkResponse(response);
+    return response.data;
+  }).catch(function (error) {
+    window.location = 'http://localhost:3000' + '/admin';
+  });
+}
+
+function returnBook(userID, bookID) {
+  return axios.delete(basePath + '/api/borrow/book/' + bookID + '/user/' + userID).then(function (response) {
+    auth.checkResponse(response);
+    return response.data;
+  }).catch(function (error) {
+    window.location = 'http://localhost:3000' + '/admin';
+  });
+}
+
+function getUsers() {
+  return axios.get(basePath + '/api/users').then(function (response) {
+    auth.checkResponse(response);
+    return response.data;
+  }).catch(function (error) {
+    window.location = 'http://localhost:3000' + '/';
+  });
+}
+
+function loginUser(data) {
+  return axios.post(basePath + '/api/login', qs.stringify(data)).then(function (response) {
+    localStorage.setItem('token', response.data.token);
+    var user = {
+      username: response.data.user.username,
+      name: response.data.user.first_name + response.data.user.last_name,
+      email: response.data.user.email,
+      admin: response.data.user.admin,
+      id: response.data.user.id
+    };
+    localStorage.setItem('user', JSON.stringify(user));
+    if (user.admin) {
+      window.location = 'http://localhost:3000' + '/admin';
+    } else {
+      window.location = 'http://localhost:3000' + '/info';
+    }
+  }).catch(function (error) {
+    window.location = 'http://localhost:3000' + '/error';
+    return { error: error };
+  });
+}
+
+function getBooks() {
+  return axios.get(basePath + '/api/books').then(function (response) {
+    return response.data;
+  }).catch(function (error) {
+    window.location = basePath + '/';
+  });
+}
+
+function postUser(data) {
+  return axios.post(basePath + '/api/user', qs.stringify(data)).then(function (response) {
+    return response.data;
+  }).catch(function (error) {
+    window.location = basePath + '/register';
+  });
+}
+
+function postBook(data) {
+  return axios.post(basePath + '/api/user', qs.stringify(data)).then(function (response) {
+    return response.data;
+  }).catch(function (error) {
+    window.location = basePath + '/';
+  });
+}
+
+module.exports = {
+  getUsers: getUsers,
+  getBooks: getBooks,
+  postBook: postBook,
+  postUser: postUser,
+  loginUser: loginUser,
+  getUserByID: getUserByID,
+  borrowBook: borrowBook,
+  returnBook: returnBook
+};
+
+/***/ }),
+/* 26 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(57);
+
+/***/ }),
+/* 27 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2075,19 +2295,19 @@ module.exports = function bind(fn, thisArg) {
 
 
 /***/ }),
-/* 26 */
+/* 28 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 /* WEBPACK VAR INJECTION */(function(process) {
 
 var utils = __webpack_require__(3);
-var settle = __webpack_require__(57);
-var buildURL = __webpack_require__(59);
-var parseHeaders = __webpack_require__(60);
-var isURLSameOrigin = __webpack_require__(61);
-var createError = __webpack_require__(27);
-var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(62);
+var settle = __webpack_require__(61);
+var buildURL = __webpack_require__(63);
+var parseHeaders = __webpack_require__(64);
+var isURLSameOrigin = __webpack_require__(65);
+var createError = __webpack_require__(29);
+var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(66);
 
 module.exports = function xhrAdapter(config) {
   return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -2184,7 +2404,7 @@ module.exports = function xhrAdapter(config) {
     // This is only done if running in a standard browser environment.
     // Specifically not if we're in a web worker, or react-native.
     if (utils.isStandardBrowserEnv()) {
-      var cookies = __webpack_require__(63);
+      var cookies = __webpack_require__(67);
 
       // Add xsrf header
       var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -2263,13 +2483,13 @@ module.exports = function xhrAdapter(config) {
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 27 */
+/* 29 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var enhanceError = __webpack_require__(58);
+var enhanceError = __webpack_require__(62);
 
 /**
  * Create an Error with the specified message, config, error code, request and response.
@@ -2288,7 +2508,7 @@ module.exports = function createError(message, config, code, request, response) 
 
 
 /***/ }),
-/* 28 */
+/* 30 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2300,7 +2520,7 @@ module.exports = function isCancel(value) {
 
 
 /***/ }),
-/* 29 */
+/* 31 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2326,7 +2546,7 @@ module.exports = Cancel;
 
 
 /***/ }),
-/* 30 */
+/* 32 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2546,7 +2766,7 @@ module.exports = {
 
 
 /***/ }),
-/* 31 */
+/* 33 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -2571,199 +2791,108 @@ module.exports = {
 
 
 /***/ }),
-/* 32 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- */
-
-
-
-var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
-
-/**
- * Simple, lightweight module assisting with the detection and context of
- * Worker. Helps avoid circular dependencies and allows code to reason about
- * whether or not they are in a Worker, even if they never include the main
- * `ReactWorker` dependency.
- */
-var ExecutionEnvironment = {
-
-  canUseDOM: canUseDOM,
-
-  canUseWorkers: typeof Worker !== 'undefined',
-
-  canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
-
-  canUseViewport: canUseDOM && !!window.screen,
-
-  isInWorker: !canUseDOM // For now, this is true - might change in the future.
-
-};
-
-module.exports = ExecutionEnvironment;
-
-/***/ }),
-/* 33 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- */
-
-/* eslint-disable fb-www/typeof-undefined */
-
-/**
- * Same as document.activeElement but wraps in a try-catch block. In IE it is
- * not safe to call document.activeElement if there is nothing focused.
- *
- * The activeElement will be null only if the document or document body is not
- * yet defined.
- *
- * @param {?DOMDocument} doc Defaults to current document.
- * @return {?DOMElement}
- */
-function getActiveElement(doc) /*?DOMElement*/{
-  doc = doc || (typeof document !== 'undefined' ? document : undefined);
-  if (typeof doc === 'undefined') {
-    return null;
-  }
-  try {
-    return doc.activeElement || doc.body;
-  } catch (e) {
-    return doc.body;
-  }
-}
-
-module.exports = getActiveElement;
-
-/***/ }),
 /* 34 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * @typechecks
- * 
- */
-
-/*eslint-disable no-self-compare */
 
 
+function authenticateUser(token) {
+  localStorage.setItem('token', token);
+}
 
-var hasOwnProperty = Object.prototype.hasOwnProperty;
+function isUserAuthenticated() {
+  return localStorage.getItem('token') !== null;
+}
 
-/**
- * inlined Object.is polyfill to avoid requiring consumers ship their own
- * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
- */
-function is(x, y) {
-  // SameValue algorithm
-  if (x === y) {
-    // Steps 1-5, 7-10
-    // Steps 6.b-6.e: +0 != -0
-    // Added the nonzero y check to make Flow happy, but it is redundant
-    return x !== 0 || y !== 0 || 1 / x === 1 / y;
-  } else {
-    // Step 6.a: NaN == NaN
-    return x !== x && y !== y;
+function deauthenticateUser() {
+  var basePath = window.location.origin;
+  localStorage.removeItem('token');
+  localStorage.removeItem('user');
+  window.location = basePath + '/';
+}
+
+function getToken() {
+  return localStorage.getItem('token');
+}
+
+function getUser() {
+  return JSON.parse(localStorage.getItem('user'));
+}
+
+function checkResponse(res) {
+  if (res.status === 401) {
+    console.log('redirect');
   }
 }
 
-/**
- * Performs equality by iterating through keys on an object and returning false
- * when any key has values which are not strictly equal between the arguments.
- * Returns true when the values of all keys are strictly equal.
- */
-function shallowEqual(objA, objB) {
-  if (is(objA, objB)) {
-    return true;
-  }
-
-  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
-    return false;
-  }
-
-  var keysA = Object.keys(objA);
-  var keysB = Object.keys(objB);
-
-  if (keysA.length !== keysB.length) {
-    return false;
-  }
-
-  // Test for A's keys different from B.
-  for (var i = 0; i < keysA.length; i++) {
-    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-module.exports = shallowEqual;
+module.exports = {
+  authenticateUser: authenticateUser,
+  isUserAuthenticated: isUserAuthenticated,
+  deauthenticateUser: deauthenticateUser,
+  getToken: getToken,
+  getUser: getUser,
+  checkResponse: checkResponse
+};
 
 /***/ }),
 /* 35 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(78);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(82);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(39);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(84);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(86);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(89);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(90);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(41);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(21);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(94);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(95);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(96);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(97);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
 
 
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- *
- * 
- */
 
-var isTextNode = __webpack_require__(79);
 
-/*eslint-disable no-bitwise */
 
-/**
- * Checks if a given DOM node contains or is another DOM node.
- */
-function containsNode(outerNode, innerNode) {
-  if (!outerNode || !innerNode) {
-    return false;
-  } else if (outerNode === innerNode) {
-    return true;
-  } else if (isTextNode(outerNode)) {
-    return false;
-  } else if (isTextNode(innerNode)) {
-    return containsNode(outerNode, innerNode.parentNode);
-  } else if ('contains' in outerNode) {
-    return outerNode.contains(innerNode);
-  } else if (outerNode.compareDocumentPosition) {
-    return !!(outerNode.compareDocumentPosition(innerNode) & 16);
-  } else {
-    return false;
-  }
-}
 
-module.exports = containsNode;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /***/ }),
 /* 36 */
@@ -3069,7 +3198,7 @@ Link.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createMemoryHistory__ = __webpack_require__(94);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createMemoryHistory__ = __webpack_require__(85);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createMemoryHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_history_createMemoryHistory__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(13);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3240,7 +3369,7 @@ Prompt.contextTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_warning__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant__ = __webpack_require__(5);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(100);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_history__ = __webpack_require__(44);
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -3282,10 +3411,10 @@ var Redirect = function (_React$Component) {
   };
 
   Redirect.prototype.componentDidUpdate = function componentDidUpdate(prevProps) {
-    var prevTo = __WEBPACK_IMPORTED_MODULE_4_history__["a" /* createLocation */](prevProps.to);
-    var nextTo = __WEBPACK_IMPORTED_MODULE_4_history__["a" /* createLocation */](this.props.to);
+    var prevTo = __WEBPACK_IMPORTED_MODULE_4_history__["createLocation"](prevProps.to);
+    var nextTo = __WEBPACK_IMPORTED_MODULE_4_history__["createLocation"](this.props.to);
 
-    if (__WEBPACK_IMPORTED_MODULE_4_history__["b" /* locationsAreEqual */](prevTo, nextTo)) {
+    if (__WEBPACK_IMPORTED_MODULE_4_history__["locationsAreEqual"](prevTo, nextTo)) {
       __WEBPACK_IMPORTED_MODULE_2_warning___default.a(false, 'You tried to redirect to the same route you\'re currently on: ' + ('"' + nextTo.pathname + nextTo.search + '"'));
       return;
     }
@@ -3337,6 +3466,34 @@ Redirect.contextTypes = {
 
 /***/ }),
 /* 44 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(91);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createBrowserHistory", function() { return __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createHashHistory__ = __webpack_require__(92);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createHashHistory", function() { return __WEBPACK_IMPORTED_MODULE_1__createHashHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(93);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createMemoryHistory", function() { return __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__["a"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(15);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createLocation", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "locationsAreEqual", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(10);
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "parsePath", function() { return __WEBPACK_IMPORTED_MODULE_4__PathUtils__["d"]; });
+/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "createPath", function() { return __WEBPACK_IMPORTED_MODULE_4__PathUtils__["b"]; });
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+/* 45 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3402,7 +3559,7 @@ var isExtraneousPopstateEvent = function isExtraneousPopstateEvent(event) {
 };
 
 /***/ }),
-/* 45 */
+/* 46 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3585,7 +3742,7 @@ StaticRouter.childContextTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (StaticRouter);
 
 /***/ }),
-/* 46 */
+/* 47 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3679,7 +3836,7 @@ Switch.propTypes = {
 /* harmony default export */ __webpack_exports__["a"] = (Switch);
 
 /***/ }),
-/* 47 */
+/* 48 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3687,7 +3844,7 @@ Switch.propTypes = {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(108);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__ = __webpack_require__(98);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_hoist_non_react_statics__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Route__ = __webpack_require__(22);
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3724,64 +3881,271 @@ var withRouter = function withRouter(Component) {
 /* harmony default export */ __webpack_exports__["a"] = (withRouter);
 
 /***/ }),
-/* 48 */
+/* 49 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ */
+
+
+
+var canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement);
+
+/**
+ * Simple, lightweight module assisting with the detection and context of
+ * Worker. Helps avoid circular dependencies and allows code to reason about
+ * whether or not they are in a Worker, even if they never include the main
+ * `ReactWorker` dependency.
+ */
+var ExecutionEnvironment = {
+
+  canUseDOM: canUseDOM,
+
+  canUseWorkers: typeof Worker !== 'undefined',
+
+  canUseEventListeners: canUseDOM && !!(window.addEventListener || window.attachEvent),
+
+  canUseViewport: canUseDOM && !!window.screen,
+
+  isInWorker: !canUseDOM // For now, this is true - might change in the future.
+
+};
+
+module.exports = ExecutionEnvironment;
+
+/***/ }),
+/* 50 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _LoginForm = __webpack_require__(49);
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ */
+
+/* eslint-disable fb-www/typeof-undefined */
+
+/**
+ * Same as document.activeElement but wraps in a try-catch block. In IE it is
+ * not safe to call document.activeElement if there is nothing focused.
+ *
+ * The activeElement will be null only if the document or document body is not
+ * yet defined.
+ *
+ * @param {?DOMDocument} doc Defaults to current document.
+ * @return {?DOMElement}
+ */
+function getActiveElement(doc) /*?DOMElement*/{
+  doc = doc || (typeof document !== 'undefined' ? document : undefined);
+  if (typeof doc === 'undefined') {
+    return null;
+  }
+  try {
+    return doc.activeElement || doc.body;
+  } catch (e) {
+    return doc.body;
+  }
+}
+
+module.exports = getActiveElement;
+
+/***/ }),
+/* 51 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * @typechecks
+ * 
+ */
+
+/*eslint-disable no-self-compare */
+
+
+
+var hasOwnProperty = Object.prototype.hasOwnProperty;
+
+/**
+ * inlined Object.is polyfill to avoid requiring consumers ship their own
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+ */
+function is(x, y) {
+  // SameValue algorithm
+  if (x === y) {
+    // Steps 1-5, 7-10
+    // Steps 6.b-6.e: +0 != -0
+    // Added the nonzero y check to make Flow happy, but it is redundant
+    return x !== 0 || y !== 0 || 1 / x === 1 / y;
+  } else {
+    // Step 6.a: NaN == NaN
+    return x !== x && y !== y;
+  }
+}
+
+/**
+ * Performs equality by iterating through keys on an object and returning false
+ * when any key has values which are not strictly equal between the arguments.
+ * Returns true when the values of all keys are strictly equal.
+ */
+function shallowEqual(objA, objB) {
+  if (is(objA, objB)) {
+    return true;
+  }
+
+  if (typeof objA !== 'object' || objA === null || typeof objB !== 'object' || objB === null) {
+    return false;
+  }
+
+  var keysA = Object.keys(objA);
+  var keysB = Object.keys(objB);
+
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+
+  // Test for A's keys different from B.
+  for (var i = 0; i < keysA.length; i++) {
+    if (!hasOwnProperty.call(objB, keysA[i]) || !is(objA[keysA[i]], objB[keysA[i]])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+module.exports = shallowEqual;
+
+/***/ }),
+/* 52 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ *
+ * 
+ */
+
+var isTextNode = __webpack_require__(106);
+
+/*eslint-disable no-bitwise */
+
+/**
+ * Checks if a given DOM node contains or is another DOM node.
+ */
+function containsNode(outerNode, innerNode) {
+  if (!outerNode || !innerNode) {
+    return false;
+  } else if (outerNode === innerNode) {
+    return true;
+  } else if (isTextNode(outerNode)) {
+    return false;
+  } else if (isTextNode(innerNode)) {
+    return containsNode(outerNode, innerNode.parentNode);
+  } else if ('contains' in outerNode) {
+    return outerNode.contains(innerNode);
+  } else if (outerNode.compareDocumentPosition) {
+    return !!(outerNode.compareDocumentPosition(innerNode) & 16);
+  } else {
+    return false;
+  }
+}
+
+module.exports = containsNode;
+
+/***/ }),
+/* 53 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _App = __webpack_require__(54);
+
+var _App2 = _interopRequireDefault(_App);
+
+var _LoginForm = __webpack_require__(24);
 
 var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
-var _test = __webpack_require__(75);
+var _RegisterForm = __webpack_require__(99);
 
-var _test2 = _interopRequireDefault(_test);
+var _RegisterForm2 = _interopRequireDefault(_RegisterForm);
 
-__webpack_require__(76);
+var _Main = __webpack_require__(100);
+
+var _Main2 = _interopRequireDefault(_Main);
+
+var _ErrorPage = __webpack_require__(101);
+
+var _ErrorPage2 = _interopRequireDefault(_ErrorPage);
+
+__webpack_require__(102);
+
+var _history = __webpack_require__(103);
+
+var _history2 = _interopRequireDefault(_history);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _reactDom = __webpack_require__(77);
+var _reactDom = __webpack_require__(104);
 
 var _reactDom2 = _interopRequireDefault(_reactDom);
 
-var _reactRouterDom = __webpack_require__(86);
+var _reactRouterDom = __webpack_require__(35);
 
-var _reactRouter = __webpack_require__(109);
+var _reactRouter = __webpack_require__(113);
 
-var _setAuthorizationToken = __webpack_require__(110);
+var _setAuthorizationToken = __webpack_require__(114);
 
 var _setAuthorizationToken2 = _interopRequireDefault(_setAuthorizationToken);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// import { connect } from 'react-redux'
-// import './index.css';
-
-
-// import RegisterForm from './RegisterForm.jsx';
-// import UserPage from './UserPage.jsx'
-// import App from "./App.jsx";
-// import "../semantic/dist/semantic.min.css";
 if (localStorage.token) {
   (0, _setAuthorizationToken2.default)(localStorage.token);
 }
 
 _reactDom2.default.render(_react2.default.createElement(
-  _reactRouterDom.BrowserRouter,
-  null,
+  _reactRouterDom.Router,
+  { history: _history2.default },
   _react2.default.createElement(
     _reactRouter.Switch,
     null,
-    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _LoginForm2.default })
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/', component: _App2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/info', component: _Main2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/login', component: _LoginForm2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/error', component: _ErrorPage2.default }),
+    _react2.default.createElement(_reactRouterDom.Route, { exact: true, path: '/register', component: _RegisterForm2.default })
   )
 ), document.getElementById('root'));
 
 /***/ }),
-/* 49 */
+/* 54 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3790,15 +4154,19 @@ _reactDom2.default.render(_react2.default.createElement(
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LoginForm = undefined;
+exports.App = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _LoginForm = __webpack_require__(24);
+
+var _LoginForm2 = _interopRequireDefault(_LoginForm);
 
 var _react = __webpack_require__(0);
 
 var _react2 = _interopRequireDefault(_react);
 
-var _requests = __webpack_require__(52);
+var _reactRouterDom = __webpack_require__(35);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -3808,106 +4176,66 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var LoginForm = exports.LoginForm = function (_React$Component) {
-  _inherits(LoginForm, _React$Component);
+var App = exports.App = function (_React$Component) {
+  _inherits(App, _React$Component);
 
-  function LoginForm(props) {
-    _classCallCheck(this, LoginForm);
+  function App(props) {
+    _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, (LoginForm.__proto__ || Object.getPrototypeOf(LoginForm)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this, props));
 
-    _this.state = {
-      user: {
-        username: '',
-        password: ''
-      }
-    };
-    _this.handleChange = _this.handleChange.bind(_this);
-    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.state = {};
     return _this;
   }
 
-  _createClass(LoginForm, [{
-    key: 'handleChange',
-    value: function handleChange(e) {
-      if (e) {
-        var target = e.target;
-        var value = target ? target.value : e.value;
-        var name = target ? target.name : '';
-        var fields = Object.assign({}, this.state.user);
-        fields[name] = value;
-        this.setState({
-          user: fields
-        });
-      }
-    }
-  }, {
-    key: 'handleSubmit',
-    value: function handleSubmit(e) {
-      e.preventDefault();
-      (0, _requests.loginUser)(this.state.user);
-    }
-  }, {
+  _createClass(App, [{
     key: 'render',
     value: function render() {
-      var form = _react2.default.createElement(
-        'form',
-        { onSubmit: this.handleSubmit },
-        _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(
-            'label',
-            null,
-            'Username'
-          ),
-          _react2.default.createElement('input', { type: 'text', className: 'form-control', value: this.state.user.username, name: 'username', required: true, onChange: this.handleChange })
-        ),
-        _react2.default.createElement(
-          'div',
-          { className: 'form-group' },
-          _react2.default.createElement(
-            'label',
-            null,
-            'Password'
-          ),
-          _react2.default.createElement('input', { type: 'password', className: 'form-control', value: this.state.user.password, name: 'password', required: true, onChange: this.handleChange })
-        ),
-        _react2.default.createElement(
-          'button',
-          { type: 'submit', className: 'btn btn-warning' },
-          'Submit'
-        )
-      );
-
       return _react2.default.createElement(
-        'div',
-        null,
-        form
+        'nav',
+        { className: 'navbar navbar-expand-lg navbar-light bg-light' },
+        _react2.default.createElement(
+          'ul',
+          { className: 'navbar-nav mr-auto' },
+          _react2.default.createElement(
+            'li',
+            { className: 'nav-item active' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: 'nav-link', to: '/' },
+              ' Home '
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            { className: 'nav-item' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: 'nav-link', to: '/login' },
+              ' Login '
+            )
+          ),
+          _react2.default.createElement(
+            'li',
+            { className: 'nav-item' },
+            _react2.default.createElement(
+              _reactRouterDom.Link,
+              { className: 'nav-link', to: '/register' },
+              ' Register '
+            )
+          )
+        )
       );
     }
   }]);
 
-  return LoginForm;
+  return App;
 }(_react2.default.Component);
 
-exports.default = LoginForm;
-// const mapStateToProps = (state, ownProps) => {
-//   return {
-//     Posts: state.Blogs.posts
-//   }
-// }
-
-// const mapDispatchToProps = (dispatch) => {
-//   return {
-//     AddBlog: (post) => dispatch(AddBlog(post))
-//   }
-// }
-
-// export default connect(mapStateToProps, mapDispatchToProps)(AddForm)
+exports.default = App;
 
 /***/ }),
-/* 50 */
+/* 55 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -3936,7 +4264,7 @@ assign:k}},Y={default:X},Z=Y&&X||Y;module.exports=Z.default?Z.default:Z;
 
 
 /***/ }),
-/* 51 */
+/* 56 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5418,124 +5746,15 @@ module.exports = react;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-/* eslint-disable no-undef */
-var axios = __webpack_require__(24);
-var basePath = window.location.origin;
-var qs = __webpack_require__(71);
-
-var auth = __webpack_require__(74);
-
-function getUserByID(id) {
-  return axios.get(basePath + '/api/user/' + id).then(function (response) {
-    auth.checkResponse(response);
-    return response.data;
-  }).catch(function (error) {
-    window.location = basePath + '/';
-  });
-}
-
-function borrowBook(userID, bookID) {
-  return axios.put(basePath + '/api/borrow/book/' + bookID + '/user/' + userID).then(function (response) {
-    auth.checkResponse(response);
-    return response.data;
-  }).catch(function (error) {
-    window.location = basePath + '/admin';
-  });
-}
-
-function returnBook(userID, bookID) {
-  return axios.delete(basePath + '/api/borrow/book/' + bookID + '/user/' + userID).then(function (response) {
-    auth.checkResponse(response);
-    return response.data;
-  }).catch(function (error) {
-    window.location = basePath + '/admin';
-  });
-}
-
-function getUsers() {
-  return axios.get(basePath + '/api/users').then(function (response) {
-    auth.checkResponse(response);
-    return response.data;
-  }).catch(function (error) {
-    window.location = basePath + '/';
-  });
-}
-
-function loginUser(data) {
-  return axios.post(basePath + '/api/login', qs.stringify(data)).then(function (response) {
-    localStorage.setItem('token', response.data.token);
-    var user = _defineProperty({
-      id: response.data.user.id,
-      username: response.data.user.username,
-      name: response.data.user.first_name + response.data.user.last_name,
-      email: response.data.user.email,
-      admin: response.data.user.admin
-    }, 'id', response.data.user.id);
-    localStorage.setItem('user', JSON.stringify(user));
-    if (user.admin) {
-      window.location = basePath + '/admin';
-    } else {
-      window.location = basePath + '/info';
-    }
-  }).catch(function (error) {
-    window.location = basePath + '/';
-    return { error: error };
-  });
-}
-
-function getBooks() {
-  return axios.get(basePath + '/api/books').then(function (response) {
-    return response.data;
-  }).catch(function (error) {
-    window.location = basePath + '/';
-  });
-}
-
-function postUser(data) {
-  return axios.post(basePath + '/api/user', qs.stringify(data)).then(function (response) {
-    return response.data;
-  }).catch(function (error) {
-    window.location = basePath + '/register';
-  });
-}
-
-function postBook(data) {
-  return axios.post(basePath + '/api/user', qs.stringify(data)).then(function (response) {
-    return response.data;
-  }).catch(function (error) {
-    window.location = basePath + '/';
-  });
-}
-
-module.exports = {
-  getUsers: getUsers,
-  getBooks: getBooks,
-  postBook: postBook,
-  postUser: postUser,
-  loginUser: loginUser,
-  getUserByID: getUserByID,
-  borrowBook: borrowBook,
-  returnBook: returnBook
-};
-
-/***/ }),
-/* 53 */
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(3);
-var bind = __webpack_require__(25);
-var Axios = __webpack_require__(55);
+var bind = __webpack_require__(27);
+var Axios = __webpack_require__(59);
 var defaults = __webpack_require__(18);
 
 /**
@@ -5569,15 +5788,15 @@ axios.create = function create(instanceConfig) {
 };
 
 // Expose Cancel & CancelToken
-axios.Cancel = __webpack_require__(29);
-axios.CancelToken = __webpack_require__(69);
-axios.isCancel = __webpack_require__(28);
+axios.Cancel = __webpack_require__(31);
+axios.CancelToken = __webpack_require__(73);
+axios.isCancel = __webpack_require__(30);
 
 // Expose all/spread
 axios.all = function all(promises) {
   return Promise.all(promises);
 };
-axios.spread = __webpack_require__(70);
+axios.spread = __webpack_require__(74);
 
 module.exports = axios;
 
@@ -5586,7 +5805,7 @@ module.exports.default = axios;
 
 
 /***/ }),
-/* 54 */
+/* 58 */
 /***/ (function(module, exports) {
 
 /*!
@@ -5613,7 +5832,7 @@ function isSlowBuffer (obj) {
 
 
 /***/ }),
-/* 55 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5621,8 +5840,8 @@ function isSlowBuffer (obj) {
 
 var defaults = __webpack_require__(18);
 var utils = __webpack_require__(3);
-var InterceptorManager = __webpack_require__(64);
-var dispatchRequest = __webpack_require__(65);
+var InterceptorManager = __webpack_require__(68);
+var dispatchRequest = __webpack_require__(69);
 
 /**
  * Create a new instance of Axios
@@ -5699,7 +5918,7 @@ module.exports = Axios;
 
 
 /***/ }),
-/* 56 */
+/* 60 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5718,13 +5937,13 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
 
 
 /***/ }),
-/* 57 */
+/* 61 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var createError = __webpack_require__(27);
+var createError = __webpack_require__(29);
 
 /**
  * Resolve or reject a Promise based on response status.
@@ -5751,7 +5970,7 @@ module.exports = function settle(resolve, reject, response) {
 
 
 /***/ }),
-/* 58 */
+/* 62 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5779,7 +5998,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
 
 
 /***/ }),
-/* 59 */
+/* 63 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5852,7 +6071,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
 
 
 /***/ }),
-/* 60 */
+/* 64 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5912,7 +6131,7 @@ module.exports = function parseHeaders(headers) {
 
 
 /***/ }),
-/* 61 */
+/* 65 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -5987,7 +6206,7 @@ module.exports = (
 
 
 /***/ }),
-/* 62 */
+/* 66 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6030,7 +6249,7 @@ module.exports = btoa;
 
 
 /***/ }),
-/* 63 */
+/* 67 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6090,7 +6309,7 @@ module.exports = (
 
 
 /***/ }),
-/* 64 */
+/* 68 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6149,18 +6368,18 @@ module.exports = InterceptorManager;
 
 
 /***/ }),
-/* 65 */
+/* 69 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
 var utils = __webpack_require__(3);
-var transformData = __webpack_require__(66);
-var isCancel = __webpack_require__(28);
+var transformData = __webpack_require__(70);
+var isCancel = __webpack_require__(30);
 var defaults = __webpack_require__(18);
-var isAbsoluteURL = __webpack_require__(67);
-var combineURLs = __webpack_require__(68);
+var isAbsoluteURL = __webpack_require__(71);
+var combineURLs = __webpack_require__(72);
 
 /**
  * Throws a `Cancel` if cancellation has been requested.
@@ -6242,7 +6461,7 @@ module.exports = function dispatchRequest(config) {
 
 
 /***/ }),
-/* 66 */
+/* 70 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6269,7 +6488,7 @@ module.exports = function transformData(data, headers, fns) {
 
 
 /***/ }),
-/* 67 */
+/* 71 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6290,7 +6509,7 @@ module.exports = function isAbsoluteURL(url) {
 
 
 /***/ }),
-/* 68 */
+/* 72 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6311,13 +6530,13 @@ module.exports = function combineURLs(baseURL, relativeURL) {
 
 
 /***/ }),
-/* 69 */
+/* 73 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var Cancel = __webpack_require__(29);
+var Cancel = __webpack_require__(31);
 
 /**
  * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -6375,7 +6594,7 @@ module.exports = CancelToken;
 
 
 /***/ }),
-/* 70 */
+/* 74 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6409,15 +6628,15 @@ module.exports = function spread(callback) {
 
 
 /***/ }),
-/* 71 */
+/* 75 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var stringify = __webpack_require__(72);
-var parse = __webpack_require__(73);
-var formats = __webpack_require__(31);
+var stringify = __webpack_require__(76);
+var parse = __webpack_require__(77);
+var formats = __webpack_require__(33);
 
 module.exports = {
     formats: formats,
@@ -6427,14 +6646,14 @@ module.exports = {
 
 
 /***/ }),
-/* 72 */
+/* 76 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(30);
-var formats = __webpack_require__(31);
+var utils = __webpack_require__(32);
+var formats = __webpack_require__(33);
 
 var arrayPrefixGenerators = {
     brackets: function brackets(prefix) { // eslint-disable-line func-name-matching
@@ -6644,13 +6863,13 @@ module.exports = function (object, opts) {
 
 
 /***/ }),
-/* 73 */
+/* 77 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var utils = __webpack_require__(30);
+var utils = __webpack_require__(32);
 
 var has = Object.prototype.hasOwnProperty;
 
@@ -6825,52 +7044,3044 @@ module.exports = function (str, opts) {
 
 
 /***/ }),
-/* 74 */
+/* 78 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createBrowserHistory__ = __webpack_require__(81);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createBrowserHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_history_createBrowserHistory__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(21);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+/**
+ * The public API for a <Router> that uses HTML5 history.
+ */
+
+var BrowserRouter = function (_React$Component) {
+  _inherits(BrowserRouter, _React$Component);
+
+  function BrowserRouter() {
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, BrowserRouter);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.history = __WEBPACK_IMPORTED_MODULE_3_history_createBrowserHistory___default.a(_this.props), _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  BrowserRouter.prototype.componentWillMount = function componentWillMount() {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!this.props.history, '<BrowserRouter> ignores the history prop. To use a custom history, ' + 'use `import { Router }` instead of `import { BrowserRouter as Router }`.');
+  };
+
+  BrowserRouter.prototype.render = function render() {
+    return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Router__["a" /* default */], { history: this.history, children: this.props.children });
+  };
+
+  return BrowserRouter;
+}(__WEBPACK_IMPORTED_MODULE_1_react___default.a.Component);
+
+BrowserRouter.propTypes = {
+  basename: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string,
+  forceRefresh: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.bool,
+  getUserConfirmation: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
+  keyLength: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.number,
+  children: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.node
+};
+
+
+/* harmony default export */ __webpack_exports__["a"] = (BrowserRouter);
+
+/***/ }),
+/* 79 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(process) {/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var emptyFunction = __webpack_require__(7);
+var invariant = __webpack_require__(6);
+var warning = __webpack_require__(12);
+var assign = __webpack_require__(8);
+
+var ReactPropTypesSecret = __webpack_require__(17);
+var checkPropTypes = __webpack_require__(16);
+
+module.exports = function(isValidElement, throwOnDirectAccess) {
+  /* global Symbol */
+  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
+  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
+
+  /**
+   * Returns the iterator method function contained on the iterable object.
+   *
+   * Be sure to invoke the function with the iterable as context:
+   *
+   *     var iteratorFn = getIteratorFn(myIterable);
+   *     if (iteratorFn) {
+   *       var iterator = iteratorFn.call(myIterable);
+   *       ...
+   *     }
+   *
+   * @param {?object} maybeIterable
+   * @return {?function}
+   */
+  function getIteratorFn(maybeIterable) {
+    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
+    if (typeof iteratorFn === 'function') {
+      return iteratorFn;
+    }
+  }
+
+  /**
+   * Collection of methods that allow declaration and validation of props that are
+   * supplied to React components. Example usage:
+   *
+   *   var Props = require('ReactPropTypes');
+   *   var MyArticle = React.createClass({
+   *     propTypes: {
+   *       // An optional string prop named "description".
+   *       description: Props.string,
+   *
+   *       // A required enum prop named "category".
+   *       category: Props.oneOf(['News','Photos']).isRequired,
+   *
+   *       // A prop named "dialog" that requires an instance of Dialog.
+   *       dialog: Props.instanceOf(Dialog).isRequired
+   *     },
+   *     render: function() { ... }
+   *   });
+   *
+   * A more formal specification of how these methods are used:
+   *
+   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
+   *   decl := ReactPropTypes.{type}(.isRequired)?
+   *
+   * Each and every declaration produces a function with the same signature. This
+   * allows the creation of custom validation functions. For example:
+   *
+   *  var MyLink = React.createClass({
+   *    propTypes: {
+   *      // An optional string or URI prop named "href".
+   *      href: function(props, propName, componentName) {
+   *        var propValue = props[propName];
+   *        if (propValue != null && typeof propValue !== 'string' &&
+   *            !(propValue instanceof URI)) {
+   *          return new Error(
+   *            'Expected a string or an URI for ' + propName + ' in ' +
+   *            componentName
+   *          );
+   *        }
+   *      }
+   *    },
+   *    render: function() {...}
+   *  });
+   *
+   * @internal
+   */
+
+  var ANONYMOUS = '<<anonymous>>';
+
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
+  var ReactPropTypes = {
+    array: createPrimitiveTypeChecker('array'),
+    bool: createPrimitiveTypeChecker('boolean'),
+    func: createPrimitiveTypeChecker('function'),
+    number: createPrimitiveTypeChecker('number'),
+    object: createPrimitiveTypeChecker('object'),
+    string: createPrimitiveTypeChecker('string'),
+    symbol: createPrimitiveTypeChecker('symbol'),
+
+    any: createAnyTypeChecker(),
+    arrayOf: createArrayOfTypeChecker,
+    element: createElementTypeChecker(),
+    instanceOf: createInstanceTypeChecker,
+    node: createNodeChecker(),
+    objectOf: createObjectOfTypeChecker,
+    oneOf: createEnumTypeChecker,
+    oneOfType: createUnionTypeChecker,
+    shape: createShapeTypeChecker,
+    exact: createStrictShapeTypeChecker,
+  };
+
+  /**
+   * inlined Object.is polyfill to avoid requiring consumers ship their own
+   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
+   */
+  /*eslint-disable no-self-compare*/
+  function is(x, y) {
+    // SameValue algorithm
+    if (x === y) {
+      // Steps 1-5, 7-10
+      // Steps 6.b-6.e: +0 != -0
+      return x !== 0 || 1 / x === 1 / y;
+    } else {
+      // Step 6.a: NaN == NaN
+      return x !== x && y !== y;
+    }
+  }
+  /*eslint-enable no-self-compare*/
+
+  /**
+   * We use an Error-like object for backward compatibility as people may call
+   * PropTypes directly and inspect their output. However, we don't use real
+   * Errors anymore. We don't inspect their stack anyway, and creating them
+   * is prohibitively expensive if they are created too often, such as what
+   * happens in oneOfType() for any type before the one that matched.
+   */
+  function PropTypeError(message) {
+    this.message = message;
+    this.stack = '';
+  }
+  // Make `instanceof Error` still work for returned errors.
+  PropTypeError.prototype = Error.prototype;
+
+  function createChainableTypeChecker(validate) {
+    if (process.env.NODE_ENV !== 'production') {
+      var manualPropTypeCallCache = {};
+      var manualPropTypeWarningCount = 0;
+    }
+    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
+      componentName = componentName || ANONYMOUS;
+      propFullName = propFullName || propName;
+
+      if (secret !== ReactPropTypesSecret) {
+        if (throwOnDirectAccess) {
+          // New behavior only for users of `prop-types` package
+          invariant(
+            false,
+            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+            'Use `PropTypes.checkPropTypes()` to call them. ' +
+            'Read more at http://fb.me/use-check-prop-types'
+          );
+        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
+          // Old behavior for people using React.PropTypes
+          var cacheKey = componentName + ':' + propName;
+          if (
+            !manualPropTypeCallCache[cacheKey] &&
+            // Avoid spamming the console because they are often not actionable except for lib authors
+            manualPropTypeWarningCount < 3
+          ) {
+            warning(
+              false,
+              'You are manually calling a React.PropTypes validation ' +
+              'function for the `%s` prop on `%s`. This is deprecated ' +
+              'and will throw in the standalone `prop-types` package. ' +
+              'You may be seeing this warning due to a third-party PropTypes ' +
+              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
+              propFullName,
+              componentName
+            );
+            manualPropTypeCallCache[cacheKey] = true;
+            manualPropTypeWarningCount++;
+          }
+        }
+      }
+      if (props[propName] == null) {
+        if (isRequired) {
+          if (props[propName] === null) {
+            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
+          }
+          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
+        }
+        return null;
+      } else {
+        return validate(props, propName, componentName, location, propFullName);
+      }
+    }
+
+    var chainedCheckType = checkType.bind(null, false);
+    chainedCheckType.isRequired = checkType.bind(null, true);
+
+    return chainedCheckType;
+  }
+
+  function createPrimitiveTypeChecker(expectedType) {
+    function validate(props, propName, componentName, location, propFullName, secret) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== expectedType) {
+        // `propValue` being instance of, say, date/regexp, pass the 'object'
+        // check, but we can offer a more precise error message here rather than
+        // 'of type `object`'.
+        var preciseType = getPreciseType(propValue);
+
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createAnyTypeChecker() {
+    return createChainableTypeChecker(emptyFunction.thatReturnsNull);
+  }
+
+  function createArrayOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
+      }
+      var propValue = props[propName];
+      if (!Array.isArray(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
+      }
+      for (var i = 0; i < propValue.length; i++) {
+        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
+        if (error instanceof Error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createElementTypeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      if (!isValidElement(propValue)) {
+        var propType = getPropType(propValue);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createInstanceTypeChecker(expectedClass) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!(props[propName] instanceof expectedClass)) {
+        var expectedClassName = expectedClass.name || ANONYMOUS;
+        var actualClassName = getClassName(props[propName]);
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createEnumTypeChecker(expectedValues) {
+    if (!Array.isArray(expectedValues)) {
+      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
+      return emptyFunction.thatReturnsNull;
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      for (var i = 0; i < expectedValues.length; i++) {
+        if (is(propValue, expectedValues[i])) {
+          return null;
+        }
+      }
+
+      var valuesString = JSON.stringify(expectedValues);
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createObjectOfTypeChecker(typeChecker) {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (typeof typeChecker !== 'function') {
+        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
+      }
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
+      }
+      for (var key in propValue) {
+        if (propValue.hasOwnProperty(key)) {
+          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+          if (error instanceof Error) {
+            return error;
+          }
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createUnionTypeChecker(arrayOfTypeCheckers) {
+    if (!Array.isArray(arrayOfTypeCheckers)) {
+      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
+      return emptyFunction.thatReturnsNull;
+    }
+
+    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+      var checker = arrayOfTypeCheckers[i];
+      if (typeof checker !== 'function') {
+        warning(
+          false,
+          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
+          'received %s at index %s.',
+          getPostfixForTypeWarning(checker),
+          i
+        );
+        return emptyFunction.thatReturnsNull;
+      }
+    }
+
+    function validate(props, propName, componentName, location, propFullName) {
+      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
+        var checker = arrayOfTypeCheckers[i];
+        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
+          return null;
+        }
+      }
+
+      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createNodeChecker() {
+    function validate(props, propName, componentName, location, propFullName) {
+      if (!isNode(props[propName])) {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      for (var key in shapeTypes) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          continue;
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+    return createChainableTypeChecker(validate);
+  }
+
+  function createStrictShapeTypeChecker(shapeTypes) {
+    function validate(props, propName, componentName, location, propFullName) {
+      var propValue = props[propName];
+      var propType = getPropType(propValue);
+      if (propType !== 'object') {
+        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
+      }
+      // We need to check all keys in case some are required but missing from
+      // props.
+      var allKeys = assign({}, props[propName], shapeTypes);
+      for (var key in allKeys) {
+        var checker = shapeTypes[key];
+        if (!checker) {
+          return new PropTypeError(
+            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
+            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
+            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
+          );
+        }
+        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
+        if (error) {
+          return error;
+        }
+      }
+      return null;
+    }
+
+    return createChainableTypeChecker(validate);
+  }
+
+  function isNode(propValue) {
+    switch (typeof propValue) {
+      case 'number':
+      case 'string':
+      case 'undefined':
+        return true;
+      case 'boolean':
+        return !propValue;
+      case 'object':
+        if (Array.isArray(propValue)) {
+          return propValue.every(isNode);
+        }
+        if (propValue === null || isValidElement(propValue)) {
+          return true;
+        }
+
+        var iteratorFn = getIteratorFn(propValue);
+        if (iteratorFn) {
+          var iterator = iteratorFn.call(propValue);
+          var step;
+          if (iteratorFn !== propValue.entries) {
+            while (!(step = iterator.next()).done) {
+              if (!isNode(step.value)) {
+                return false;
+              }
+            }
+          } else {
+            // Iterator will provide entry [k,v] tuples rather than values.
+            while (!(step = iterator.next()).done) {
+              var entry = step.value;
+              if (entry) {
+                if (!isNode(entry[1])) {
+                  return false;
+                }
+              }
+            }
+          }
+        } else {
+          return false;
+        }
+
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  function isSymbol(propType, propValue) {
+    // Native Symbol.
+    if (propType === 'symbol') {
+      return true;
+    }
+
+    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
+    if (propValue['@@toStringTag'] === 'Symbol') {
+      return true;
+    }
+
+    // Fallback for non-spec compliant Symbols which are polyfilled.
+    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
+      return true;
+    }
+
+    return false;
+  }
+
+  // Equivalent of `typeof` but with special handling for array and regexp.
+  function getPropType(propValue) {
+    var propType = typeof propValue;
+    if (Array.isArray(propValue)) {
+      return 'array';
+    }
+    if (propValue instanceof RegExp) {
+      // Old webkits (at least until Android 4.0) return 'function' rather than
+      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
+      // passes PropTypes.object.
+      return 'object';
+    }
+    if (isSymbol(propType, propValue)) {
+      return 'symbol';
+    }
+    return propType;
+  }
+
+  // This handles more types than `getPropType`. Only used for error messages.
+  // See `createPrimitiveTypeChecker`.
+  function getPreciseType(propValue) {
+    if (typeof propValue === 'undefined' || propValue === null) {
+      return '' + propValue;
+    }
+    var propType = getPropType(propValue);
+    if (propType === 'object') {
+      if (propValue instanceof Date) {
+        return 'date';
+      } else if (propValue instanceof RegExp) {
+        return 'regexp';
+      }
+    }
+    return propType;
+  }
+
+  // Returns a string that is postfixed to a warning about an invalid type.
+  // For example, "undefined" or "of type array"
+  function getPostfixForTypeWarning(value) {
+    var type = getPreciseType(value);
+    switch (type) {
+      case 'array':
+      case 'object':
+        return 'an ' + type;
+      case 'boolean':
+      case 'date':
+      case 'regexp':
+        return 'a ' + type;
+      default:
+        return type;
+    }
+  }
+
+  // Returns class name of the object, if any.
+  function getClassName(propValue) {
+    if (!propValue.constructor || !propValue.constructor.name) {
+      return ANONYMOUS;
+    }
+    return propValue.constructor.name;
+  }
+
+  ReactPropTypes.checkPropTypes = checkPropTypes;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
+
+/***/ }),
+/* 80 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/**
+ * Copyright (c) 2013-present, Facebook, Inc.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+
+
+var emptyFunction = __webpack_require__(7);
+var invariant = __webpack_require__(6);
+var ReactPropTypesSecret = __webpack_require__(17);
+
+module.exports = function() {
+  function shim(props, propName, componentName, location, propFullName, secret) {
+    if (secret === ReactPropTypesSecret) {
+      // It is still safe when called from React.
+      return;
+    }
+    invariant(
+      false,
+      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
+      'Use PropTypes.checkPropTypes() to call them. ' +
+      'Read more at http://fb.me/use-check-prop-types'
+    );
+  };
+  shim.isRequired = shim;
+  function getShim() {
+    return shim;
+  };
+  // Important!
+  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
+  var ReactPropTypes = {
+    array: shim,
+    bool: shim,
+    func: shim,
+    number: shim,
+    object: shim,
+    string: shim,
+    symbol: shim,
+
+    any: shim,
+    arrayOf: getShim,
+    element: shim,
+    instanceOf: getShim,
+    node: shim,
+    objectOf: getShim,
+    oneOf: getShim,
+    oneOfType: getShim,
+    shape: getShim,
+    exact: getShim
+  };
+
+  ReactPropTypes.checkPropTypes = emptyFunction;
+  ReactPropTypes.PropTypes = ReactPropTypes;
+
+  return ReactPropTypes;
+};
+
+
+/***/ }),
+/* 81 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-function authenticateUser(token) {
-  localStorage.setItem('token', token);
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _warning = __webpack_require__(1);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _invariant = __webpack_require__(5);
+
+var _invariant2 = _interopRequireDefault(_invariant);
+
+var _LocationUtils = __webpack_require__(19);
+
+var _PathUtils = __webpack_require__(9);
+
+var _createTransitionManager = __webpack_require__(20);
+
+var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+
+var _DOMUtils = __webpack_require__(38);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var PopStateEvent = 'popstate';
+var HashChangeEvent = 'hashchange';
+
+var getHistoryState = function getHistoryState() {
+  try {
+    return window.history.state || {};
+  } catch (e) {
+    // IE 11 sometimes throws when accessing window.history.state
+    // See https://github.com/ReactTraining/history/pull/289
+    return {};
+  }
+};
+
+/**
+ * Creates a history object that uses the HTML5 history API including
+ * pushState, replaceState, and the popstate event.
+ */
+var createBrowserHistory = function createBrowserHistory() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Browser history needs a DOM');
+
+  var globalHistory = window.history;
+  var canUseHistory = (0, _DOMUtils.supportsHistory)();
+  var needsHashChangeListener = !(0, _DOMUtils.supportsPopStateOnHashChange)();
+
+  var _props$forceRefresh = props.forceRefresh,
+      forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
+      _props$getUserConfirm = props.getUserConfirmation,
+      getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
+      _props$keyLength = props.keyLength,
+      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
+
+  var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
+
+  var getDOMLocation = function getDOMLocation(historyState) {
+    var _ref = historyState || {},
+        key = _ref.key,
+        state = _ref.state;
+
+    var _window$location = window.location,
+        pathname = _window$location.pathname,
+        search = _window$location.search,
+        hash = _window$location.hash;
+
+
+    var path = pathname + search + hash;
+
+    (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
+
+    if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
+
+    return (0, _LocationUtils.createLocation)(path, state, key);
+  };
+
+  var createKey = function createKey() {
+    return Math.random().toString(36).substr(2, keyLength);
+  };
+
+  var transitionManager = (0, _createTransitionManager2.default)();
+
+  var setState = function setState(nextState) {
+    _extends(history, nextState);
+
+    history.length = globalHistory.length;
+
+    transitionManager.notifyListeners(history.location, history.action);
+  };
+
+  var handlePopState = function handlePopState(event) {
+    // Ignore extraneous popstate events in WebKit.
+    if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) return;
+
+    handlePop(getDOMLocation(event.state));
+  };
+
+  var handleHashChange = function handleHashChange() {
+    handlePop(getDOMLocation(getHistoryState()));
+  };
+
+  var forceNextPop = false;
+
+  var handlePop = function handlePop(location) {
+    if (forceNextPop) {
+      forceNextPop = false;
+      setState();
+    } else {
+      var action = 'POP';
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (ok) {
+          setState({ action: action, location: location });
+        } else {
+          revertPop(location);
+        }
+      });
+    }
+  };
+
+  var revertPop = function revertPop(fromLocation) {
+    var toLocation = history.location;
+
+    // TODO: We could probably make this more reliable by
+    // keeping a list of keys we've seen in sessionStorage.
+    // Instead, we just default to 0 for keys we don't know.
+
+    var toIndex = allKeys.indexOf(toLocation.key);
+
+    if (toIndex === -1) toIndex = 0;
+
+    var fromIndex = allKeys.indexOf(fromLocation.key);
+
+    if (fromIndex === -1) fromIndex = 0;
+
+    var delta = toIndex - fromIndex;
+
+    if (delta) {
+      forceNextPop = true;
+      go(delta);
+    }
+  };
+
+  var initialLocation = getDOMLocation(getHistoryState());
+  var allKeys = [initialLocation.key];
+
+  // Public interface
+
+  var createHref = function createHref(location) {
+    return basename + (0, _PathUtils.createPath)(location);
+  };
+
+  var push = function push(path, state) {
+    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+    var action = 'PUSH';
+    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var href = createHref(location);
+      var key = location.key,
+          state = location.state;
+
+
+      if (canUseHistory) {
+        globalHistory.pushState({ key: key, state: state }, null, href);
+
+        if (forceRefresh) {
+          window.location.href = href;
+        } else {
+          var prevIndex = allKeys.indexOf(history.location.key);
+          var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
+
+          nextKeys.push(location.key);
+          allKeys = nextKeys;
+
+          setState({ action: action, location: location });
+        }
+      } else {
+        (0, _warning2.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
+
+        window.location.href = href;
+      }
+    });
+  };
+
+  var replace = function replace(path, state) {
+    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+    var action = 'REPLACE';
+    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var href = createHref(location);
+      var key = location.key,
+          state = location.state;
+
+
+      if (canUseHistory) {
+        globalHistory.replaceState({ key: key, state: state }, null, href);
+
+        if (forceRefresh) {
+          window.location.replace(href);
+        } else {
+          var prevIndex = allKeys.indexOf(history.location.key);
+
+          if (prevIndex !== -1) allKeys[prevIndex] = location.key;
+
+          setState({ action: action, location: location });
+        }
+      } else {
+        (0, _warning2.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
+
+        window.location.replace(href);
+      }
+    });
+  };
+
+  var go = function go(n) {
+    globalHistory.go(n);
+  };
+
+  var goBack = function goBack() {
+    return go(-1);
+  };
+
+  var goForward = function goForward() {
+    return go(1);
+  };
+
+  var listenerCount = 0;
+
+  var checkDOMListeners = function checkDOMListeners(delta) {
+    listenerCount += delta;
+
+    if (listenerCount === 1) {
+      (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
+
+      if (needsHashChangeListener) (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
+    } else if (listenerCount === 0) {
+      (0, _DOMUtils.removeEventListener)(window, PopStateEvent, handlePopState);
+
+      if (needsHashChangeListener) (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
+    }
+  };
+
+  var isBlocked = false;
+
+  var block = function block() {
+    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+    var unblock = transitionManager.setPrompt(prompt);
+
+    if (!isBlocked) {
+      checkDOMListeners(1);
+      isBlocked = true;
+    }
+
+    return function () {
+      if (isBlocked) {
+        isBlocked = false;
+        checkDOMListeners(-1);
+      }
+
+      return unblock();
+    };
+  };
+
+  var listen = function listen(listener) {
+    var unlisten = transitionManager.appendListener(listener);
+    checkDOMListeners(1);
+
+    return function () {
+      checkDOMListeners(-1);
+      unlisten();
+    };
+  };
+
+  var history = {
+    length: globalHistory.length,
+    action: 'POP',
+    location: initialLocation,
+    createHref: createHref,
+    push: push,
+    replace: replace,
+    go: go,
+    goBack: goBack,
+    goForward: goForward,
+    block: block,
+    listen: listen
+  };
+
+  return history;
+};
+
+exports.default = createBrowserHistory;
+
+/***/ }),
+/* 82 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createHashHistory__ = __webpack_require__(83);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createHashHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_history_createHashHistory__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(21);
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+
+
+
+
+
+
+/**
+ * The public API for a <Router> that uses window.location.hash.
+ */
+
+var HashRouter = function (_React$Component) {
+  _inherits(HashRouter, _React$Component);
+
+  function HashRouter() {
+    var _temp, _this, _ret;
+
+    _classCallCheck(this, HashRouter);
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.history = __WEBPACK_IMPORTED_MODULE_3_history_createHashHistory___default.a(_this.props), _temp), _possibleConstructorReturn(_this, _ret);
+  }
+
+  HashRouter.prototype.componentWillMount = function componentWillMount() {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!this.props.history, '<HashRouter> ignores the history prop. To use a custom history, ' + 'use `import { Router }` instead of `import { HashRouter as Router }`.');
+  };
+
+  HashRouter.prototype.render = function render() {
+    return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Router__["a" /* default */], { history: this.history, children: this.props.children });
+  };
+
+  return HashRouter;
+}(__WEBPACK_IMPORTED_MODULE_1_react___default.a.Component);
+
+HashRouter.propTypes = {
+  basename: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string,
+  getUserConfirmation: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
+  hashType: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.oneOf(['hashbang', 'noslash', 'slash']),
+  children: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.node
+};
+
+
+/* harmony default export */ __webpack_exports__["a"] = (HashRouter);
+
+/***/ }),
+/* 83 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _warning = __webpack_require__(1);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _invariant = __webpack_require__(5);
+
+var _invariant2 = _interopRequireDefault(_invariant);
+
+var _LocationUtils = __webpack_require__(19);
+
+var _PathUtils = __webpack_require__(9);
+
+var _createTransitionManager = __webpack_require__(20);
+
+var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+
+var _DOMUtils = __webpack_require__(38);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var HashChangeEvent = 'hashchange';
+
+var HashPathCoders = {
+  hashbang: {
+    encodePath: function encodePath(path) {
+      return path.charAt(0) === '!' ? path : '!/' + (0, _PathUtils.stripLeadingSlash)(path);
+    },
+    decodePath: function decodePath(path) {
+      return path.charAt(0) === '!' ? path.substr(1) : path;
+    }
+  },
+  noslash: {
+    encodePath: _PathUtils.stripLeadingSlash,
+    decodePath: _PathUtils.addLeadingSlash
+  },
+  slash: {
+    encodePath: _PathUtils.addLeadingSlash,
+    decodePath: _PathUtils.addLeadingSlash
+  }
+};
+
+var getHashPath = function getHashPath() {
+  // We can't use window.location.hash here because it's not
+  // consistent across browsers - Firefox will pre-decode it!
+  var href = window.location.href;
+  var hashIndex = href.indexOf('#');
+  return hashIndex === -1 ? '' : href.substring(hashIndex + 1);
+};
+
+var pushHashPath = function pushHashPath(path) {
+  return window.location.hash = path;
+};
+
+var replaceHashPath = function replaceHashPath(path) {
+  var hashIndex = window.location.href.indexOf('#');
+
+  window.location.replace(window.location.href.slice(0, hashIndex >= 0 ? hashIndex : 0) + '#' + path);
+};
+
+var createHashHistory = function createHashHistory() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Hash history needs a DOM');
+
+  var globalHistory = window.history;
+  var canGoWithoutReload = (0, _DOMUtils.supportsGoWithoutReloadUsingHash)();
+
+  var _props$getUserConfirm = props.getUserConfirmation,
+      getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
+      _props$hashType = props.hashType,
+      hashType = _props$hashType === undefined ? 'slash' : _props$hashType;
+
+  var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
+
+  var _HashPathCoders$hashT = HashPathCoders[hashType],
+      encodePath = _HashPathCoders$hashT.encodePath,
+      decodePath = _HashPathCoders$hashT.decodePath;
+
+
+  var getDOMLocation = function getDOMLocation() {
+    var path = decodePath(getHashPath());
+
+    (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
+
+    if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
+
+    return (0, _LocationUtils.createLocation)(path);
+  };
+
+  var transitionManager = (0, _createTransitionManager2.default)();
+
+  var setState = function setState(nextState) {
+    _extends(history, nextState);
+
+    history.length = globalHistory.length;
+
+    transitionManager.notifyListeners(history.location, history.action);
+  };
+
+  var forceNextPop = false;
+  var ignorePath = null;
+
+  var handleHashChange = function handleHashChange() {
+    var path = getHashPath();
+    var encodedPath = encodePath(path);
+
+    if (path !== encodedPath) {
+      // Ensure we always have a properly-encoded hash.
+      replaceHashPath(encodedPath);
+    } else {
+      var location = getDOMLocation();
+      var prevLocation = history.location;
+
+      if (!forceNextPop && (0, _LocationUtils.locationsAreEqual)(prevLocation, location)) return; // A hashchange doesn't always == location change.
+
+      if (ignorePath === (0, _PathUtils.createPath)(location)) return; // Ignore this change; we already setState in push/replace.
+
+      ignorePath = null;
+
+      handlePop(location);
+    }
+  };
+
+  var handlePop = function handlePop(location) {
+    if (forceNextPop) {
+      forceNextPop = false;
+      setState();
+    } else {
+      var action = 'POP';
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (ok) {
+          setState({ action: action, location: location });
+        } else {
+          revertPop(location);
+        }
+      });
+    }
+  };
+
+  var revertPop = function revertPop(fromLocation) {
+    var toLocation = history.location;
+
+    // TODO: We could probably make this more reliable by
+    // keeping a list of paths we've seen in sessionStorage.
+    // Instead, we just default to 0 for paths we don't know.
+
+    var toIndex = allPaths.lastIndexOf((0, _PathUtils.createPath)(toLocation));
+
+    if (toIndex === -1) toIndex = 0;
+
+    var fromIndex = allPaths.lastIndexOf((0, _PathUtils.createPath)(fromLocation));
+
+    if (fromIndex === -1) fromIndex = 0;
+
+    var delta = toIndex - fromIndex;
+
+    if (delta) {
+      forceNextPop = true;
+      go(delta);
+    }
+  };
+
+  // Ensure the hash is encoded properly before doing anything else.
+  var path = getHashPath();
+  var encodedPath = encodePath(path);
+
+  if (path !== encodedPath) replaceHashPath(encodedPath);
+
+  var initialLocation = getDOMLocation();
+  var allPaths = [(0, _PathUtils.createPath)(initialLocation)];
+
+  // Public interface
+
+  var createHref = function createHref(location) {
+    return '#' + encodePath(basename + (0, _PathUtils.createPath)(location));
+  };
+
+  var push = function push(path, state) {
+    (0, _warning2.default)(state === undefined, 'Hash history cannot push state; it is ignored');
+
+    var action = 'PUSH';
+    var location = (0, _LocationUtils.createLocation)(path, undefined, undefined, history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var path = (0, _PathUtils.createPath)(location);
+      var encodedPath = encodePath(basename + path);
+      var hashChanged = getHashPath() !== encodedPath;
+
+      if (hashChanged) {
+        // We cannot tell if a hashchange was caused by a PUSH, so we'd
+        // rather setState here and ignore the hashchange. The caveat here
+        // is that other hash histories in the page will consider it a POP.
+        ignorePath = path;
+        pushHashPath(encodedPath);
+
+        var prevIndex = allPaths.lastIndexOf((0, _PathUtils.createPath)(history.location));
+        var nextPaths = allPaths.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
+
+        nextPaths.push(path);
+        allPaths = nextPaths;
+
+        setState({ action: action, location: location });
+      } else {
+        (0, _warning2.default)(false, 'Hash history cannot PUSH the same path; a new entry will not be added to the history stack');
+
+        setState();
+      }
+    });
+  };
+
+  var replace = function replace(path, state) {
+    (0, _warning2.default)(state === undefined, 'Hash history cannot replace state; it is ignored');
+
+    var action = 'REPLACE';
+    var location = (0, _LocationUtils.createLocation)(path, undefined, undefined, history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var path = (0, _PathUtils.createPath)(location);
+      var encodedPath = encodePath(basename + path);
+      var hashChanged = getHashPath() !== encodedPath;
+
+      if (hashChanged) {
+        // We cannot tell if a hashchange was caused by a REPLACE, so we'd
+        // rather setState here and ignore the hashchange. The caveat here
+        // is that other hash histories in the page will consider it a POP.
+        ignorePath = path;
+        replaceHashPath(encodedPath);
+      }
+
+      var prevIndex = allPaths.indexOf((0, _PathUtils.createPath)(history.location));
+
+      if (prevIndex !== -1) allPaths[prevIndex] = path;
+
+      setState({ action: action, location: location });
+    });
+  };
+
+  var go = function go(n) {
+    (0, _warning2.default)(canGoWithoutReload, 'Hash history go(n) causes a full page reload in this browser');
+
+    globalHistory.go(n);
+  };
+
+  var goBack = function goBack() {
+    return go(-1);
+  };
+
+  var goForward = function goForward() {
+    return go(1);
+  };
+
+  var listenerCount = 0;
+
+  var checkDOMListeners = function checkDOMListeners(delta) {
+    listenerCount += delta;
+
+    if (listenerCount === 1) {
+      (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
+    } else if (listenerCount === 0) {
+      (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
+    }
+  };
+
+  var isBlocked = false;
+
+  var block = function block() {
+    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+    var unblock = transitionManager.setPrompt(prompt);
+
+    if (!isBlocked) {
+      checkDOMListeners(1);
+      isBlocked = true;
+    }
+
+    return function () {
+      if (isBlocked) {
+        isBlocked = false;
+        checkDOMListeners(-1);
+      }
+
+      return unblock();
+    };
+  };
+
+  var listen = function listen(listener) {
+    var unlisten = transitionManager.appendListener(listener);
+    checkDOMListeners(1);
+
+    return function () {
+      checkDOMListeners(-1);
+      unlisten();
+    };
+  };
+
+  var history = {
+    length: globalHistory.length,
+    action: 'POP',
+    location: initialLocation,
+    createHref: createHref,
+    push: push,
+    replace: replace,
+    go: go,
+    goBack: goBack,
+    goForward: goForward,
+    block: block,
+    listen: listen
+  };
+
+  return history;
+};
+
+exports.default = createHashHistory;
+
+/***/ }),
+/* 84 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__ = __webpack_require__(40);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__["a" /* default */]);
+
+/***/ }),
+/* 85 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.__esModule = true;
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _warning = __webpack_require__(1);
+
+var _warning2 = _interopRequireDefault(_warning);
+
+var _PathUtils = __webpack_require__(9);
+
+var _LocationUtils = __webpack_require__(19);
+
+var _createTransitionManager = __webpack_require__(20);
+
+var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var clamp = function clamp(n, lowerBound, upperBound) {
+  return Math.min(Math.max(n, lowerBound), upperBound);
+};
+
+/**
+ * Creates a history object that stores locations in memory.
+ */
+var createMemoryHistory = function createMemoryHistory() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var getUserConfirmation = props.getUserConfirmation,
+      _props$initialEntries = props.initialEntries,
+      initialEntries = _props$initialEntries === undefined ? ['/'] : _props$initialEntries,
+      _props$initialIndex = props.initialIndex,
+      initialIndex = _props$initialIndex === undefined ? 0 : _props$initialIndex,
+      _props$keyLength = props.keyLength,
+      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
+
+
+  var transitionManager = (0, _createTransitionManager2.default)();
+
+  var setState = function setState(nextState) {
+    _extends(history, nextState);
+
+    history.length = history.entries.length;
+
+    transitionManager.notifyListeners(history.location, history.action);
+  };
+
+  var createKey = function createKey() {
+    return Math.random().toString(36).substr(2, keyLength);
+  };
+
+  var index = clamp(initialIndex, 0, initialEntries.length - 1);
+  var entries = initialEntries.map(function (entry) {
+    return typeof entry === 'string' ? (0, _LocationUtils.createLocation)(entry, undefined, createKey()) : (0, _LocationUtils.createLocation)(entry, undefined, entry.key || createKey());
+  });
+
+  // Public interface
+
+  var createHref = _PathUtils.createPath;
+
+  var push = function push(path, state) {
+    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+    var action = 'PUSH';
+    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var prevIndex = history.index;
+      var nextIndex = prevIndex + 1;
+
+      var nextEntries = history.entries.slice(0);
+      if (nextEntries.length > nextIndex) {
+        nextEntries.splice(nextIndex, nextEntries.length - nextIndex, location);
+      } else {
+        nextEntries.push(location);
+      }
+
+      setState({
+        action: action,
+        location: location,
+        index: nextIndex,
+        entries: nextEntries
+      });
+    });
+  };
+
+  var replace = function replace(path, state) {
+    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+    var action = 'REPLACE';
+    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      history.entries[history.index] = location;
+
+      setState({ action: action, location: location });
+    });
+  };
+
+  var go = function go(n) {
+    var nextIndex = clamp(history.index + n, 0, history.entries.length - 1);
+
+    var action = 'POP';
+    var location = history.entries[nextIndex];
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (ok) {
+        setState({
+          action: action,
+          location: location,
+          index: nextIndex
+        });
+      } else {
+        // Mimic the behavior of DOM histories by
+        // causing a render after a cancelled POP.
+        setState();
+      }
+    });
+  };
+
+  var goBack = function goBack() {
+    return go(-1);
+  };
+
+  var goForward = function goForward() {
+    return go(1);
+  };
+
+  var canGo = function canGo(n) {
+    var nextIndex = history.index + n;
+    return nextIndex >= 0 && nextIndex < history.entries.length;
+  };
+
+  var block = function block() {
+    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    return transitionManager.setPrompt(prompt);
+  };
+
+  var listen = function listen(listener) {
+    return transitionManager.appendListener(listener);
+  };
+
+  var history = {
+    length: entries.length,
+    action: 'POP',
+    location: entries[index],
+    index: index,
+    entries: entries,
+    createHref: createHref,
+    push: push,
+    replace: replace,
+    go: go,
+    goBack: goBack,
+    goForward: goForward,
+    canGo: canGo,
+    block: block,
+    listen: listen
+  };
+
+  return history;
+};
+
+exports.default = createMemoryHistory;
+
+/***/ }),
+/* 86 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Route__ = __webpack_require__(41);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(39);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+
+
+
+
+
+
+/**
+ * A <Link> wrapper that knows if it's "active" or not.
+ */
+var NavLink = function NavLink(_ref) {
+  var to = _ref.to,
+      exact = _ref.exact,
+      strict = _ref.strict,
+      location = _ref.location,
+      activeClassName = _ref.activeClassName,
+      className = _ref.className,
+      activeStyle = _ref.activeStyle,
+      style = _ref.style,
+      getIsActive = _ref.isActive,
+      ariaCurrent = _ref.ariaCurrent,
+      rest = _objectWithoutProperties(_ref, ['to', 'exact', 'strict', 'location', 'activeClassName', 'className', 'activeStyle', 'style', 'isActive', 'ariaCurrent']);
+
+  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Route__["a" /* default */], {
+    path: (typeof to === 'undefined' ? 'undefined' : _typeof(to)) === 'object' ? to.pathname : to,
+    exact: exact,
+    strict: strict,
+    location: location,
+    children: function children(_ref2) {
+      var location = _ref2.location,
+          match = _ref2.match;
+
+      var isActive = !!(getIsActive ? getIsActive(match, location) : match);
+
+      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Link__["a" /* default */], _extends({
+        to: to,
+        className: isActive ? [className, activeClassName].filter(function (i) {
+          return i;
+        }).join(' ') : className,
+        style: isActive ? _extends({}, style, activeStyle) : style,
+        'aria-current': isActive && ariaCurrent
+      }, rest));
+    }
+  });
+};
+
+NavLink.propTypes = {
+  to: __WEBPACK_IMPORTED_MODULE_3__Link__["a" /* default */].propTypes.to,
+  exact: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
+  strict: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
+  location: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
+  activeClassName: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
+  className: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
+  activeStyle: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
+  style: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
+  isActive: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
+  ariaCurrent: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOf(['page', 'step', 'location', 'true'])
+};
+
+NavLink.defaultProps = {
+  activeClassName: 'active',
+  ariaCurrent: 'true'
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (NavLink);
+
+/***/ }),
+/* 87 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var isarray = __webpack_require__(88)
+
+/**
+ * Expose `pathToRegexp`.
+ */
+module.exports = pathToRegexp
+module.exports.parse = parse
+module.exports.compile = compile
+module.exports.tokensToFunction = tokensToFunction
+module.exports.tokensToRegExp = tokensToRegExp
+
+/**
+ * The main path matching regexp utility.
+ *
+ * @type {RegExp}
+ */
+var PATH_REGEXP = new RegExp([
+  // Match escaped characters that would otherwise appear in future matches.
+  // This allows the user to escape special characters that won't transform.
+  '(\\\\.)',
+  // Match Express-style parameters and un-named parameters with a prefix
+  // and optional suffixes. Matches appear as:
+  //
+  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
+  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
+  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
+  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
+].join('|'), 'g')
+
+/**
+ * Parse a string for the raw tokens.
+ *
+ * @param  {string}  str
+ * @param  {Object=} options
+ * @return {!Array}
+ */
+function parse (str, options) {
+  var tokens = []
+  var key = 0
+  var index = 0
+  var path = ''
+  var defaultDelimiter = options && options.delimiter || '/'
+  var res
+
+  while ((res = PATH_REGEXP.exec(str)) != null) {
+    var m = res[0]
+    var escaped = res[1]
+    var offset = res.index
+    path += str.slice(index, offset)
+    index = offset + m.length
+
+    // Ignore already escaped sequences.
+    if (escaped) {
+      path += escaped[1]
+      continue
+    }
+
+    var next = str[index]
+    var prefix = res[2]
+    var name = res[3]
+    var capture = res[4]
+    var group = res[5]
+    var modifier = res[6]
+    var asterisk = res[7]
+
+    // Push the current path onto the tokens.
+    if (path) {
+      tokens.push(path)
+      path = ''
+    }
+
+    var partial = prefix != null && next != null && next !== prefix
+    var repeat = modifier === '+' || modifier === '*'
+    var optional = modifier === '?' || modifier === '*'
+    var delimiter = res[2] || defaultDelimiter
+    var pattern = capture || group
+
+    tokens.push({
+      name: name || key++,
+      prefix: prefix || '',
+      delimiter: delimiter,
+      optional: optional,
+      repeat: repeat,
+      partial: partial,
+      asterisk: !!asterisk,
+      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
+    })
+  }
+
+  // Match any characters still remaining.
+  if (index < str.length) {
+    path += str.substr(index)
+  }
+
+  // If the path exists, push it onto the end.
+  if (path) {
+    tokens.push(path)
+  }
+
+  return tokens
 }
 
-function isUserAuthenticated() {
-  return localStorage.getItem('token') !== null;
+/**
+ * Compile a string to a template function for the path.
+ *
+ * @param  {string}             str
+ * @param  {Object=}            options
+ * @return {!function(Object=, Object=)}
+ */
+function compile (str, options) {
+  return tokensToFunction(parse(str, options))
 }
 
-function deauthenticateUser() {
-  var basePath = window.location.origin;
-  localStorage.removeItem('token');
-  localStorage.removeItem('user');
-  window.location = basePath + '/';
+/**
+ * Prettier encoding of URI path segments.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeURIComponentPretty (str) {
+  return encodeURI(str).replace(/[\/?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
 }
 
-function getToken() {
-  return localStorage.getItem('token');
+/**
+ * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
+ *
+ * @param  {string}
+ * @return {string}
+ */
+function encodeAsterisk (str) {
+  return encodeURI(str).replace(/[?#]/g, function (c) {
+    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
+  })
 }
 
-function getUser() {
-  return JSON.parse(localStorage.getItem('user'));
-}
+/**
+ * Expose a method for transforming tokens into the path function.
+ */
+function tokensToFunction (tokens) {
+  // Compile all the tokens into regexps.
+  var matches = new Array(tokens.length)
 
-function checkResponse(res) {
-  if (res.status === 401) {
-    console.log('redirect');
+  // Compile all the patterns before compilation.
+  for (var i = 0; i < tokens.length; i++) {
+    if (typeof tokens[i] === 'object') {
+      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$')
+    }
+  }
+
+  return function (obj, opts) {
+    var path = ''
+    var data = obj || {}
+    var options = opts || {}
+    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
+
+    for (var i = 0; i < tokens.length; i++) {
+      var token = tokens[i]
+
+      if (typeof token === 'string') {
+        path += token
+
+        continue
+      }
+
+      var value = data[token.name]
+      var segment
+
+      if (value == null) {
+        if (token.optional) {
+          // Prepend partial segment prefixes.
+          if (token.partial) {
+            path += token.prefix
+          }
+
+          continue
+        } else {
+          throw new TypeError('Expected "' + token.name + '" to be defined')
+        }
+      }
+
+      if (isarray(value)) {
+        if (!token.repeat) {
+          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
+        }
+
+        if (value.length === 0) {
+          if (token.optional) {
+            continue
+          } else {
+            throw new TypeError('Expected "' + token.name + '" to not be empty')
+          }
+        }
+
+        for (var j = 0; j < value.length; j++) {
+          segment = encode(value[j])
+
+          if (!matches[i].test(segment)) {
+            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
+          }
+
+          path += (j === 0 ? token.prefix : token.delimiter) + segment
+        }
+
+        continue
+      }
+
+      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
+
+      if (!matches[i].test(segment)) {
+        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
+      }
+
+      path += token.prefix + segment
+    }
+
+    return path
   }
 }
 
-module.exports = {
-  authenticateUser: authenticateUser,
-  isUserAuthenticated: isUserAuthenticated,
-  deauthenticateUser: deauthenticateUser,
-  getToken: getToken,
-  getUser: getUser,
-  checkResponse: checkResponse
-};
+/**
+ * Escape a regular expression string.
+ *
+ * @param  {string} str
+ * @return {string}
+ */
+function escapeString (str) {
+  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
+}
+
+/**
+ * Escape the capturing group by escaping special characters and meaning.
+ *
+ * @param  {string} group
+ * @return {string}
+ */
+function escapeGroup (group) {
+  return group.replace(/([=!:$\/()])/g, '\\$1')
+}
+
+/**
+ * Attach the keys as a property of the regexp.
+ *
+ * @param  {!RegExp} re
+ * @param  {Array}   keys
+ * @return {!RegExp}
+ */
+function attachKeys (re, keys) {
+  re.keys = keys
+  return re
+}
+
+/**
+ * Get the flags for a regexp from the options.
+ *
+ * @param  {Object} options
+ * @return {string}
+ */
+function flags (options) {
+  return options.sensitive ? '' : 'i'
+}
+
+/**
+ * Pull out keys from a regexp.
+ *
+ * @param  {!RegExp} path
+ * @param  {!Array}  keys
+ * @return {!RegExp}
+ */
+function regexpToRegexp (path, keys) {
+  // Use a negative lookahead to match only capturing groups.
+  var groups = path.source.match(/\((?!\?)/g)
+
+  if (groups) {
+    for (var i = 0; i < groups.length; i++) {
+      keys.push({
+        name: i,
+        prefix: null,
+        delimiter: null,
+        optional: false,
+        repeat: false,
+        partial: false,
+        asterisk: false,
+        pattern: null
+      })
+    }
+  }
+
+  return attachKeys(path, keys)
+}
+
+/**
+ * Transform an array into a regexp.
+ *
+ * @param  {!Array}  path
+ * @param  {Array}   keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function arrayToRegexp (path, keys, options) {
+  var parts = []
+
+  for (var i = 0; i < path.length; i++) {
+    parts.push(pathToRegexp(path[i], keys, options).source)
+  }
+
+  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
+
+  return attachKeys(regexp, keys)
+}
+
+/**
+ * Create a path regexp from string input.
+ *
+ * @param  {string}  path
+ * @param  {!Array}  keys
+ * @param  {!Object} options
+ * @return {!RegExp}
+ */
+function stringToRegexp (path, keys, options) {
+  return tokensToRegExp(parse(path, options), keys, options)
+}
+
+/**
+ * Expose a function for taking tokens and returning a RegExp.
+ *
+ * @param  {!Array}          tokens
+ * @param  {(Array|Object)=} keys
+ * @param  {Object=}         options
+ * @return {!RegExp}
+ */
+function tokensToRegExp (tokens, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  var strict = options.strict
+  var end = options.end !== false
+  var route = ''
+
+  // Iterate over the tokens and create our regexp string.
+  for (var i = 0; i < tokens.length; i++) {
+    var token = tokens[i]
+
+    if (typeof token === 'string') {
+      route += escapeString(token)
+    } else {
+      var prefix = escapeString(token.prefix)
+      var capture = '(?:' + token.pattern + ')'
+
+      keys.push(token)
+
+      if (token.repeat) {
+        capture += '(?:' + prefix + capture + ')*'
+      }
+
+      if (token.optional) {
+        if (!token.partial) {
+          capture = '(?:' + prefix + '(' + capture + '))?'
+        } else {
+          capture = prefix + '(' + capture + ')?'
+        }
+      } else {
+        capture = prefix + '(' + capture + ')'
+      }
+
+      route += capture
+    }
+  }
+
+  var delimiter = escapeString(options.delimiter || '/')
+  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
+
+  // In non-strict mode we allow a slash at the end of match. If the path to
+  // match already ends with a slash, we remove it for consistency. The slash
+  // is valid at the end of a path match, not in the middle. This is important
+  // in non-ending mode, where "/test/" shouldn't match "/test//route".
+  if (!strict) {
+    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
+  }
+
+  if (end) {
+    route += '$'
+  } else {
+    // In non-ending mode, we need the capturing groups to match as much as
+    // possible by using a positive lookahead to the end or next path segment.
+    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
+  }
+
+  return attachKeys(new RegExp('^' + route, flags(options)), keys)
+}
+
+/**
+ * Normalize the given path string, returning a regular expression.
+ *
+ * An empty array can be passed in for the keys, which will hold the
+ * placeholder key descriptions. For example, using `/user/:id`, `keys` will
+ * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
+ *
+ * @param  {(string|RegExp|Array)} path
+ * @param  {(Array|Object)=}       keys
+ * @param  {Object=}               options
+ * @return {!RegExp}
+ */
+function pathToRegexp (path, keys, options) {
+  if (!isarray(keys)) {
+    options = /** @type {!Object} */ (keys || options)
+    keys = []
+  }
+
+  options = options || {}
+
+  if (path instanceof RegExp) {
+    return regexpToRegexp(path, /** @type {!Array} */ (keys))
+  }
+
+  if (isarray(path)) {
+    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
+  }
+
+  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
+}
+
 
 /***/ }),
-/* 75 */
+/* 88 */
+/***/ (function(module, exports) {
+
+module.exports = Array.isArray || function (arr) {
+  return Object.prototype.toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+/* 89 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__ = __webpack_require__(42);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__["a" /* default */]);
+
+/***/ }),
+/* 90 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__ = __webpack_require__(43);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__["a" /* default */]);
+
+/***/ }),
+/* 91 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(45);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+
+
+
+
+
+var PopStateEvent = 'popstate';
+var HashChangeEvent = 'hashchange';
+
+var getHistoryState = function getHistoryState() {
+  try {
+    return window.history.state || {};
+  } catch (e) {
+    // IE 11 sometimes throws when accessing window.history.state
+    // See https://github.com/ReactTraining/history/pull/289
+    return {};
+  }
+};
+
+/**
+ * Creates a history object that uses the HTML5 history API including
+ * pushState, replaceState, and the popstate event.
+ */
+var createBrowserHistory = function createBrowserHistory() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  __WEBPACK_IMPORTED_MODULE_1_invariant___default.a(__WEBPACK_IMPORTED_MODULE_5__DOMUtils__["b" /* canUseDOM */], 'Browser history needs a DOM');
+
+  var globalHistory = window.history;
+  var canUseHistory = __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["g" /* supportsHistory */]();
+  var needsHashChangeListener = !__WEBPACK_IMPORTED_MODULE_5__DOMUtils__["h" /* supportsPopStateOnHashChange */]();
+
+  var _props$forceRefresh = props.forceRefresh,
+      forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
+      _props$getUserConfirm = props.getUserConfirmation,
+      getUserConfirmation = _props$getUserConfirm === undefined ? __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["c" /* getConfirmation */] : _props$getUserConfirm,
+      _props$keyLength = props.keyLength,
+      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
+
+  var basename = props.basename ? __WEBPACK_IMPORTED_MODULE_3__PathUtils__["g" /* stripTrailingSlash */](__WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */](props.basename)) : '';
+
+  var getDOMLocation = function getDOMLocation(historyState) {
+    var _ref = historyState || {},
+        key = _ref.key,
+        state = _ref.state;
+
+    var _window$location = window.location,
+        pathname = _window$location.pathname,
+        search = _window$location.search,
+        hash = _window$location.hash;
+
+
+    var path = pathname + search + hash;
+
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!basename || __WEBPACK_IMPORTED_MODULE_3__PathUtils__["c" /* hasBasename */](path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
+
+    if (basename) path = __WEBPACK_IMPORTED_MODULE_3__PathUtils__["e" /* stripBasename */](path, basename);
+
+    return __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, key);
+  };
+
+  var createKey = function createKey() {
+    return Math.random().toString(36).substr(2, keyLength);
+  };
+
+  var transitionManager = __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__["a" /* default */]();
+
+  var setState = function setState(nextState) {
+    _extends(history, nextState);
+
+    history.length = globalHistory.length;
+
+    transitionManager.notifyListeners(history.location, history.action);
+  };
+
+  var handlePopState = function handlePopState(event) {
+    // Ignore extraneous popstate events in WebKit.
+    if (__WEBPACK_IMPORTED_MODULE_5__DOMUtils__["d" /* isExtraneousPopstateEvent */](event)) return;
+
+    handlePop(getDOMLocation(event.state));
+  };
+
+  var handleHashChange = function handleHashChange() {
+    handlePop(getDOMLocation(getHistoryState()));
+  };
+
+  var forceNextPop = false;
+
+  var handlePop = function handlePop(location) {
+    if (forceNextPop) {
+      forceNextPop = false;
+      setState();
+    } else {
+      var action = 'POP';
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (ok) {
+          setState({ action: action, location: location });
+        } else {
+          revertPop(location);
+        }
+      });
+    }
+  };
+
+  var revertPop = function revertPop(fromLocation) {
+    var toLocation = history.location;
+
+    // TODO: We could probably make this more reliable by
+    // keeping a list of keys we've seen in sessionStorage.
+    // Instead, we just default to 0 for keys we don't know.
+
+    var toIndex = allKeys.indexOf(toLocation.key);
+
+    if (toIndex === -1) toIndex = 0;
+
+    var fromIndex = allKeys.indexOf(fromLocation.key);
+
+    if (fromIndex === -1) fromIndex = 0;
+
+    var delta = toIndex - fromIndex;
+
+    if (delta) {
+      forceNextPop = true;
+      go(delta);
+    }
+  };
+
+  var initialLocation = getDOMLocation(getHistoryState());
+  var allKeys = [initialLocation.key];
+
+  // Public interface
+
+  var createHref = function createHref(location) {
+    return basename + __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location);
+  };
+
+  var push = function push(path, state) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+    var action = 'PUSH';
+    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, createKey(), history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var href = createHref(location);
+      var key = location.key,
+          state = location.state;
+
+
+      if (canUseHistory) {
+        globalHistory.pushState({ key: key, state: state }, null, href);
+
+        if (forceRefresh) {
+          window.location.href = href;
+        } else {
+          var prevIndex = allKeys.indexOf(history.location.key);
+          var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
+
+          nextKeys.push(location.key);
+          allKeys = nextKeys;
+
+          setState({ action: action, location: location });
+        }
+      } else {
+        __WEBPACK_IMPORTED_MODULE_0_warning___default.a(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
+
+        window.location.href = href;
+      }
+    });
+  };
+
+  var replace = function replace(path, state) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+    var action = 'REPLACE';
+    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, createKey(), history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var href = createHref(location);
+      var key = location.key,
+          state = location.state;
+
+
+      if (canUseHistory) {
+        globalHistory.replaceState({ key: key, state: state }, null, href);
+
+        if (forceRefresh) {
+          window.location.replace(href);
+        } else {
+          var prevIndex = allKeys.indexOf(history.location.key);
+
+          if (prevIndex !== -1) allKeys[prevIndex] = location.key;
+
+          setState({ action: action, location: location });
+        }
+      } else {
+        __WEBPACK_IMPORTED_MODULE_0_warning___default.a(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
+
+        window.location.replace(href);
+      }
+    });
+  };
+
+  var go = function go(n) {
+    globalHistory.go(n);
+  };
+
+  var goBack = function goBack() {
+    return go(-1);
+  };
+
+  var goForward = function goForward() {
+    return go(1);
+  };
+
+  var listenerCount = 0;
+
+  var checkDOMListeners = function checkDOMListeners(delta) {
+    listenerCount += delta;
+
+    if (listenerCount === 1) {
+      __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["a" /* addEventListener */](window, PopStateEvent, handlePopState);
+
+      if (needsHashChangeListener) __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["a" /* addEventListener */](window, HashChangeEvent, handleHashChange);
+    } else if (listenerCount === 0) {
+      __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["e" /* removeEventListener */](window, PopStateEvent, handlePopState);
+
+      if (needsHashChangeListener) __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["e" /* removeEventListener */](window, HashChangeEvent, handleHashChange);
+    }
+  };
+
+  var isBlocked = false;
+
+  var block = function block() {
+    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+    var unblock = transitionManager.setPrompt(prompt);
+
+    if (!isBlocked) {
+      checkDOMListeners(1);
+      isBlocked = true;
+    }
+
+    return function () {
+      if (isBlocked) {
+        isBlocked = false;
+        checkDOMListeners(-1);
+      }
+
+      return unblock();
+    };
+  };
+
+  var listen = function listen(listener) {
+    var unlisten = transitionManager.appendListener(listener);
+    checkDOMListeners(1);
+
+    return function () {
+      checkDOMListeners(-1);
+      unlisten();
+    };
+  };
+
+  var history = {
+    length: globalHistory.length,
+    action: 'POP',
+    location: initialLocation,
+    createHref: createHref,
+    push: push,
+    replace: replace,
+    go: go,
+    goBack: goBack,
+    goForward: goForward,
+    block: block,
+    listen: listen
+  };
+
+  return history;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (createBrowserHistory);
+
+/***/ }),
+/* 92 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(23);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(45);
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+
+
+
+
+
+var HashChangeEvent = 'hashchange';
+
+var HashPathCoders = {
+  hashbang: {
+    encodePath: function encodePath(path) {
+      return path.charAt(0) === '!' ? path : '!/' + __WEBPACK_IMPORTED_MODULE_3__PathUtils__["f" /* stripLeadingSlash */](path);
+    },
+    decodePath: function decodePath(path) {
+      return path.charAt(0) === '!' ? path.substr(1) : path;
+    }
+  },
+  noslash: {
+    encodePath: __WEBPACK_IMPORTED_MODULE_3__PathUtils__["f" /* stripLeadingSlash */],
+    decodePath: __WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */]
+  },
+  slash: {
+    encodePath: __WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */],
+    decodePath: __WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */]
+  }
+};
+
+var getHashPath = function getHashPath() {
+  // We can't use window.location.hash here because it's not
+  // consistent across browsers - Firefox will pre-decode it!
+  var href = window.location.href;
+  var hashIndex = href.indexOf('#');
+  return hashIndex === -1 ? '' : href.substring(hashIndex + 1);
+};
+
+var pushHashPath = function pushHashPath(path) {
+  return window.location.hash = path;
+};
+
+var replaceHashPath = function replaceHashPath(path) {
+  var hashIndex = window.location.href.indexOf('#');
+
+  window.location.replace(window.location.href.slice(0, hashIndex >= 0 ? hashIndex : 0) + '#' + path);
+};
+
+var createHashHistory = function createHashHistory() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  __WEBPACK_IMPORTED_MODULE_1_invariant___default.a(__WEBPACK_IMPORTED_MODULE_5__DOMUtils__["b" /* canUseDOM */], 'Hash history needs a DOM');
+
+  var globalHistory = window.history;
+  var canGoWithoutReload = __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["f" /* supportsGoWithoutReloadUsingHash */]();
+
+  var _props$getUserConfirm = props.getUserConfirmation,
+      getUserConfirmation = _props$getUserConfirm === undefined ? __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["c" /* getConfirmation */] : _props$getUserConfirm,
+      _props$hashType = props.hashType,
+      hashType = _props$hashType === undefined ? 'slash' : _props$hashType;
+
+  var basename = props.basename ? __WEBPACK_IMPORTED_MODULE_3__PathUtils__["g" /* stripTrailingSlash */](__WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */](props.basename)) : '';
+
+  var _HashPathCoders$hashT = HashPathCoders[hashType],
+      encodePath = _HashPathCoders$hashT.encodePath,
+      decodePath = _HashPathCoders$hashT.decodePath;
+
+
+  var getDOMLocation = function getDOMLocation() {
+    var path = decodePath(getHashPath());
+
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!basename || __WEBPACK_IMPORTED_MODULE_3__PathUtils__["c" /* hasBasename */](path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
+
+    if (basename) path = __WEBPACK_IMPORTED_MODULE_3__PathUtils__["e" /* stripBasename */](path, basename);
+
+    return __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path);
+  };
+
+  var transitionManager = __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__["a" /* default */]();
+
+  var setState = function setState(nextState) {
+    _extends(history, nextState);
+
+    history.length = globalHistory.length;
+
+    transitionManager.notifyListeners(history.location, history.action);
+  };
+
+  var forceNextPop = false;
+  var ignorePath = null;
+
+  var handleHashChange = function handleHashChange() {
+    var path = getHashPath();
+    var encodedPath = encodePath(path);
+
+    if (path !== encodedPath) {
+      // Ensure we always have a properly-encoded hash.
+      replaceHashPath(encodedPath);
+    } else {
+      var location = getDOMLocation();
+      var prevLocation = history.location;
+
+      if (!forceNextPop && __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["b" /* locationsAreEqual */](prevLocation, location)) return; // A hashchange doesn't always == location change.
+
+      if (ignorePath === __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location)) return; // Ignore this change; we already setState in push/replace.
+
+      ignorePath = null;
+
+      handlePop(location);
+    }
+  };
+
+  var handlePop = function handlePop(location) {
+    if (forceNextPop) {
+      forceNextPop = false;
+      setState();
+    } else {
+      var action = 'POP';
+
+      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+        if (ok) {
+          setState({ action: action, location: location });
+        } else {
+          revertPop(location);
+        }
+      });
+    }
+  };
+
+  var revertPop = function revertPop(fromLocation) {
+    var toLocation = history.location;
+
+    // TODO: We could probably make this more reliable by
+    // keeping a list of paths we've seen in sessionStorage.
+    // Instead, we just default to 0 for paths we don't know.
+
+    var toIndex = allPaths.lastIndexOf(__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](toLocation));
+
+    if (toIndex === -1) toIndex = 0;
+
+    var fromIndex = allPaths.lastIndexOf(__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](fromLocation));
+
+    if (fromIndex === -1) fromIndex = 0;
+
+    var delta = toIndex - fromIndex;
+
+    if (delta) {
+      forceNextPop = true;
+      go(delta);
+    }
+  };
+
+  // Ensure the hash is encoded properly before doing anything else.
+  var path = getHashPath();
+  var encodedPath = encodePath(path);
+
+  if (path !== encodedPath) replaceHashPath(encodedPath);
+
+  var initialLocation = getDOMLocation();
+  var allPaths = [__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](initialLocation)];
+
+  // Public interface
+
+  var createHref = function createHref(location) {
+    return '#' + encodePath(basename + __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location));
+  };
+
+  var push = function push(path, state) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(state === undefined, 'Hash history cannot push state; it is ignored');
+
+    var action = 'PUSH';
+    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, undefined, undefined, history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var path = __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location);
+      var encodedPath = encodePath(basename + path);
+      var hashChanged = getHashPath() !== encodedPath;
+
+      if (hashChanged) {
+        // We cannot tell if a hashchange was caused by a PUSH, so we'd
+        // rather setState here and ignore the hashchange. The caveat here
+        // is that other hash histories in the page will consider it a POP.
+        ignorePath = path;
+        pushHashPath(encodedPath);
+
+        var prevIndex = allPaths.lastIndexOf(__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](history.location));
+        var nextPaths = allPaths.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
+
+        nextPaths.push(path);
+        allPaths = nextPaths;
+
+        setState({ action: action, location: location });
+      } else {
+        __WEBPACK_IMPORTED_MODULE_0_warning___default.a(false, 'Hash history cannot PUSH the same path; a new entry will not be added to the history stack');
+
+        setState();
+      }
+    });
+  };
+
+  var replace = function replace(path, state) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(state === undefined, 'Hash history cannot replace state; it is ignored');
+
+    var action = 'REPLACE';
+    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, undefined, undefined, history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var path = __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location);
+      var encodedPath = encodePath(basename + path);
+      var hashChanged = getHashPath() !== encodedPath;
+
+      if (hashChanged) {
+        // We cannot tell if a hashchange was caused by a REPLACE, so we'd
+        // rather setState here and ignore the hashchange. The caveat here
+        // is that other hash histories in the page will consider it a POP.
+        ignorePath = path;
+        replaceHashPath(encodedPath);
+      }
+
+      var prevIndex = allPaths.indexOf(__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](history.location));
+
+      if (prevIndex !== -1) allPaths[prevIndex] = path;
+
+      setState({ action: action, location: location });
+    });
+  };
+
+  var go = function go(n) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(canGoWithoutReload, 'Hash history go(n) causes a full page reload in this browser');
+
+    globalHistory.go(n);
+  };
+
+  var goBack = function goBack() {
+    return go(-1);
+  };
+
+  var goForward = function goForward() {
+    return go(1);
+  };
+
+  var listenerCount = 0;
+
+  var checkDOMListeners = function checkDOMListeners(delta) {
+    listenerCount += delta;
+
+    if (listenerCount === 1) {
+      __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["a" /* addEventListener */](window, HashChangeEvent, handleHashChange);
+    } else if (listenerCount === 0) {
+      __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["e" /* removeEventListener */](window, HashChangeEvent, handleHashChange);
+    }
+  };
+
+  var isBlocked = false;
+
+  var block = function block() {
+    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+    var unblock = transitionManager.setPrompt(prompt);
+
+    if (!isBlocked) {
+      checkDOMListeners(1);
+      isBlocked = true;
+    }
+
+    return function () {
+      if (isBlocked) {
+        isBlocked = false;
+        checkDOMListeners(-1);
+      }
+
+      return unblock();
+    };
+  };
+
+  var listen = function listen(listener) {
+    var unlisten = transitionManager.appendListener(listener);
+    checkDOMListeners(1);
+
+    return function () {
+      checkDOMListeners(-1);
+      unlisten();
+    };
+  };
+
+  var history = {
+    length: globalHistory.length,
+    action: 'POP',
+    location: initialLocation,
+    createHref: createHref,
+    push: push,
+    replace: replace,
+    go: go,
+    goBack: goBack,
+    goForward: goForward,
+    block: block,
+    listen: listen
+  };
+
+  return history;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (createHashHistory);
+
+/***/ }),
+/* 93 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(10);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(15);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(23);
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+
+
+
+
+
+var clamp = function clamp(n, lowerBound, upperBound) {
+  return Math.min(Math.max(n, lowerBound), upperBound);
+};
+
+/**
+ * Creates a history object that stores locations in memory.
+ */
+var createMemoryHistory = function createMemoryHistory() {
+  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var getUserConfirmation = props.getUserConfirmation,
+      _props$initialEntries = props.initialEntries,
+      initialEntries = _props$initialEntries === undefined ? ['/'] : _props$initialEntries,
+      _props$initialIndex = props.initialIndex,
+      initialIndex = _props$initialIndex === undefined ? 0 : _props$initialIndex,
+      _props$keyLength = props.keyLength,
+      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
+
+
+  var transitionManager = __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__["a" /* default */]();
+
+  var setState = function setState(nextState) {
+    _extends(history, nextState);
+
+    history.length = history.entries.length;
+
+    transitionManager.notifyListeners(history.location, history.action);
+  };
+
+  var createKey = function createKey() {
+    return Math.random().toString(36).substr(2, keyLength);
+  };
+
+  var index = clamp(initialIndex, 0, initialEntries.length - 1);
+  var entries = initialEntries.map(function (entry) {
+    return typeof entry === 'string' ? __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](entry, undefined, createKey()) : __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](entry, undefined, entry.key || createKey());
+  });
+
+  // Public interface
+
+  var createHref = __WEBPACK_IMPORTED_MODULE_1__PathUtils__["b" /* createPath */];
+
+  var push = function push(path, state) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+    var action = 'PUSH';
+    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, createKey(), history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      var prevIndex = history.index;
+      var nextIndex = prevIndex + 1;
+
+      var nextEntries = history.entries.slice(0);
+      if (nextEntries.length > nextIndex) {
+        nextEntries.splice(nextIndex, nextEntries.length - nextIndex, location);
+      } else {
+        nextEntries.push(location);
+      }
+
+      setState({
+        action: action,
+        location: location,
+        index: nextIndex,
+        entries: nextEntries
+      });
+    });
+  };
+
+  var replace = function replace(path, state) {
+    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
+
+    var action = 'REPLACE';
+    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, createKey(), history.location);
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (!ok) return;
+
+      history.entries[history.index] = location;
+
+      setState({ action: action, location: location });
+    });
+  };
+
+  var go = function go(n) {
+    var nextIndex = clamp(history.index + n, 0, history.entries.length - 1);
+
+    var action = 'POP';
+    var location = history.entries[nextIndex];
+
+    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
+      if (ok) {
+        setState({
+          action: action,
+          location: location,
+          index: nextIndex
+        });
+      } else {
+        // Mimic the behavior of DOM histories by
+        // causing a render after a cancelled POP.
+        setState();
+      }
+    });
+  };
+
+  var goBack = function goBack() {
+    return go(-1);
+  };
+
+  var goForward = function goForward() {
+    return go(1);
+  };
+
+  var canGo = function canGo(n) {
+    var nextIndex = history.index + n;
+    return nextIndex >= 0 && nextIndex < history.entries.length;
+  };
+
+  var block = function block() {
+    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+    return transitionManager.setPrompt(prompt);
+  };
+
+  var listen = function listen(listener) {
+    return transitionManager.appendListener(listener);
+  };
+
+  var history = {
+    length: entries.length,
+    action: 'POP',
+    location: entries[index],
+    index: index,
+    entries: entries,
+    createHref: createHref,
+    push: push,
+    replace: replace,
+    go: go,
+    goBack: goBack,
+    goForward: goForward,
+    canGo: canGo,
+    block: block,
+    listen: listen
+  };
+
+  return history;
+};
+
+/* harmony default export */ __webpack_exports__["a"] = (createMemoryHistory);
+
+/***/ }),
+/* 94 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__ = __webpack_require__(46);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__["a" /* default */]);
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__ = __webpack_require__(47);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
+
+/***/ }),
+/* 96 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__ = __webpack_require__(14);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__["a" /* default */]);
+
+/***/ }),
+/* 97 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__ = __webpack_require__(48);
+// Written in this round about way for babel-transform-imports
+
+
+/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__["a" /* default */]);
+
+/***/ }),
+/* 98 */
+/***/ (function(module, exports, __webpack_require__) {
+
+/**
+ * Copyright 2015, Yahoo! Inc.
+ * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
+ */
+(function (global, factory) {
+     true ? module.exports = factory() :
+    typeof define === 'function' && define.amd ? define(factory) :
+    (global.hoistNonReactStatics = factory());
+}(this, (function () {
+    'use strict';
+    
+    var REACT_STATICS = {
+        childContextTypes: true,
+        contextTypes: true,
+        defaultProps: true,
+        displayName: true,
+        getDefaultProps: true,
+        getDerivedStateFromProps: true,
+        mixins: true,
+        propTypes: true,
+        type: true
+    };
+    
+    var KNOWN_STATICS = {
+        name: true,
+        length: true,
+        prototype: true,
+        caller: true,
+        callee: true,
+        arguments: true,
+        arity: true
+    };
+    
+    var defineProperty = Object.defineProperty;
+    var getOwnPropertyNames = Object.getOwnPropertyNames;
+    var getOwnPropertySymbols = Object.getOwnPropertySymbols;
+    var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
+    var getPrototypeOf = Object.getPrototypeOf;
+    var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
+    
+    return function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
+        if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
+            
+            if (objectPrototype) {
+                var inheritedComponent = getPrototypeOf(sourceComponent);
+                if (inheritedComponent && inheritedComponent !== objectPrototype) {
+                    hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
+                }
+            }
+            
+            var keys = getOwnPropertyNames(sourceComponent);
+            
+            if (getOwnPropertySymbols) {
+                keys = keys.concat(getOwnPropertySymbols(sourceComponent));
+            }
+            
+            for (var i = 0; i < keys.length; ++i) {
+                var key = keys[i];
+                if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
+                    var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
+                    try { // Avoid failures from read-only properties
+                        defineProperty(targetComponent, key, descriptor);
+                    } catch (e) {}
+                }
+            }
+            
+            return targetComponent;
+        }
+        
+        return targetComponent;
+    };
+})));
+
+
+/***/ }),
+/* 99 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6879,7 +10090,197 @@ module.exports = {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Test = undefined;
+exports.RegisterForm = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _requests = __webpack_require__(25);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var RegisterForm = exports.RegisterForm = function (_Component) {
+  _inherits(RegisterForm, _Component);
+
+  function RegisterForm(props) {
+    _classCallCheck(this, RegisterForm);
+
+    var _this = _possibleConstructorReturn(this, (RegisterForm.__proto__ || Object.getPrototypeOf(RegisterForm)).call(this, props));
+
+    _this.state = {
+      data: {
+        username: '',
+        password: '',
+        first_name: '',
+        last_name: '',
+        email: ''
+      }
+    };
+
+    _this.handleInputChange = _this.handleInputChange.bind(_this);
+    _this.handleSubmit = _this.handleSubmit.bind(_this);
+    _this.login = _this.login.bind(_this);
+    return _this;
+  }
+
+  _createClass(RegisterForm, [{
+    key: 'handleInputChange',
+    value: function handleInputChange(event) {
+      var target = event.target;
+      var value = target.value;
+      var name = target.name;
+      var data = Object.assign({}, this.state.data);
+      data[name] = value;
+      this.setState({ data: data });
+    }
+  }, {
+    key: 'handleSubmit',
+    value: function handleSubmit(event) {
+      event.preventDefault();
+      (0, _requests.postUser)(this.state.data);
+      window.location = '/';
+    }
+  }, {
+    key: 'login',
+    value: function login(event) {
+      window.location = '/';
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'form',
+        { onSubmit: this.handleSubmit, role: 'form' },
+        _react2.default.createElement(
+          'h2',
+          null,
+          'Register'
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'text', name: 'first_name', className: 'form-control input-lg', placeholder: 'First Name' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'text', name: 'last_name', className: 'form-control input-lg', placeholder: 'Last Name' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'text', name: 'username', className: 'form-control input-lg', placeholder: 'Username' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'email', name: 'email', className: 'form-control input-lg', placeholder: 'Email Address' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'password', name: 'password', className: 'form-control input-lg', placeholder: 'Password' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'password', name: 'password_confirmation', className: 'form-control input-lg', placeholder: 'Confirm Password' })
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'form-group' },
+          _react2.default.createElement('input', { onChange: this.handleInputChange, type: 'submit', value: 'Register', className: 'btn btn-primary btn-block btn-lg' })
+        ),
+        _react2.default.createElement(
+          'a',
+          { onClick: this.login, className: 'btn btn-success btn-block btn-lg' },
+          'Login'
+        )
+      );
+    }
+  }]);
+
+  return RegisterForm;
+}(_react.Component);
+
+exports.default = RegisterForm;
+
+/***/ }),
+/* 100 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Main = undefined;
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = __webpack_require__(0);
+
+var _react2 = _interopRequireDefault(_react);
+
+var _auth = __webpack_require__(34);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Main = exports.Main = function (_React$Component) {
+  _inherits(Main, _React$Component);
+
+  function Main(props) {
+    _classCallCheck(this, Main);
+
+    var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this, props));
+
+    _this.state = {};
+    return _this;
+  }
+
+  _createClass(Main, [{
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        null,
+        'Test User'
+      );
+    }
+  }]);
+
+  return Main;
+}(_react2.default.Component);
+
+exports.default = Main;
+
+/***/ }),
+/* 101 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ErrorPage = undefined;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
@@ -6895,40 +10296,58 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Test = exports.Test = function (_React$Component) {
-  _inherits(Test, _React$Component);
+var ErrorPage = exports.ErrorPage = function (_React$Component) {
+  _inherits(ErrorPage, _React$Component);
 
-  function Test(props) {
-    _classCallCheck(this, Test);
+  function ErrorPage(props) {
+    _classCallCheck(this, ErrorPage);
 
-    return _possibleConstructorReturn(this, (Test.__proto__ || Object.getPrototypeOf(Test)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (ErrorPage.__proto__ || Object.getPrototypeOf(ErrorPage)).call(this, props));
+
+    _this.state = {};
+    return _this;
   }
 
-  _createClass(Test, [{
+  _createClass(ErrorPage, [{
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        'TEST'
+        'You should go to librarian to register you!'
       );
     }
   }]);
 
-  return Test;
+  return ErrorPage;
 }(_react2.default.Component);
 
-exports.default = Test;
+exports.default = ErrorPage;
 
 /***/ }),
-/* 76 */
+/* 102 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
 module.exports = {"h1":"node_modules-bootstrap-dist-css-bootstrap-min__h1--JLbN0","h2":"node_modules-bootstrap-dist-css-bootstrap-min__h2--1Yx4I","h3":"node_modules-bootstrap-dist-css-bootstrap-min__h3--2tb_F","h4":"node_modules-bootstrap-dist-css-bootstrap-min__h4--mJbUm","h5":"node_modules-bootstrap-dist-css-bootstrap-min__h5--pPsEc","h6":"node_modules-bootstrap-dist-css-bootstrap-min__h6--2NPYy","lead":"node_modules-bootstrap-dist-css-bootstrap-min__lead--3zmFd","display-1":"node_modules-bootstrap-dist-css-bootstrap-min__display-1--106EL","display-2":"node_modules-bootstrap-dist-css-bootstrap-min__display-2--mHrDh","display-3":"node_modules-bootstrap-dist-css-bootstrap-min__display-3--3uUy7","display-4":"node_modules-bootstrap-dist-css-bootstrap-min__display-4--NrGcs","small":"node_modules-bootstrap-dist-css-bootstrap-min__small--2gJYW","mark":"node_modules-bootstrap-dist-css-bootstrap-min__mark--1gm-C","list-unstyled":"node_modules-bootstrap-dist-css-bootstrap-min__list-unstyled--3EX6R","list-inline":"node_modules-bootstrap-dist-css-bootstrap-min__list-inline--TCNFj","list-inline-item":"node_modules-bootstrap-dist-css-bootstrap-min__list-inline-item--3W8W2","initialism":"node_modules-bootstrap-dist-css-bootstrap-min__initialism--3zCIV","blockquote":"node_modules-bootstrap-dist-css-bootstrap-min__blockquote--2-erm","blockquote-footer":"node_modules-bootstrap-dist-css-bootstrap-min__blockquote-footer--1Wn9S","img-fluid":"node_modules-bootstrap-dist-css-bootstrap-min__img-fluid--ZUm7A","img-thumbnail":"node_modules-bootstrap-dist-css-bootstrap-min__img-thumbnail--2LZov","figure":"node_modules-bootstrap-dist-css-bootstrap-min__figure--2GcEm","figure-img":"node_modules-bootstrap-dist-css-bootstrap-min__figure-img--2L-Fx","figure-caption":"node_modules-bootstrap-dist-css-bootstrap-min__figure-caption--1zehO","pre-scrollable":"node_modules-bootstrap-dist-css-bootstrap-min__pre-scrollable--1sRNU","container":"node_modules-bootstrap-dist-css-bootstrap-min__container--3i4Ca","container-fluid":"node_modules-bootstrap-dist-css-bootstrap-min__container-fluid--Jx8Kl","row":"node_modules-bootstrap-dist-css-bootstrap-min__row--2048F","no-gutters":"node_modules-bootstrap-dist-css-bootstrap-min__no-gutters--2cHQS","col":"node_modules-bootstrap-dist-css-bootstrap-min__col--RU1cZ","col-1":"node_modules-bootstrap-dist-css-bootstrap-min__col-1--6Qqlk","col-10":"node_modules-bootstrap-dist-css-bootstrap-min__col-10--3qdzx","col-11":"node_modules-bootstrap-dist-css-bootstrap-min__col-11--humUF","col-12":"node_modules-bootstrap-dist-css-bootstrap-min__col-12--16adp","col-2":"node_modules-bootstrap-dist-css-bootstrap-min__col-2--t1tH5","col-3":"node_modules-bootstrap-dist-css-bootstrap-min__col-3--2Qh34","col-4":"node_modules-bootstrap-dist-css-bootstrap-min__col-4--1uyBp","col-5":"node_modules-bootstrap-dist-css-bootstrap-min__col-5--1Cc2H","col-6":"node_modules-bootstrap-dist-css-bootstrap-min__col-6--3mVHX","col-7":"node_modules-bootstrap-dist-css-bootstrap-min__col-7--3z3Qw","col-8":"node_modules-bootstrap-dist-css-bootstrap-min__col-8--2v9P1","col-9":"node_modules-bootstrap-dist-css-bootstrap-min__col-9--Xi24b","col-auto":"node_modules-bootstrap-dist-css-bootstrap-min__col-auto--2A5d2","col-lg":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg--1w0iC","col-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-1--3uad4","col-lg-10":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-10--1yTjU","col-lg-11":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-11--foFwG","col-lg-12":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-12--1Vspn","col-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-2--1b4lq","col-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-3--3KCMa","col-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-4--3gZYS","col-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-5--2ewkc","col-lg-6":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-6--15QrV","col-lg-7":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-7--vKsWR","col-lg-8":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-8--AZTLn","col-lg-9":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-9--2459q","col-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__col-lg-auto--11W6e","col-md":"node_modules-bootstrap-dist-css-bootstrap-min__col-md--AwNqC","col-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-1--3I_2A","col-md-10":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-10--1j5LU","col-md-11":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-11--1RZFk","col-md-12":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-12--2ymaN","col-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-2--p0Q41","col-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-3--1gEUG","col-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-4--A8ARb","col-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-5--15DVD","col-md-6":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-6--1vbTi","col-md-7":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-7--2QmfU","col-md-8":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-8--3iK48","col-md-9":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-9--2Apy1","col-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__col-md-auto--Eh3F2","col-sm":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm--2eezo","col-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-1--2zUq3","col-sm-10":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-10--36KiQ","col-sm-11":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-11--2NDic","col-sm-12":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-12--2voWg","col-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-2--1tKJK","col-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-3--28kxC","col-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-4--1jB7H","col-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-5--223ow","col-sm-6":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-6--1V2Ts","col-sm-7":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-7--1TWhA","col-sm-8":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-8--p8PTP","col-sm-9":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-9--3y-wC","col-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__col-sm-auto--3eXkk","col-xl":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl--3x8LH","col-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-1--2VwYK","col-xl-10":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-10--2ZUYg","col-xl-11":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-11--3TMI9","col-xl-12":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-12--3jtDi","col-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-2--1B8HE","col-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-3--1O7op","col-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-4--2_zwC","col-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-5--2-83a","col-xl-6":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-6--3A7tk","col-xl-7":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-7--2hvqJ","col-xl-8":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-8--3K2Mi","col-xl-9":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-9--1BHV0","col-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__col-xl-auto--1bfNf","order-first":"node_modules-bootstrap-dist-css-bootstrap-min__order-first--28lWR","order-last":"node_modules-bootstrap-dist-css-bootstrap-min__order-last--3g_t_","order-0":"node_modules-bootstrap-dist-css-bootstrap-min__order-0--3cuZw","order-1":"node_modules-bootstrap-dist-css-bootstrap-min__order-1--2KDdd","order-2":"node_modules-bootstrap-dist-css-bootstrap-min__order-2--30UBH","order-3":"node_modules-bootstrap-dist-css-bootstrap-min__order-3--2c9Qo","order-4":"node_modules-bootstrap-dist-css-bootstrap-min__order-4--1qR7U","order-5":"node_modules-bootstrap-dist-css-bootstrap-min__order-5--1-g8r","order-6":"node_modules-bootstrap-dist-css-bootstrap-min__order-6--2fzs6","order-7":"node_modules-bootstrap-dist-css-bootstrap-min__order-7--3sTcN","order-8":"node_modules-bootstrap-dist-css-bootstrap-min__order-8--3vwOs","order-9":"node_modules-bootstrap-dist-css-bootstrap-min__order-9--2aDvf","order-10":"node_modules-bootstrap-dist-css-bootstrap-min__order-10--3taRp","order-11":"node_modules-bootstrap-dist-css-bootstrap-min__order-11--2l38Z","order-12":"node_modules-bootstrap-dist-css-bootstrap-min__order-12--2SSvU","offset-1":"node_modules-bootstrap-dist-css-bootstrap-min__offset-1--3mzBL","offset-2":"node_modules-bootstrap-dist-css-bootstrap-min__offset-2--3maGy","offset-3":"node_modules-bootstrap-dist-css-bootstrap-min__offset-3--1nSf-","offset-4":"node_modules-bootstrap-dist-css-bootstrap-min__offset-4--3yZ-m","offset-5":"node_modules-bootstrap-dist-css-bootstrap-min__offset-5--q9yNr","offset-6":"node_modules-bootstrap-dist-css-bootstrap-min__offset-6--TvaUa","offset-7":"node_modules-bootstrap-dist-css-bootstrap-min__offset-7--2M1zt","offset-8":"node_modules-bootstrap-dist-css-bootstrap-min__offset-8--2RgJK","offset-9":"node_modules-bootstrap-dist-css-bootstrap-min__offset-9--1uFuD","offset-10":"node_modules-bootstrap-dist-css-bootstrap-min__offset-10--h18sf","offset-11":"node_modules-bootstrap-dist-css-bootstrap-min__offset-11--zX4oX","order-sm-first":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-first--2k17P","order-sm-last":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-last--3q1xs","order-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-0--2M61G","order-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-1--2_70j","order-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-2--3EAm4","order-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-3--1mq1Y","order-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-4--OCbRg","order-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-5--1fPNh","order-sm-6":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-6--2VW6d","order-sm-7":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-7--3rWwI","order-sm-8":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-8--3kR4-","order-sm-9":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-9--1BsBm","order-sm-10":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-10--1Dw2N","order-sm-11":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-11--MsvfW","order-sm-12":"node_modules-bootstrap-dist-css-bootstrap-min__order-sm-12--37zpc","offset-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-0--n3CzS","offset-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-1--6tb4G","offset-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-2--2bc2d","offset-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-3--2DS7I","offset-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-4--3tUmd","offset-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-5--WtsaI","offset-sm-6":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-6--1W2G-","offset-sm-7":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-7--2i9yj","offset-sm-8":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-8--1O0yq","offset-sm-9":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-9--3xR1G","offset-sm-10":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-10--B-s1V","offset-sm-11":"node_modules-bootstrap-dist-css-bootstrap-min__offset-sm-11--3jxwU","order-md-first":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-first--1WWCe","order-md-last":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-last--mR5Bp","order-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-0--28tzJ","order-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-1--223p3","order-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-2--XCAHB","order-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-3--2271W","order-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-4--9OXRm","order-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-5--3wS7j","order-md-6":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-6--384rx","order-md-7":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-7--1GQjS","order-md-8":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-8--16Cus","order-md-9":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-9--1bqgE","order-md-10":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-10--wGaq4","order-md-11":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-11--1DvqF","order-md-12":"node_modules-bootstrap-dist-css-bootstrap-min__order-md-12--Sl-FS","offset-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-0--SPrVN","offset-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-1--1kjsF","offset-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-2--1Z5-x","offset-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-3--E0BCz","offset-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-4--1ffco","offset-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-5--1G_Uz","offset-md-6":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-6--1cQki","offset-md-7":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-7--nXnvU","offset-md-8":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-8--3E9v2","offset-md-9":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-9--3Gqfq","offset-md-10":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-10--9higS","offset-md-11":"node_modules-bootstrap-dist-css-bootstrap-min__offset-md-11--19ak1","order-lg-first":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-first--3zjdY","order-lg-last":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-last--ZajyN","order-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-0--3jzDG","order-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-1--1aowm","order-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-2--3e2tv","order-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-3--32qP5","order-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-4--2tFzW","order-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-5--10eHM","order-lg-6":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-6--3D81p","order-lg-7":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-7--2yqLZ","order-lg-8":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-8--n02o0","order-lg-9":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-9--2R-MI","order-lg-10":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-10--Sp1WV","order-lg-11":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-11--1TOZ6","order-lg-12":"node_modules-bootstrap-dist-css-bootstrap-min__order-lg-12--3V7kY","offset-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-0--26L4O","offset-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-1--32GA9","offset-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-2--2URYH","offset-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-3--23Skv","offset-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-4--13--v","offset-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-5--1i8tr","offset-lg-6":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-6--poDMj","offset-lg-7":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-7--2mMsa","offset-lg-8":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-8--10gUw","offset-lg-9":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-9--1bD10","offset-lg-10":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-10--_S191","offset-lg-11":"node_modules-bootstrap-dist-css-bootstrap-min__offset-lg-11--mlrVt","order-xl-first":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-first--ABKvU","order-xl-last":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-last--1ZQll","order-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-0--3ctkz","order-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-1--1hivV","order-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-2--A8Fn-","order-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-3--2iYrp","order-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-4--2KWup","order-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-5--19az2","order-xl-6":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-6--woc4X","order-xl-7":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-7--1kC3g","order-xl-8":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-8--2_Gls","order-xl-9":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-9--2ySo7","order-xl-10":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-10--zDPAG","order-xl-11":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-11--2-I-m","order-xl-12":"node_modules-bootstrap-dist-css-bootstrap-min__order-xl-12--1DZgb","offset-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-0--3Ppx4","offset-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-1--38A2i","offset-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-2--1astV","offset-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-3--3RLKt","offset-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-4--17-jt","offset-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-5--1PhYG","offset-xl-6":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-6--1fV-o","offset-xl-7":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-7--3DDhO","offset-xl-8":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-8--2lsdA","offset-xl-9":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-9--2nccN","offset-xl-10":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-10--2wDrA","offset-xl-11":"node_modules-bootstrap-dist-css-bootstrap-min__offset-xl-11--2E-O3","table":"node_modules-bootstrap-dist-css-bootstrap-min__table--GrZsg","table-sm":"node_modules-bootstrap-dist-css-bootstrap-min__table-sm--1Ill8","table-bordered":"node_modules-bootstrap-dist-css-bootstrap-min__table-bordered--jf6La","table-borderless":"node_modules-bootstrap-dist-css-bootstrap-min__table-borderless--anXdR","table-striped":"node_modules-bootstrap-dist-css-bootstrap-min__table-striped--15ObI","table-hover":"node_modules-bootstrap-dist-css-bootstrap-min__table-hover--2boCp","table-primary":"node_modules-bootstrap-dist-css-bootstrap-min__table-primary--3SO7x","table-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__table-secondary--1ZpUz","table-success":"node_modules-bootstrap-dist-css-bootstrap-min__table-success--3AAEa","table-info":"node_modules-bootstrap-dist-css-bootstrap-min__table-info--x680H","table-warning":"node_modules-bootstrap-dist-css-bootstrap-min__table-warning--3DXJT","table-danger":"node_modules-bootstrap-dist-css-bootstrap-min__table-danger--9FPT1","table-light":"node_modules-bootstrap-dist-css-bootstrap-min__table-light--16t3P","table-dark":"node_modules-bootstrap-dist-css-bootstrap-min__table-dark--ip9nb","table-active":"node_modules-bootstrap-dist-css-bootstrap-min__table-active--3Q_TP","thead-dark":"node_modules-bootstrap-dist-css-bootstrap-min__thead-dark--269Fy","thead-light":"node_modules-bootstrap-dist-css-bootstrap-min__thead-light--3mJqb","table-responsive-sm":"node_modules-bootstrap-dist-css-bootstrap-min__table-responsive-sm--337J0","table-responsive-md":"node_modules-bootstrap-dist-css-bootstrap-min__table-responsive-md--3g9P4","table-responsive-lg":"node_modules-bootstrap-dist-css-bootstrap-min__table-responsive-lg--bpkWR","table-responsive-xl":"node_modules-bootstrap-dist-css-bootstrap-min__table-responsive-xl--1QLe-","table-responsive":"node_modules-bootstrap-dist-css-bootstrap-min__table-responsive--3JORC","form-control":"node_modules-bootstrap-dist-css-bootstrap-min__form-control--fANnP","form-control-file":"node_modules-bootstrap-dist-css-bootstrap-min__form-control-file--3Hngc","form-control-range":"node_modules-bootstrap-dist-css-bootstrap-min__form-control-range--1n97V","col-form-label":"node_modules-bootstrap-dist-css-bootstrap-min__col-form-label--1z8uf","col-form-label-lg":"node_modules-bootstrap-dist-css-bootstrap-min__col-form-label-lg--2Qksr","col-form-label-sm":"node_modules-bootstrap-dist-css-bootstrap-min__col-form-label-sm--2wdq-","form-control-plaintext":"node_modules-bootstrap-dist-css-bootstrap-min__form-control-plaintext--3Vm1h","form-control-lg":"node_modules-bootstrap-dist-css-bootstrap-min__form-control-lg--3soHr","form-control-sm":"node_modules-bootstrap-dist-css-bootstrap-min__form-control-sm--2nCKg","input-group-lg":"node_modules-bootstrap-dist-css-bootstrap-min__input-group-lg--3ts2N","input-group-append":"node_modules-bootstrap-dist-css-bootstrap-min__input-group-append--1O8Y5","btn":"node_modules-bootstrap-dist-css-bootstrap-min__btn--33rIN","input-group-text":"node_modules-bootstrap-dist-css-bootstrap-min__input-group-text--eKdwB","input-group-prepend":"node_modules-bootstrap-dist-css-bootstrap-min__input-group-prepend--1yylP","input-group-sm":"node_modules-bootstrap-dist-css-bootstrap-min__input-group-sm--1YLWo","form-group":"node_modules-bootstrap-dist-css-bootstrap-min__form-group--1njHb","form-text":"node_modules-bootstrap-dist-css-bootstrap-min__form-text--306pf","form-row":"node_modules-bootstrap-dist-css-bootstrap-min__form-row--24oCs","form-check":"node_modules-bootstrap-dist-css-bootstrap-min__form-check--3sVw_","form-check-input":"node_modules-bootstrap-dist-css-bootstrap-min__form-check-input--3DDZ-","form-check-label":"node_modules-bootstrap-dist-css-bootstrap-min__form-check-label--3xBdx","form-check-inline":"node_modules-bootstrap-dist-css-bootstrap-min__form-check-inline--2b2Vf","valid-feedback":"node_modules-bootstrap-dist-css-bootstrap-min__valid-feedback--14GzG","valid-tooltip":"node_modules-bootstrap-dist-css-bootstrap-min__valid-tooltip--NuBPF","custom-select":"node_modules-bootstrap-dist-css-bootstrap-min__custom-select--14GRb","is-valid":"node_modules-bootstrap-dist-css-bootstrap-min__is-valid--SWhYo","was-validated":"node_modules-bootstrap-dist-css-bootstrap-min__was-validated--3iU3L","custom-control-input":"node_modules-bootstrap-dist-css-bootstrap-min__custom-control-input--j1ZQf","custom-control-label":"node_modules-bootstrap-dist-css-bootstrap-min__custom-control-label--fKECc","custom-file-input":"node_modules-bootstrap-dist-css-bootstrap-min__custom-file-input--36AJ8","custom-file-label":"node_modules-bootstrap-dist-css-bootstrap-min__custom-file-label--2PmAt","invalid-feedback":"node_modules-bootstrap-dist-css-bootstrap-min__invalid-feedback--2rYSE","invalid-tooltip":"node_modules-bootstrap-dist-css-bootstrap-min__invalid-tooltip--3Xb-8","is-invalid":"node_modules-bootstrap-dist-css-bootstrap-min__is-invalid--P7W0T","form-inline":"node_modules-bootstrap-dist-css-bootstrap-min__form-inline--1XVYA","input-group":"node_modules-bootstrap-dist-css-bootstrap-min__input-group--3jA_e","custom-control":"node_modules-bootstrap-dist-css-bootstrap-min__custom-control--1tp0t","focus":"node_modules-bootstrap-dist-css-bootstrap-min__focus--35glV","disabled":"node_modules-bootstrap-dist-css-bootstrap-min__disabled--fTMRt","active":"node_modules-bootstrap-dist-css-bootstrap-min__active--tKiHW","btn-primary":"node_modules-bootstrap-dist-css-bootstrap-min__btn-primary--1uK5i","show":"node_modules-bootstrap-dist-css-bootstrap-min__show--21bZy","dropdown-toggle":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown-toggle--1nQ3V","btn-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__btn-secondary--147J1","btn-success":"node_modules-bootstrap-dist-css-bootstrap-min__btn-success--2Ish5","btn-info":"node_modules-bootstrap-dist-css-bootstrap-min__btn-info--3XM44","btn-warning":"node_modules-bootstrap-dist-css-bootstrap-min__btn-warning--3IE29","btn-danger":"node_modules-bootstrap-dist-css-bootstrap-min__btn-danger--1PX1f","btn-light":"node_modules-bootstrap-dist-css-bootstrap-min__btn-light--3CaQW","btn-dark":"node_modules-bootstrap-dist-css-bootstrap-min__btn-dark--2Sqzj","btn-outline-primary":"node_modules-bootstrap-dist-css-bootstrap-min__btn-outline-primary--1PhQ7","btn-outline-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__btn-outline-secondary--3EK6n","btn-outline-success":"node_modules-bootstrap-dist-css-bootstrap-min__btn-outline-success--hmqmA","btn-outline-info":"node_modules-bootstrap-dist-css-bootstrap-min__btn-outline-info--d5m4a","btn-outline-warning":"node_modules-bootstrap-dist-css-bootstrap-min__btn-outline-warning--ktVaW","btn-outline-danger":"node_modules-bootstrap-dist-css-bootstrap-min__btn-outline-danger--219up","btn-outline-light":"node_modules-bootstrap-dist-css-bootstrap-min__btn-outline-light--qbKU0","btn-outline-dark":"node_modules-bootstrap-dist-css-bootstrap-min__btn-outline-dark--1zkgz","btn-link":"node_modules-bootstrap-dist-css-bootstrap-min__btn-link--3yKvN","btn-group-lg":"node_modules-bootstrap-dist-css-bootstrap-min__btn-group-lg--1whjW","btn-lg":"node_modules-bootstrap-dist-css-bootstrap-min__btn-lg--1NEsE","btn-group-sm":"node_modules-bootstrap-dist-css-bootstrap-min__btn-group-sm--yebtv","btn-sm":"node_modules-bootstrap-dist-css-bootstrap-min__btn-sm--3Jksh","btn-block":"node_modules-bootstrap-dist-css-bootstrap-min__btn-block--36r0B","fade":"node_modules-bootstrap-dist-css-bootstrap-min__fade--1rBDU","collapse":"node_modules-bootstrap-dist-css-bootstrap-min__collapse--EYjfW","collapsing":"node_modules-bootstrap-dist-css-bootstrap-min__collapsing--1zNEv","dropdown":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown--24B3o","dropleft":"node_modules-bootstrap-dist-css-bootstrap-min__dropleft--2Od7v","dropright":"node_modules-bootstrap-dist-css-bootstrap-min__dropright--2m7GB","dropup":"node_modules-bootstrap-dist-css-bootstrap-min__dropup--2vLDm","dropdown-menu":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown-menu--1u94g","dropdown-menu-right":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown-menu-right--3Qt2w","dropdown-divider":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown-divider--1U5Zc","dropdown-item":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown-item--2YDDX","dropdown-header":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown-header--1L0Zd","dropdown-item-text":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown-item-text--58RV7","btn-group":"node_modules-bootstrap-dist-css-bootstrap-min__btn-group--3RVt3","btn-group-vertical":"node_modules-bootstrap-dist-css-bootstrap-min__btn-group-vertical--HGkYe","btn-toolbar":"node_modules-bootstrap-dist-css-bootstrap-min__btn-toolbar--3SE_R","dropdown-toggle-split":"node_modules-bootstrap-dist-css-bootstrap-min__dropdown-toggle-split--2m7Jq","btn-group-toggle":"node_modules-bootstrap-dist-css-bootstrap-min__btn-group-toggle--JJedm","custom-file":"node_modules-bootstrap-dist-css-bootstrap-min__custom-file--_5Bw0","custom-control-inline":"node_modules-bootstrap-dist-css-bootstrap-min__custom-control-inline--2cZ13","custom-checkbox":"node_modules-bootstrap-dist-css-bootstrap-min__custom-checkbox--2KOad","custom-radio":"node_modules-bootstrap-dist-css-bootstrap-min__custom-radio--2JbKQ","custom-select-sm":"node_modules-bootstrap-dist-css-bootstrap-min__custom-select-sm--2m6aP","custom-select-lg":"node_modules-bootstrap-dist-css-bootstrap-min__custom-select-lg--1Zlsp","custom-range":"node_modules-bootstrap-dist-css-bootstrap-min__custom-range--Qwkss","nav":"node_modules-bootstrap-dist-css-bootstrap-min__nav--1KQTZ","nav-link":"node_modules-bootstrap-dist-css-bootstrap-min__nav-link--3iORz","nav-tabs":"node_modules-bootstrap-dist-css-bootstrap-min__nav-tabs--1DJRQ","nav-item":"node_modules-bootstrap-dist-css-bootstrap-min__nav-item--1G8h7","nav-pills":"node_modules-bootstrap-dist-css-bootstrap-min__nav-pills--1ffn9","nav-fill":"node_modules-bootstrap-dist-css-bootstrap-min__nav-fill--3Ger5","nav-justified":"node_modules-bootstrap-dist-css-bootstrap-min__nav-justified--1auPN","tab-content":"node_modules-bootstrap-dist-css-bootstrap-min__tab-content--3y46z","tab-pane":"node_modules-bootstrap-dist-css-bootstrap-min__tab-pane--2dZcs","navbar":"node_modules-bootstrap-dist-css-bootstrap-min__navbar--3LmOW","navbar-brand":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-brand--3b-gG","navbar-nav":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-nav--1QAGq","navbar-text":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-text--1YpP7","navbar-collapse":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-collapse--1jtm0","navbar-toggler":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-toggler--DLkkw","navbar-toggler-icon":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-toggler-icon--2r4bQ","navbar-expand-sm":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-expand-sm--j4DXU","navbar-expand-md":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-expand-md--3bbmV","navbar-expand-lg":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-expand-lg--2kfZt","navbar-expand-xl":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-expand-xl--8Tsm5","navbar-expand":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-expand--1ABOo","navbar-light":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-light--2VTxL","navbar-dark":"node_modules-bootstrap-dist-css-bootstrap-min__navbar-dark--2kzdG","card":"node_modules-bootstrap-dist-css-bootstrap-min__card--1W6lu","list-group":"node_modules-bootstrap-dist-css-bootstrap-min__list-group--2z24x","list-group-item":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item--fxIKy","card-body":"node_modules-bootstrap-dist-css-bootstrap-min__card-body--OSqJu","card-title":"node_modules-bootstrap-dist-css-bootstrap-min__card-title--x9kqU","card-subtitle":"node_modules-bootstrap-dist-css-bootstrap-min__card-subtitle--2HQjg","card-text":"node_modules-bootstrap-dist-css-bootstrap-min__card-text--BPqCR","card-link":"node_modules-bootstrap-dist-css-bootstrap-min__card-link--WliIv","card-header":"node_modules-bootstrap-dist-css-bootstrap-min__card-header--1mHyC","card-footer":"node_modules-bootstrap-dist-css-bootstrap-min__card-footer--2xRSL","card-header-tabs":"node_modules-bootstrap-dist-css-bootstrap-min__card-header-tabs--NVwcZ","card-header-pills":"node_modules-bootstrap-dist-css-bootstrap-min__card-header-pills--15tG_","card-img-overlay":"node_modules-bootstrap-dist-css-bootstrap-min__card-img-overlay--3v-4X","card-img":"node_modules-bootstrap-dist-css-bootstrap-min__card-img--259ep","card-img-top":"node_modules-bootstrap-dist-css-bootstrap-min__card-img-top--12-LF","card-img-bottom":"node_modules-bootstrap-dist-css-bootstrap-min__card-img-bottom--mi0ah","card-deck":"node_modules-bootstrap-dist-css-bootstrap-min__card-deck--3T7fK","card-group":"node_modules-bootstrap-dist-css-bootstrap-min__card-group--2xjxT","card-columns":"node_modules-bootstrap-dist-css-bootstrap-min__card-columns--E7sQX","accordion":"node_modules-bootstrap-dist-css-bootstrap-min__accordion--2Hfd6","breadcrumb":"node_modules-bootstrap-dist-css-bootstrap-min__breadcrumb--3RoW_","breadcrumb-item":"node_modules-bootstrap-dist-css-bootstrap-min__breadcrumb-item--19aZc","pagination":"node_modules-bootstrap-dist-css-bootstrap-min__pagination--3r29R","page-link":"node_modules-bootstrap-dist-css-bootstrap-min__page-link--3lh7Q","page-item":"node_modules-bootstrap-dist-css-bootstrap-min__page-item--CYikG","pagination-lg":"node_modules-bootstrap-dist-css-bootstrap-min__pagination-lg--3X4yd","pagination-sm":"node_modules-bootstrap-dist-css-bootstrap-min__pagination-sm--Y_oRl","badge":"node_modules-bootstrap-dist-css-bootstrap-min__badge--3pcZA","badge-pill":"node_modules-bootstrap-dist-css-bootstrap-min__badge-pill--EPoYU","badge-primary":"node_modules-bootstrap-dist-css-bootstrap-min__badge-primary--1AFI5","badge-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__badge-secondary--3ciN-","badge-success":"node_modules-bootstrap-dist-css-bootstrap-min__badge-success--3vQvw","badge-info":"node_modules-bootstrap-dist-css-bootstrap-min__badge-info--2oNTf","badge-warning":"node_modules-bootstrap-dist-css-bootstrap-min__badge-warning--1J-wg","badge-danger":"node_modules-bootstrap-dist-css-bootstrap-min__badge-danger--3aeia","badge-light":"node_modules-bootstrap-dist-css-bootstrap-min__badge-light--2Elso","badge-dark":"node_modules-bootstrap-dist-css-bootstrap-min__badge-dark--3D-UI","jumbotron":"node_modules-bootstrap-dist-css-bootstrap-min__jumbotron--2S1z9","jumbotron-fluid":"node_modules-bootstrap-dist-css-bootstrap-min__jumbotron-fluid--2yObt","alert":"node_modules-bootstrap-dist-css-bootstrap-min__alert--GSk2G","alert-heading":"node_modules-bootstrap-dist-css-bootstrap-min__alert-heading--1M4LW","alert-link":"node_modules-bootstrap-dist-css-bootstrap-min__alert-link--2LKI0","alert-dismissible":"node_modules-bootstrap-dist-css-bootstrap-min__alert-dismissible--19VOn","close":"node_modules-bootstrap-dist-css-bootstrap-min__close--2HFpO","alert-primary":"node_modules-bootstrap-dist-css-bootstrap-min__alert-primary--1Jqr7","alert-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__alert-secondary--w5yJb","alert-success":"node_modules-bootstrap-dist-css-bootstrap-min__alert-success--2MpsS","alert-info":"node_modules-bootstrap-dist-css-bootstrap-min__alert-info--29gK4","alert-warning":"node_modules-bootstrap-dist-css-bootstrap-min__alert-warning--1fK7e","alert-danger":"node_modules-bootstrap-dist-css-bootstrap-min__alert-danger--1wh1S","alert-light":"node_modules-bootstrap-dist-css-bootstrap-min__alert-light--1xbPN","alert-dark":"node_modules-bootstrap-dist-css-bootstrap-min__alert-dark--23eW0","progress":"node_modules-bootstrap-dist-css-bootstrap-min__progress--V1G4m","progress-bar":"node_modules-bootstrap-dist-css-bootstrap-min__progress-bar--_HHv8","progress-bar-striped":"node_modules-bootstrap-dist-css-bootstrap-min__progress-bar-striped--2Muim","progress-bar-animated":"node_modules-bootstrap-dist-css-bootstrap-min__progress-bar-animated--128kx","progress-bar-stripes":"node_modules-bootstrap-dist-css-bootstrap-min__progress-bar-stripes--23bHI","media":"node_modules-bootstrap-dist-css-bootstrap-min__media--1P6zp","media-body":"node_modules-bootstrap-dist-css-bootstrap-min__media-body--2-cp2","list-group-item-action":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-action--UJuCg","list-group-flush":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-flush--29obn","list-group-item-primary":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-primary--nEPIc","list-group-item-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-secondary--2VKHU","list-group-item-success":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-success--18JZ0","list-group-item-info":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-info--30jiO","list-group-item-warning":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-warning--3EfCM","list-group-item-danger":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-danger--3AWVv","list-group-item-light":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-light--1G--1","list-group-item-dark":"node_modules-bootstrap-dist-css-bootstrap-min__list-group-item-dark--34A8R","modal-open":"node_modules-bootstrap-dist-css-bootstrap-min__modal-open--3XYl4","modal":"node_modules-bootstrap-dist-css-bootstrap-min__modal--mFY3C","modal-dialog":"node_modules-bootstrap-dist-css-bootstrap-min__modal-dialog---nZgb","modal-dialog-centered":"node_modules-bootstrap-dist-css-bootstrap-min__modal-dialog-centered--2FJEK","modal-content":"node_modules-bootstrap-dist-css-bootstrap-min__modal-content--35cuO","modal-backdrop":"node_modules-bootstrap-dist-css-bootstrap-min__modal-backdrop--3yf-q","modal-header":"node_modules-bootstrap-dist-css-bootstrap-min__modal-header--3JiLK","modal-title":"node_modules-bootstrap-dist-css-bootstrap-min__modal-title--12Qxl","modal-body":"node_modules-bootstrap-dist-css-bootstrap-min__modal-body--2DLlt","modal-footer":"node_modules-bootstrap-dist-css-bootstrap-min__modal-footer--3C3H3","modal-scrollbar-measure":"node_modules-bootstrap-dist-css-bootstrap-min__modal-scrollbar-measure--3UbHX","modal-sm":"node_modules-bootstrap-dist-css-bootstrap-min__modal-sm--2YqWF","modal-lg":"node_modules-bootstrap-dist-css-bootstrap-min__modal-lg--2TdQn","tooltip":"node_modules-bootstrap-dist-css-bootstrap-min__tooltip--3yKeV","arrow":"node_modules-bootstrap-dist-css-bootstrap-min__arrow--2j1Ku","bs-tooltip-auto":"node_modules-bootstrap-dist-css-bootstrap-min__bs-tooltip-auto--3O7Yp","bs-tooltip-top":"node_modules-bootstrap-dist-css-bootstrap-min__bs-tooltip-top--2vFUG","bs-tooltip-right":"node_modules-bootstrap-dist-css-bootstrap-min__bs-tooltip-right--2SfLr","bs-tooltip-bottom":"node_modules-bootstrap-dist-css-bootstrap-min__bs-tooltip-bottom--ngWVn","bs-tooltip-left":"node_modules-bootstrap-dist-css-bootstrap-min__bs-tooltip-left--2nb6L","tooltip-inner":"node_modules-bootstrap-dist-css-bootstrap-min__tooltip-inner--2gLo2","popover":"node_modules-bootstrap-dist-css-bootstrap-min__popover--3vSiu","bs-popover-auto":"node_modules-bootstrap-dist-css-bootstrap-min__bs-popover-auto--3nbMA","bs-popover-top":"node_modules-bootstrap-dist-css-bootstrap-min__bs-popover-top--2aCBB","bs-popover-right":"node_modules-bootstrap-dist-css-bootstrap-min__bs-popover-right--1ZCV5","bs-popover-bottom":"node_modules-bootstrap-dist-css-bootstrap-min__bs-popover-bottom--1_tfk","popover-header":"node_modules-bootstrap-dist-css-bootstrap-min__popover-header--26TxA","bs-popover-left":"node_modules-bootstrap-dist-css-bootstrap-min__bs-popover-left--KN478","popover-body":"node_modules-bootstrap-dist-css-bootstrap-min__popover-body--1FdsA","carousel":"node_modules-bootstrap-dist-css-bootstrap-min__carousel--28ccy","carousel-inner":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-inner--2YIqg","carousel-item":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-item--1Uxs2","carousel-item-next":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-item-next--2aTjE","carousel-item-prev":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-item-prev--1pVia","carousel-item-left":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-item-left--UYYUu","carousel-item-right":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-item-right--Q3wXf","carousel-fade":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-fade--1GMgF","carousel-control-next":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-control-next--3BvG6","carousel-control-prev":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-control-prev--PsTwF","carousel-control-next-icon":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-control-next-icon--1jhLG","carousel-control-prev-icon":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-control-prev-icon--20GXI","carousel-indicators":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-indicators--3yTKT","carousel-caption":"node_modules-bootstrap-dist-css-bootstrap-min__carousel-caption--3MivW","align-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-baseline--1xtfe","align-top":"node_modules-bootstrap-dist-css-bootstrap-min__align-top--3_Lip","align-middle":"node_modules-bootstrap-dist-css-bootstrap-min__align-middle--F9beq","align-bottom":"node_modules-bootstrap-dist-css-bootstrap-min__align-bottom--35JSB","align-text-bottom":"node_modules-bootstrap-dist-css-bootstrap-min__align-text-bottom--1cGlM","align-text-top":"node_modules-bootstrap-dist-css-bootstrap-min__align-text-top--lZKpF","bg-primary":"node_modules-bootstrap-dist-css-bootstrap-min__bg-primary--35XSE","bg-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__bg-secondary--1HSi2","bg-success":"node_modules-bootstrap-dist-css-bootstrap-min__bg-success--1oQGL","bg-info":"node_modules-bootstrap-dist-css-bootstrap-min__bg-info--u_Bhs","bg-warning":"node_modules-bootstrap-dist-css-bootstrap-min__bg-warning--1CCgu","bg-danger":"node_modules-bootstrap-dist-css-bootstrap-min__bg-danger--2vxiN","bg-light":"node_modules-bootstrap-dist-css-bootstrap-min__bg-light--pxLEz","bg-dark":"node_modules-bootstrap-dist-css-bootstrap-min__bg-dark--CWPPk","bg-white":"node_modules-bootstrap-dist-css-bootstrap-min__bg-white--fEOV8","bg-transparent":"node_modules-bootstrap-dist-css-bootstrap-min__bg-transparent--VFCXE","border":"node_modules-bootstrap-dist-css-bootstrap-min__border--1DR_R","border-top":"node_modules-bootstrap-dist-css-bootstrap-min__border-top--1AbBB","border-right":"node_modules-bootstrap-dist-css-bootstrap-min__border-right--3Mur6","border-bottom":"node_modules-bootstrap-dist-css-bootstrap-min__border-bottom--_9wxD","border-left":"node_modules-bootstrap-dist-css-bootstrap-min__border-left--QR8bq","border-0":"node_modules-bootstrap-dist-css-bootstrap-min__border-0--3PWbA","border-top-0":"node_modules-bootstrap-dist-css-bootstrap-min__border-top-0--3MtwM","border-right-0":"node_modules-bootstrap-dist-css-bootstrap-min__border-right-0--1K3OZ","border-bottom-0":"node_modules-bootstrap-dist-css-bootstrap-min__border-bottom-0--10XoC","border-left-0":"node_modules-bootstrap-dist-css-bootstrap-min__border-left-0--296Ad","border-primary":"node_modules-bootstrap-dist-css-bootstrap-min__border-primary--2fhvV","border-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__border-secondary--2raZm","border-success":"node_modules-bootstrap-dist-css-bootstrap-min__border-success--_ocBi","border-info":"node_modules-bootstrap-dist-css-bootstrap-min__border-info--2PYTN","border-warning":"node_modules-bootstrap-dist-css-bootstrap-min__border-warning--2dPrX","border-danger":"node_modules-bootstrap-dist-css-bootstrap-min__border-danger--39-Pe","border-light":"node_modules-bootstrap-dist-css-bootstrap-min__border-light--2A967","border-dark":"node_modules-bootstrap-dist-css-bootstrap-min__border-dark--1o1qw","border-white":"node_modules-bootstrap-dist-css-bootstrap-min__border-white--tV70f","rounded":"node_modules-bootstrap-dist-css-bootstrap-min__rounded--3JDEy","rounded-top":"node_modules-bootstrap-dist-css-bootstrap-min__rounded-top--3woLq","rounded-right":"node_modules-bootstrap-dist-css-bootstrap-min__rounded-right--3Ptc5","rounded-bottom":"node_modules-bootstrap-dist-css-bootstrap-min__rounded-bottom--2szXd","rounded-left":"node_modules-bootstrap-dist-css-bootstrap-min__rounded-left--2X7hF","rounded-circle":"node_modules-bootstrap-dist-css-bootstrap-min__rounded-circle--203GV","rounded-0":"node_modules-bootstrap-dist-css-bootstrap-min__rounded-0--cPjyK","clearfix":"node_modules-bootstrap-dist-css-bootstrap-min__clearfix--2h-1v","d-none":"node_modules-bootstrap-dist-css-bootstrap-min__d-none--3xbXj","d-inline":"node_modules-bootstrap-dist-css-bootstrap-min__d-inline--2Da8f","d-inline-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-inline-block--3AIfG","d-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-block--2ZkZ_","d-table":"node_modules-bootstrap-dist-css-bootstrap-min__d-table--3FU6J","d-table-row":"node_modules-bootstrap-dist-css-bootstrap-min__d-table-row--2TIce","d-table-cell":"node_modules-bootstrap-dist-css-bootstrap-min__d-table-cell--1rueI","d-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-flex--1df3v","d-inline-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-inline-flex--1P9k2","d-sm-none":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-none--1syem","d-sm-inline":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-inline--31xrf","d-sm-inline-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-inline-block--3k-xU","d-sm-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-block--14wip","d-sm-table":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-table--sFkq1","d-sm-table-row":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-table-row--yXeeW","d-sm-table-cell":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-table-cell--2nq1-","d-sm-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-flex--2kXrZ","d-sm-inline-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-sm-inline-flex--2FSU1","d-md-none":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-none--2jna-","d-md-inline":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-inline--1mgWb","d-md-inline-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-inline-block--1GLqQ","d-md-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-block--1fmlf","d-md-table":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-table--i8usl","d-md-table-row":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-table-row--3UsSZ","d-md-table-cell":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-table-cell--3SrIC","d-md-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-flex--2k_TZ","d-md-inline-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-md-inline-flex--1Ic9k","d-lg-none":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-none--3b9Vf","d-lg-inline":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-inline--3GgaD","d-lg-inline-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-inline-block--3REnf","d-lg-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-block--504oi","d-lg-table":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-table--3tdPX","d-lg-table-row":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-table-row--3AOMg","d-lg-table-cell":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-table-cell--18pOv","d-lg-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-flex--1ytLq","d-lg-inline-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-lg-inline-flex--3r-Ji","d-xl-none":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-none--1qPIc","d-xl-inline":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-inline--19dFg","d-xl-inline-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-inline-block--1GD5X","d-xl-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-block--3DEsy","d-xl-table":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-table--R4tHu","d-xl-table-row":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-table-row--2EZJX","d-xl-table-cell":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-table-cell--3Lpuu","d-xl-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-flex--3rnSX","d-xl-inline-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-xl-inline-flex--1VYyQ","d-print-none":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-none--48AXr","d-print-inline":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-inline--36Y7f","d-print-inline-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-inline-block--3rTtx","d-print-block":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-block--2vbS3","d-print-table":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-table--3fCYa","d-print-table-row":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-table-row--3pET6","d-print-table-cell":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-table-cell--21bRy","d-print-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-flex--3xBFB","d-print-inline-flex":"node_modules-bootstrap-dist-css-bootstrap-min__d-print-inline-flex--3K_kB","embed-responsive":"node_modules-bootstrap-dist-css-bootstrap-min__embed-responsive--2mWeb","embed-responsive-item":"node_modules-bootstrap-dist-css-bootstrap-min__embed-responsive-item--7oAaw","embed-responsive-21by9":"node_modules-bootstrap-dist-css-bootstrap-min__embed-responsive-21by9--1-Qz6","embed-responsive-16by9":"node_modules-bootstrap-dist-css-bootstrap-min__embed-responsive-16by9---ZZ25","embed-responsive-4by3":"node_modules-bootstrap-dist-css-bootstrap-min__embed-responsive-4by3--WhFn2","embed-responsive-1by1":"node_modules-bootstrap-dist-css-bootstrap-min__embed-responsive-1by1--2aMfC","flex-row":"node_modules-bootstrap-dist-css-bootstrap-min__flex-row--2CP7x","flex-column":"node_modules-bootstrap-dist-css-bootstrap-min__flex-column--33Qrn","flex-row-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-row-reverse--2eTVw","flex-column-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-column-reverse--2bsg6","flex-wrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-wrap--3XB5r","flex-nowrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-nowrap--Kpjdg","flex-wrap-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-wrap-reverse--18bJ7","flex-fill":"node_modules-bootstrap-dist-css-bootstrap-min__flex-fill--3zQV6","flex-grow-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-grow-0--RkPJM","flex-grow-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-grow-1--2cY8z","flex-shrink-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-shrink-0--2XPzb","flex-shrink-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-shrink-1--1-sTp","justify-content-start":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-start--OIAf5","justify-content-end":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-end--3331y","justify-content-center":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-center--3oIG1","justify-content-between":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-between--MEI8a","justify-content-around":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-around--2Vm02","align-items-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-start--2I-r3","align-items-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-end--3yW_2","align-items-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-center--Sje_5","align-items-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-baseline--qD8Ds","align-items-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-stretch--JqcVm","align-content-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-start--1DYlo","align-content-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-end--3bURH","align-content-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-center--TVVe4","align-content-between":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-between--1JJSA","align-content-around":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-around--dq0LN","align-content-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-stretch--2Ir5Z","align-self-auto":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-auto--2NRcs","align-self-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-start--Qtid7","align-self-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-end--1PoaK","align-self-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-center--3Pv5e","align-self-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-baseline--3T_Co","align-self-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-stretch--2q5R4","flex-sm-row":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-row--BuMCh","flex-sm-column":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-column--1Bduy","flex-sm-row-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-row-reverse--2XDSI","flex-sm-column-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-column-reverse--36lGH","flex-sm-wrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-wrap--253TD","flex-sm-nowrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-nowrap--1xji0","flex-sm-wrap-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-wrap-reverse--1Km8_","flex-sm-fill":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-fill--1ChP_","flex-sm-grow-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-grow-0--OES31","flex-sm-grow-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-grow-1--2SUWr","flex-sm-shrink-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-shrink-0--3nNO2","flex-sm-shrink-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-sm-shrink-1--23GWI","justify-content-sm-start":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-sm-start--2fwaI","justify-content-sm-end":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-sm-end--33QBR","justify-content-sm-center":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-sm-center--13C7z","justify-content-sm-between":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-sm-between--1q0Uk","justify-content-sm-around":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-sm-around--26Tt-","align-items-sm-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-sm-start--3sOpE","align-items-sm-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-sm-end--3zlhM","align-items-sm-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-sm-center--2R71e","align-items-sm-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-sm-baseline--2J1ii","align-items-sm-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-sm-stretch--E-_eP","align-content-sm-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-sm-start--3X2J4","align-content-sm-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-sm-end--11NPY","align-content-sm-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-sm-center--3AMj5","align-content-sm-between":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-sm-between--mjSA_","align-content-sm-around":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-sm-around--3in-V","align-content-sm-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-sm-stretch--3kd11","align-self-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-sm-auto--3_85S","align-self-sm-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-sm-start--34lgk","align-self-sm-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-sm-end--2TSI4","align-self-sm-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-sm-center--3dM2u","align-self-sm-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-sm-baseline--3oNa7","align-self-sm-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-sm-stretch--3oAUE","flex-md-row":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-row--YJxuQ","flex-md-column":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-column--YaYMl","flex-md-row-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-row-reverse--32D9t","flex-md-column-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-column-reverse--3VtQS","flex-md-wrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-wrap--WXErw","flex-md-nowrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-nowrap--dxPO6","flex-md-wrap-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-wrap-reverse--MPlE1","flex-md-fill":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-fill--33CdU","flex-md-grow-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-grow-0--2a2Z9","flex-md-grow-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-grow-1--vLQ_h","flex-md-shrink-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-shrink-0--2MNLY","flex-md-shrink-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-md-shrink-1--h_wUP","justify-content-md-start":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-md-start--1rAoy","justify-content-md-end":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-md-end--2xUdd","justify-content-md-center":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-md-center--2OBLh","justify-content-md-between":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-md-between--2600V","justify-content-md-around":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-md-around--3fITg","align-items-md-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-md-start--bGKR3","align-items-md-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-md-end--1M7i8","align-items-md-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-md-center--3kIb-","align-items-md-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-md-baseline--hF_DA","align-items-md-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-md-stretch--lXWM-","align-content-md-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-md-start--6TMB1","align-content-md-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-md-end--1CV0T","align-content-md-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-md-center--3mAsE","align-content-md-between":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-md-between--1w9D9","align-content-md-around":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-md-around--25pXm","align-content-md-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-md-stretch--wkcVs","align-self-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-md-auto--T7yIV","align-self-md-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-md-start--2TeLN","align-self-md-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-md-end--7eaNG","align-self-md-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-md-center--xF1P5","align-self-md-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-md-baseline--3EYq3","align-self-md-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-md-stretch--3QCHq","flex-lg-row":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-row--1XCRF","flex-lg-column":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-column--1gnXU","flex-lg-row-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-row-reverse--2015n","flex-lg-column-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-column-reverse--1srcD","flex-lg-wrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-wrap--3LhkU","flex-lg-nowrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-nowrap--2D1ZJ","flex-lg-wrap-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-wrap-reverse--3MO5N","flex-lg-fill":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-fill--25QF2","flex-lg-grow-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-grow-0--bvrDx","flex-lg-grow-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-grow-1--1raGb","flex-lg-shrink-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-shrink-0--1Mf-E","flex-lg-shrink-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-lg-shrink-1--1-TPG","justify-content-lg-start":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-lg-start--11Hjx","justify-content-lg-end":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-lg-end--2ChGY","justify-content-lg-center":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-lg-center--28cu2","justify-content-lg-between":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-lg-between--2GIx0","justify-content-lg-around":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-lg-around--lkeZH","align-items-lg-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-lg-start--IAjtU","align-items-lg-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-lg-end--3GYqo","align-items-lg-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-lg-center--25jJc","align-items-lg-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-lg-baseline--3ovYl","align-items-lg-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-lg-stretch--17GAa","align-content-lg-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-lg-start--3wxxM","align-content-lg-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-lg-end--25YRZ","align-content-lg-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-lg-center--303ZB","align-content-lg-between":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-lg-between--3XKb9","align-content-lg-around":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-lg-around--22n4E","align-content-lg-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-lg-stretch--2-77Y","align-self-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-lg-auto--3l56Z","align-self-lg-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-lg-start--3F4H5","align-self-lg-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-lg-end--1srWG","align-self-lg-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-lg-center--2dkqZ","align-self-lg-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-lg-baseline--D1v4L","align-self-lg-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-lg-stretch--1G0z-","flex-xl-row":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-row--2nWGY","flex-xl-column":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-column--1_jQz","flex-xl-row-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-row-reverse--3ofKI","flex-xl-column-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-column-reverse--1RtpE","flex-xl-wrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-wrap--JZzgm","flex-xl-nowrap":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-nowrap--BQBxU","flex-xl-wrap-reverse":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-wrap-reverse--2cALv","flex-xl-fill":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-fill--3mLvT","flex-xl-grow-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-grow-0--10ki9","flex-xl-grow-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-grow-1--338x9","flex-xl-shrink-0":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-shrink-0--1zyMJ","flex-xl-shrink-1":"node_modules-bootstrap-dist-css-bootstrap-min__flex-xl-shrink-1--Ht6CD","justify-content-xl-start":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-xl-start--1MzTP","justify-content-xl-end":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-xl-end--2lQ9s","justify-content-xl-center":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-xl-center--3Qps1","justify-content-xl-between":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-xl-between--1UllS","justify-content-xl-around":"node_modules-bootstrap-dist-css-bootstrap-min__justify-content-xl-around--1vbdx","align-items-xl-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-xl-start--3T39x","align-items-xl-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-xl-end--3qu7y","align-items-xl-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-xl-center--1QhcT","align-items-xl-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-xl-baseline--13PBI","align-items-xl-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-items-xl-stretch--2yFew","align-content-xl-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-xl-start--1NCye","align-content-xl-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-xl-end--3o4kB","align-content-xl-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-xl-center--YpkUo","align-content-xl-between":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-xl-between--oXZeY","align-content-xl-around":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-xl-around--2ZbsS","align-content-xl-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-content-xl-stretch--2Utnu","align-self-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-xl-auto--1dSy9","align-self-xl-start":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-xl-start--ZxcrV","align-self-xl-end":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-xl-end--3NcjW","align-self-xl-center":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-xl-center--2CbbL","align-self-xl-baseline":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-xl-baseline--3X_mG","align-self-xl-stretch":"node_modules-bootstrap-dist-css-bootstrap-min__align-self-xl-stretch--1kjF4","float-left":"node_modules-bootstrap-dist-css-bootstrap-min__float-left--cPkT0","float-right":"node_modules-bootstrap-dist-css-bootstrap-min__float-right--2HyDy","float-none":"node_modules-bootstrap-dist-css-bootstrap-min__float-none--38Yw7","float-sm-left":"node_modules-bootstrap-dist-css-bootstrap-min__float-sm-left--H7pJJ","float-sm-right":"node_modules-bootstrap-dist-css-bootstrap-min__float-sm-right--2UbUX","float-sm-none":"node_modules-bootstrap-dist-css-bootstrap-min__float-sm-none--28pKi","float-md-left":"node_modules-bootstrap-dist-css-bootstrap-min__float-md-left--rtydc","float-md-right":"node_modules-bootstrap-dist-css-bootstrap-min__float-md-right--2h552","float-md-none":"node_modules-bootstrap-dist-css-bootstrap-min__float-md-none--_REKx","float-lg-left":"node_modules-bootstrap-dist-css-bootstrap-min__float-lg-left--3Vzd6","float-lg-right":"node_modules-bootstrap-dist-css-bootstrap-min__float-lg-right--3ZLS1","float-lg-none":"node_modules-bootstrap-dist-css-bootstrap-min__float-lg-none--2FqEB","float-xl-left":"node_modules-bootstrap-dist-css-bootstrap-min__float-xl-left--3d1-0","float-xl-right":"node_modules-bootstrap-dist-css-bootstrap-min__float-xl-right--1jHc7","float-xl-none":"node_modules-bootstrap-dist-css-bootstrap-min__float-xl-none--lw9Wl","position-static":"node_modules-bootstrap-dist-css-bootstrap-min__position-static--2KIiR","position-relative":"node_modules-bootstrap-dist-css-bootstrap-min__position-relative--1RPOp","position-absolute":"node_modules-bootstrap-dist-css-bootstrap-min__position-absolute--2MW5b","position-fixed":"node_modules-bootstrap-dist-css-bootstrap-min__position-fixed--2eZ16","position-sticky":"node_modules-bootstrap-dist-css-bootstrap-min__position-sticky--2UJ7i","fixed-top":"node_modules-bootstrap-dist-css-bootstrap-min__fixed-top--YRjrG","fixed-bottom":"node_modules-bootstrap-dist-css-bootstrap-min__fixed-bottom--3gEfg","sticky-top":"node_modules-bootstrap-dist-css-bootstrap-min__sticky-top--39hyL","sr-only":"node_modules-bootstrap-dist-css-bootstrap-min__sr-only--3wlTd","sr-only-focusable":"node_modules-bootstrap-dist-css-bootstrap-min__sr-only-focusable--3Y7wD","shadow-sm":"node_modules-bootstrap-dist-css-bootstrap-min__shadow-sm--2r6KM","shadow":"node_modules-bootstrap-dist-css-bootstrap-min__shadow--3cbYX","shadow-lg":"node_modules-bootstrap-dist-css-bootstrap-min__shadow-lg--5xa6b","shadow-none":"node_modules-bootstrap-dist-css-bootstrap-min__shadow-none--3glcx","w-25":"node_modules-bootstrap-dist-css-bootstrap-min__w-25--3foLz","w-50":"node_modules-bootstrap-dist-css-bootstrap-min__w-50--2Kwwf","w-75":"node_modules-bootstrap-dist-css-bootstrap-min__w-75--1c-Bu","w-100":"node_modules-bootstrap-dist-css-bootstrap-min__w-100--1KKYa","w-auto":"node_modules-bootstrap-dist-css-bootstrap-min__w-auto--2uf0M","h-25":"node_modules-bootstrap-dist-css-bootstrap-min__h-25--1YO69","h-50":"node_modules-bootstrap-dist-css-bootstrap-min__h-50--3KFih","h-75":"node_modules-bootstrap-dist-css-bootstrap-min__h-75--2vP6h","h-100":"node_modules-bootstrap-dist-css-bootstrap-min__h-100--1Kgav","h-auto":"node_modules-bootstrap-dist-css-bootstrap-min__h-auto--1xnmI","mw-100":"node_modules-bootstrap-dist-css-bootstrap-min__mw-100--1fxuS","mh-100":"node_modules-bootstrap-dist-css-bootstrap-min__mh-100--C3bL1","m-0":"node_modules-bootstrap-dist-css-bootstrap-min__m-0--3kbbd","mt-0":"node_modules-bootstrap-dist-css-bootstrap-min__mt-0--xfdvo","my-0":"node_modules-bootstrap-dist-css-bootstrap-min__my-0--1A0KQ","mr-0":"node_modules-bootstrap-dist-css-bootstrap-min__mr-0--1H-sU","mx-0":"node_modules-bootstrap-dist-css-bootstrap-min__mx-0--2oZ-8","mb-0":"node_modules-bootstrap-dist-css-bootstrap-min__mb-0--2-fFq","ml-0":"node_modules-bootstrap-dist-css-bootstrap-min__ml-0--4VnOg","m-1":"node_modules-bootstrap-dist-css-bootstrap-min__m-1--b1X1L","mt-1":"node_modules-bootstrap-dist-css-bootstrap-min__mt-1--mB9m5","my-1":"node_modules-bootstrap-dist-css-bootstrap-min__my-1--3Xj93","mr-1":"node_modules-bootstrap-dist-css-bootstrap-min__mr-1--1odpH","mx-1":"node_modules-bootstrap-dist-css-bootstrap-min__mx-1--HbHpc","mb-1":"node_modules-bootstrap-dist-css-bootstrap-min__mb-1--1HytV","ml-1":"node_modules-bootstrap-dist-css-bootstrap-min__ml-1--3vL9R","m-2":"node_modules-bootstrap-dist-css-bootstrap-min__m-2---hSQq","mt-2":"node_modules-bootstrap-dist-css-bootstrap-min__mt-2--FgwhN","my-2":"node_modules-bootstrap-dist-css-bootstrap-min__my-2--XocYr","mr-2":"node_modules-bootstrap-dist-css-bootstrap-min__mr-2--2Je_M","mx-2":"node_modules-bootstrap-dist-css-bootstrap-min__mx-2--3q4WO","mb-2":"node_modules-bootstrap-dist-css-bootstrap-min__mb-2--14Nlw","ml-2":"node_modules-bootstrap-dist-css-bootstrap-min__ml-2--2LKEQ","m-3":"node_modules-bootstrap-dist-css-bootstrap-min__m-3--1DfZn","mt-3":"node_modules-bootstrap-dist-css-bootstrap-min__mt-3--3JFcX","my-3":"node_modules-bootstrap-dist-css-bootstrap-min__my-3--16PNZ","mr-3":"node_modules-bootstrap-dist-css-bootstrap-min__mr-3--2LO4p","mx-3":"node_modules-bootstrap-dist-css-bootstrap-min__mx-3--3VDf8","mb-3":"node_modules-bootstrap-dist-css-bootstrap-min__mb-3--eddn3","ml-3":"node_modules-bootstrap-dist-css-bootstrap-min__ml-3--10N_M","m-4":"node_modules-bootstrap-dist-css-bootstrap-min__m-4--3u1qn","mt-4":"node_modules-bootstrap-dist-css-bootstrap-min__mt-4--37fwV","my-4":"node_modules-bootstrap-dist-css-bootstrap-min__my-4--369wi","mr-4":"node_modules-bootstrap-dist-css-bootstrap-min__mr-4--2K7ZG","mx-4":"node_modules-bootstrap-dist-css-bootstrap-min__mx-4--Tibcj","mb-4":"node_modules-bootstrap-dist-css-bootstrap-min__mb-4--27mE3","ml-4":"node_modules-bootstrap-dist-css-bootstrap-min__ml-4--RjhRP","m-5":"node_modules-bootstrap-dist-css-bootstrap-min__m-5--3twjl","mt-5":"node_modules-bootstrap-dist-css-bootstrap-min__mt-5--PsGNt","my-5":"node_modules-bootstrap-dist-css-bootstrap-min__my-5--37D-H","mr-5":"node_modules-bootstrap-dist-css-bootstrap-min__mr-5---9-1o","mx-5":"node_modules-bootstrap-dist-css-bootstrap-min__mx-5--1fbh8","mb-5":"node_modules-bootstrap-dist-css-bootstrap-min__mb-5--kdV56","ml-5":"node_modules-bootstrap-dist-css-bootstrap-min__ml-5--2avzT","p-0":"node_modules-bootstrap-dist-css-bootstrap-min__p-0--33fMn","pt-0":"node_modules-bootstrap-dist-css-bootstrap-min__pt-0--1c5U2","py-0":"node_modules-bootstrap-dist-css-bootstrap-min__py-0--2uU6i","pr-0":"node_modules-bootstrap-dist-css-bootstrap-min__pr-0--2HOdm","px-0":"node_modules-bootstrap-dist-css-bootstrap-min__px-0--1SF4g","pb-0":"node_modules-bootstrap-dist-css-bootstrap-min__pb-0--SAp-O","pl-0":"node_modules-bootstrap-dist-css-bootstrap-min__pl-0--3IZsT","p-1":"node_modules-bootstrap-dist-css-bootstrap-min__p-1--3aT2Z","pt-1":"node_modules-bootstrap-dist-css-bootstrap-min__pt-1--dCGYB","py-1":"node_modules-bootstrap-dist-css-bootstrap-min__py-1--3p_VK","pr-1":"node_modules-bootstrap-dist-css-bootstrap-min__pr-1--1AtZd","px-1":"node_modules-bootstrap-dist-css-bootstrap-min__px-1--1akff","pb-1":"node_modules-bootstrap-dist-css-bootstrap-min__pb-1--1852x","pl-1":"node_modules-bootstrap-dist-css-bootstrap-min__pl-1--1ATV5","p-2":"node_modules-bootstrap-dist-css-bootstrap-min__p-2--zsQ_f","pt-2":"node_modules-bootstrap-dist-css-bootstrap-min__pt-2--9v4OL","py-2":"node_modules-bootstrap-dist-css-bootstrap-min__py-2--pLxa4","pr-2":"node_modules-bootstrap-dist-css-bootstrap-min__pr-2--1mwEg","px-2":"node_modules-bootstrap-dist-css-bootstrap-min__px-2--38nOV","pb-2":"node_modules-bootstrap-dist-css-bootstrap-min__pb-2--2c_S5","pl-2":"node_modules-bootstrap-dist-css-bootstrap-min__pl-2--3JhQ6","p-3":"node_modules-bootstrap-dist-css-bootstrap-min__p-3--2ickh","pt-3":"node_modules-bootstrap-dist-css-bootstrap-min__pt-3--3JVa7","py-3":"node_modules-bootstrap-dist-css-bootstrap-min__py-3--J2iAq","pr-3":"node_modules-bootstrap-dist-css-bootstrap-min__pr-3--1i9Qw","px-3":"node_modules-bootstrap-dist-css-bootstrap-min__px-3--3Rpzg","pb-3":"node_modules-bootstrap-dist-css-bootstrap-min__pb-3--2Sz6F","pl-3":"node_modules-bootstrap-dist-css-bootstrap-min__pl-3--YIGQW","p-4":"node_modules-bootstrap-dist-css-bootstrap-min__p-4--36BRa","pt-4":"node_modules-bootstrap-dist-css-bootstrap-min__pt-4--3INIx","py-4":"node_modules-bootstrap-dist-css-bootstrap-min__py-4--13g-u","pr-4":"node_modules-bootstrap-dist-css-bootstrap-min__pr-4--3WCbC","px-4":"node_modules-bootstrap-dist-css-bootstrap-min__px-4--31Emi","pb-4":"node_modules-bootstrap-dist-css-bootstrap-min__pb-4--kZMl8","pl-4":"node_modules-bootstrap-dist-css-bootstrap-min__pl-4--2HFia","p-5":"node_modules-bootstrap-dist-css-bootstrap-min__p-5--16h6p","pt-5":"node_modules-bootstrap-dist-css-bootstrap-min__pt-5--2F3b1","py-5":"node_modules-bootstrap-dist-css-bootstrap-min__py-5--1JxIt","pr-5":"node_modules-bootstrap-dist-css-bootstrap-min__pr-5--3B6e3","px-5":"node_modules-bootstrap-dist-css-bootstrap-min__px-5--U1_cm","pb-5":"node_modules-bootstrap-dist-css-bootstrap-min__pb-5--2iN6L","pl-5":"node_modules-bootstrap-dist-css-bootstrap-min__pl-5--3H-Q8","m-auto":"node_modules-bootstrap-dist-css-bootstrap-min__m-auto--GSqcq","mt-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mt-auto--30Kb9","my-auto":"node_modules-bootstrap-dist-css-bootstrap-min__my-auto--PqUDw","mr-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mr-auto--2BOD-","mx-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mx-auto---PUlj","mb-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mb-auto--1YGQP","ml-auto":"node_modules-bootstrap-dist-css-bootstrap-min__ml-auto--TEqF8","m-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__m-sm-0--2GHVp","mt-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__mt-sm-0--v9Gdz","my-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__my-sm-0--annru","mr-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__mr-sm-0--3lyv4","mx-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__mx-sm-0--3TbAy","mb-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__mb-sm-0--3SZ32","ml-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__ml-sm-0--3HGyF","m-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__m-sm-1--2ko2g","mt-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__mt-sm-1--2PF4F","my-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__my-sm-1--3XhcH","mr-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__mr-sm-1--3hWtr","mx-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__mx-sm-1--3CjrE","mb-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__mb-sm-1--t31hg","ml-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__ml-sm-1--21WQS","m-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__m-sm-2--2Gtdg","mt-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__mt-sm-2--3kOkj","my-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__my-sm-2--gxOK3","mr-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__mr-sm-2--2JNXg","mx-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__mx-sm-2--38v1E","mb-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__mb-sm-2--24uN0","ml-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__ml-sm-2--3ti4J","m-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__m-sm-3--1IwQx","mt-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__mt-sm-3--22lF6","my-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__my-sm-3--3WhnH","mr-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__mr-sm-3--3WPXe","mx-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__mx-sm-3--2BTkb","mb-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__mb-sm-3--1PLZt","ml-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__ml-sm-3--eWtPF","m-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__m-sm-4--3ea-_","mt-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__mt-sm-4--1V9_w","my-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__my-sm-4--2yNVm","mr-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__mr-sm-4--1YDRm","mx-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__mx-sm-4--2AINU","mb-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__mb-sm-4--V4P_G","ml-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__ml-sm-4--39A5O","m-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__m-sm-5--1pI53","mt-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__mt-sm-5--3p6le","my-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__my-sm-5--ozsTy","mr-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__mr-sm-5--1m_e0","mx-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__mx-sm-5--YXPvT","mb-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__mb-sm-5--3PiN1","ml-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__ml-sm-5--2IdY5","p-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__p-sm-0--3Y0DC","pt-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__pt-sm-0--1SGks","py-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__py-sm-0--_Rn2C","pr-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__pr-sm-0--VD9xu","px-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__px-sm-0--34OZ6","pb-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__pb-sm-0--CwXOD","pl-sm-0":"node_modules-bootstrap-dist-css-bootstrap-min__pl-sm-0--1r-RZ","p-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__p-sm-1--2B7pw","pt-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__pt-sm-1--S7-G0","py-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__py-sm-1--1gR77","pr-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__pr-sm-1--13gpm","px-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__px-sm-1--2w7OT","pb-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__pb-sm-1--1Z7d5","pl-sm-1":"node_modules-bootstrap-dist-css-bootstrap-min__pl-sm-1--16Fam","p-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__p-sm-2--xxTVj","pt-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__pt-sm-2--2bR0N","py-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__py-sm-2--2u97t","pr-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__pr-sm-2--3f9DE","px-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__px-sm-2--2ZAV_","pb-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__pb-sm-2--1S6qd","pl-sm-2":"node_modules-bootstrap-dist-css-bootstrap-min__pl-sm-2--3xGLF","p-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__p-sm-3--2s5SD","pt-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__pt-sm-3--2p5Cy","py-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__py-sm-3--3dZRL","pr-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__pr-sm-3--58_yW","px-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__px-sm-3--9dnUw","pb-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__pb-sm-3--1l3zH","pl-sm-3":"node_modules-bootstrap-dist-css-bootstrap-min__pl-sm-3--1mBfB","p-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__p-sm-4--2mWCX","pt-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__pt-sm-4--2JOXc","py-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__py-sm-4--3j84j","pr-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__pr-sm-4--1KdGe","px-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__px-sm-4--3hJ7m","pb-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__pb-sm-4--2iOyd","pl-sm-4":"node_modules-bootstrap-dist-css-bootstrap-min__pl-sm-4--yKwXi","p-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__p-sm-5--11QoJ","pt-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__pt-sm-5--1kwyw","py-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__py-sm-5--1ob1N","pr-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__pr-sm-5--3k_TZ","px-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__px-sm-5--1FnBM","pb-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__pb-sm-5--2R23Z","pl-sm-5":"node_modules-bootstrap-dist-css-bootstrap-min__pl-sm-5--21Xnl","m-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__m-sm-auto--1bnmD","mt-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mt-sm-auto--3enII","my-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__my-sm-auto--B5jWj","mr-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mr-sm-auto--SuOhb","mx-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mx-sm-auto--3LNte","mb-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mb-sm-auto--2uhf4","ml-sm-auto":"node_modules-bootstrap-dist-css-bootstrap-min__ml-sm-auto--3qdvi","m-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__m-md-0--1nCS6","mt-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__mt-md-0--3KiGH","my-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__my-md-0--2igB-","mr-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__mr-md-0--1Gc6X","mx-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__mx-md-0--cGmaJ","mb-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__mb-md-0--2_pVn","ml-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__ml-md-0--VrI48","m-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__m-md-1--1qtxz","mt-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__mt-md-1--XPNru","my-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__my-md-1--znPWP","mr-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__mr-md-1--2tlTR","mx-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__mx-md-1--1nukR","mb-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__mb-md-1--3xdhG","ml-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__ml-md-1--2nT0T","m-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__m-md-2--19WzS","mt-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__mt-md-2--1m7yn","my-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__my-md-2--H8DZz","mr-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__mr-md-2--3JfbU","mx-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__mx-md-2--3-0XL","mb-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__mb-md-2--2zVz8","ml-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__ml-md-2--AWBzY","m-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__m-md-3--2Z8hn","mt-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__mt-md-3--37g2X","my-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__my-md-3--1rEwf","mr-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__mr-md-3--30-_n","mx-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__mx-md-3--2LNdx","mb-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__mb-md-3--1TUmo","ml-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__ml-md-3--Nw_jf","m-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__m-md-4--1Pg11","mt-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__mt-md-4--2SpRO","my-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__my-md-4--ZQzFO","mr-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__mr-md-4--1gdcU","mx-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__mx-md-4--2UTJu","mb-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__mb-md-4--1QTMd","ml-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__ml-md-4--2qDVW","m-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__m-md-5--fEiqb","mt-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__mt-md-5--m9LnR","my-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__my-md-5--2cWQU","mr-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__mr-md-5--3JbvU","mx-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__mx-md-5--3MI0A","mb-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__mb-md-5--1h5Zy","ml-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__ml-md-5--1G_qo","p-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__p-md-0--1KqDA","pt-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__pt-md-0--6_tfI","py-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__py-md-0--1AmpJ","pr-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__pr-md-0--2BRSX","px-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__px-md-0--3vshK","pb-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__pb-md-0--3RRgg","pl-md-0":"node_modules-bootstrap-dist-css-bootstrap-min__pl-md-0--ath6R","p-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__p-md-1--D0N3Z","pt-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__pt-md-1--30IzU","py-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__py-md-1--1viW5","pr-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__pr-md-1--74unF","px-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__px-md-1--3AEiK","pb-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__pb-md-1--18_UX","pl-md-1":"node_modules-bootstrap-dist-css-bootstrap-min__pl-md-1--2pwU7","p-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__p-md-2--3_Iwu","pt-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__pt-md-2--3zbde","py-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__py-md-2--1cjO7","pr-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__pr-md-2--2cjsU","px-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__px-md-2--I4Omo","pb-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__pb-md-2--3FFIZ","pl-md-2":"node_modules-bootstrap-dist-css-bootstrap-min__pl-md-2--U4UDm","p-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__p-md-3--2S0Vs","pt-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__pt-md-3--65v_w","py-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__py-md-3--3Hb_v","pr-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__pr-md-3--3ce7o","px-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__px-md-3--RYom3","pb-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__pb-md-3--1QcQ0","pl-md-3":"node_modules-bootstrap-dist-css-bootstrap-min__pl-md-3--1wEWs","p-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__p-md-4--3RqFo","pt-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__pt-md-4--2BuhA","py-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__py-md-4--yyZeZ","pr-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__pr-md-4--1X20D","px-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__px-md-4--1mIIf","pb-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__pb-md-4--1NalS","pl-md-4":"node_modules-bootstrap-dist-css-bootstrap-min__pl-md-4--10TSx","p-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__p-md-5--251Ok","pt-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__pt-md-5--1Qb-R","py-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__py-md-5--29S9e","pr-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__pr-md-5--21FL3","px-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__px-md-5--2gODS","pb-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__pb-md-5--3J4FH","pl-md-5":"node_modules-bootstrap-dist-css-bootstrap-min__pl-md-5--2zJG6","m-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__m-md-auto--uiIqU","mt-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mt-md-auto--1-RVh","my-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__my-md-auto--1WgRH","mr-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mr-md-auto--22EZu","mx-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mx-md-auto--2yr1M","mb-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mb-md-auto--3pYNh","ml-md-auto":"node_modules-bootstrap-dist-css-bootstrap-min__ml-md-auto---I-Gk","m-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__m-lg-0--2ITEU","mt-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__mt-lg-0--20UQv","my-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__my-lg-0--2Qjkq","mr-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__mr-lg-0--31mZK","mx-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__mx-lg-0--JzI58","mb-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__mb-lg-0--30kef","ml-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__ml-lg-0--3rWbW","m-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__m-lg-1--29l_J","mt-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__mt-lg-1--XaL4H","my-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__my-lg-1--2qFvk","mr-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__mr-lg-1--1yArd","mx-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__mx-lg-1--31AIW","mb-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__mb-lg-1--3ajCA","ml-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__ml-lg-1--3bw7U","m-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__m-lg-2--1UsP-","mt-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__mt-lg-2--2UEmF","my-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__my-lg-2--33E8V","mr-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__mr-lg-2--19iND","mx-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__mx-lg-2--mILZV","mb-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__mb-lg-2--2Iag1","ml-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__ml-lg-2--1tZ3C","m-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__m-lg-3--3AsLd","mt-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__mt-lg-3--3makX","my-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__my-lg-3--2zxDq","mr-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__mr-lg-3--12qo1","mx-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__mx-lg-3--1L4xn","mb-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__mb-lg-3--8TFxZ","ml-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__ml-lg-3--3PCmW","m-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__m-lg-4--ax_kP","mt-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__mt-lg-4--UZrqR","my-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__my-lg-4--25wAF","mr-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__mr-lg-4--1Q7C0","mx-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__mx-lg-4--3ASyG","mb-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__mb-lg-4--DluXz","ml-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__ml-lg-4--1Gbgm","m-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__m-lg-5--3ShYG","mt-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__mt-lg-5--19mti","my-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__my-lg-5--VJm7m","mr-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__mr-lg-5--3hDqQ","mx-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__mx-lg-5--1fGex","mb-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__mb-lg-5--XCMhi","ml-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__ml-lg-5--2avvW","p-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__p-lg-0--1YEld","pt-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__pt-lg-0--1oaA9","py-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__py-lg-0--3Ulkb","pr-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__pr-lg-0--3m4To","px-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__px-lg-0--3m4YX","pb-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__pb-lg-0--2ln4b","pl-lg-0":"node_modules-bootstrap-dist-css-bootstrap-min__pl-lg-0--3EUcq","p-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__p-lg-1--20Fj_","pt-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__pt-lg-1--1TTsv","py-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__py-lg-1--O_L8X","pr-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__pr-lg-1--2HiBQ","px-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__px-lg-1--1PNQ5","pb-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__pb-lg-1--1NNR-","pl-lg-1":"node_modules-bootstrap-dist-css-bootstrap-min__pl-lg-1--13tlD","p-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__p-lg-2--2rWW3","pt-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__pt-lg-2--3e-Dz","py-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__py-lg-2--32-dO","pr-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__pr-lg-2--1XcVQ","px-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__px-lg-2--1OFN1","pb-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__pb-lg-2--2uXfP","pl-lg-2":"node_modules-bootstrap-dist-css-bootstrap-min__pl-lg-2--3flvs","p-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__p-lg-3--2ZkMm","pt-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__pt-lg-3--CXqcY","py-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__py-lg-3--2qQyi","pr-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__pr-lg-3--3m-Hb","px-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__px-lg-3--ugJIj","pb-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__pb-lg-3--r33xW","pl-lg-3":"node_modules-bootstrap-dist-css-bootstrap-min__pl-lg-3--3RS-f","p-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__p-lg-4--2mzlF","pt-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__pt-lg-4--1l_MH","py-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__py-lg-4--29MPs","pr-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__pr-lg-4--3XxH4","px-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__px-lg-4--3XUBN","pb-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__pb-lg-4--24VKg","pl-lg-4":"node_modules-bootstrap-dist-css-bootstrap-min__pl-lg-4--3YqG5","p-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__p-lg-5--2Fsig","pt-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__pt-lg-5--1Ogzb","py-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__py-lg-5--3g39X","pr-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__pr-lg-5--1dBHS","px-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__px-lg-5--1vFmL","pb-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__pb-lg-5--3GJOb","pl-lg-5":"node_modules-bootstrap-dist-css-bootstrap-min__pl-lg-5--2YG7G","m-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__m-lg-auto--2zQ75","mt-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mt-lg-auto--aYceM","my-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__my-lg-auto--2VX45","mr-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mr-lg-auto--1Ut_b","mx-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mx-lg-auto--3z97a","mb-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mb-lg-auto--2xQPS","ml-lg-auto":"node_modules-bootstrap-dist-css-bootstrap-min__ml-lg-auto--2B0kn","m-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__m-xl-0--38S7J","mt-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__mt-xl-0--vm_BP","my-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__my-xl-0--2ZbFp","mr-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__mr-xl-0--3Rsf4","mx-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__mx-xl-0--3ql3l","mb-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__mb-xl-0--1MTJs","ml-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__ml-xl-0--2iatn","m-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__m-xl-1--15n3n","mt-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__mt-xl-1--7JTMj","my-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__my-xl-1--3AQIC","mr-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__mr-xl-1--3dpcr","mx-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__mx-xl-1--v1R6R","mb-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__mb-xl-1--3IFzC","ml-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__ml-xl-1--2GfUU","m-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__m-xl-2--2Skfk","mt-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__mt-xl-2--3B_1k","my-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__my-xl-2--3aSib","mr-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__mr-xl-2--254N4","mx-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__mx-xl-2--WKzBP","mb-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__mb-xl-2--ShgK6","ml-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__ml-xl-2--2XiUz","m-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__m-xl-3--2CCOn","mt-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__mt-xl-3--eI3pX","my-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__my-xl-3--2POPU","mr-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__mr-xl-3--HH8w-","mx-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__mx-xl-3--1iHMG","mb-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__mb-xl-3--1k2Mk","ml-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__ml-xl-3--2nKxV","m-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__m-xl-4--2NCXc","mt-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__mt-xl-4--1ehCe","my-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__my-xl-4--3XUwO","mr-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__mr-xl-4--opVLF","mx-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__mx-xl-4--8SS2Q","mb-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__mb-xl-4--2F0re","ml-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__ml-xl-4--1ygAL","m-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__m-xl-5--2F6e0","mt-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__mt-xl-5--f0fjV","my-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__my-xl-5--256f-","mr-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__mr-xl-5--1Moos","mx-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__mx-xl-5--Yzq2x","mb-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__mb-xl-5--3ijSk","ml-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__ml-xl-5--1z4kr","p-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__p-xl-0--2YMkS","pt-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__pt-xl-0--17VRq","py-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__py-xl-0--1u-aU","pr-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__pr-xl-0--Wg6we","px-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__px-xl-0--fqULh","pb-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__pb-xl-0--2iULp","pl-xl-0":"node_modules-bootstrap-dist-css-bootstrap-min__pl-xl-0--3YiEr","p-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__p-xl-1--2ZOUm","pt-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__pt-xl-1--16Lsf","py-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__py-xl-1--Ulj0K","pr-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__pr-xl-1--1TdKt","px-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__px-xl-1--35dfA","pb-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__pb-xl-1--2vYMv","pl-xl-1":"node_modules-bootstrap-dist-css-bootstrap-min__pl-xl-1--KU81p","p-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__p-xl-2--3ybjk","pt-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__pt-xl-2--1lV8T","py-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__py-xl-2--3Hjmc","pr-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__pr-xl-2--3ud1r","px-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__px-xl-2--26tvH","pb-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__pb-xl-2--2R3aC","pl-xl-2":"node_modules-bootstrap-dist-css-bootstrap-min__pl-xl-2--HW5kp","p-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__p-xl-3--1sjtR","pt-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__pt-xl-3--2SJ8u","py-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__py-xl-3--KmxjD","pr-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__pr-xl-3--1O0Ko","px-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__px-xl-3--3yv5A","pb-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__pb-xl-3--3MSQ2","pl-xl-3":"node_modules-bootstrap-dist-css-bootstrap-min__pl-xl-3--CZJKs","p-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__p-xl-4--52_du","pt-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__pt-xl-4--3vk8h","py-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__py-xl-4--14uEU","pr-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__pr-xl-4--KChN1","px-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__px-xl-4--sRmEG","pb-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__pb-xl-4--do-yw","pl-xl-4":"node_modules-bootstrap-dist-css-bootstrap-min__pl-xl-4--2akKB","p-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__p-xl-5--2wpnV","pt-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__pt-xl-5--2Tuov","py-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__py-xl-5--3bJvA","pr-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__pr-xl-5--2M8GE","px-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__px-xl-5--1cZlH","pb-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__pb-xl-5--13vTw","pl-xl-5":"node_modules-bootstrap-dist-css-bootstrap-min__pl-xl-5--2nwKV","m-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__m-xl-auto--3PpCg","mt-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mt-xl-auto--3Qjmw","my-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__my-xl-auto--rcjXw","mr-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mr-xl-auto--1QMcO","mx-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mx-xl-auto--Dz9Xy","mb-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__mb-xl-auto--2BUV_","ml-xl-auto":"node_modules-bootstrap-dist-css-bootstrap-min__ml-xl-auto--3KSoq","text-monospace":"node_modules-bootstrap-dist-css-bootstrap-min__text-monospace--2jOo9","text-justify":"node_modules-bootstrap-dist-css-bootstrap-min__text-justify--fIDtr","text-nowrap":"node_modules-bootstrap-dist-css-bootstrap-min__text-nowrap--2y79v","text-truncate":"node_modules-bootstrap-dist-css-bootstrap-min__text-truncate--vmrs-","text-left":"node_modules-bootstrap-dist-css-bootstrap-min__text-left--oR3hZ","text-right":"node_modules-bootstrap-dist-css-bootstrap-min__text-right--3bwyt","text-center":"node_modules-bootstrap-dist-css-bootstrap-min__text-center--2R-s3","text-sm-left":"node_modules-bootstrap-dist-css-bootstrap-min__text-sm-left--i_5vy","text-sm-right":"node_modules-bootstrap-dist-css-bootstrap-min__text-sm-right--rZSKR","text-sm-center":"node_modules-bootstrap-dist-css-bootstrap-min__text-sm-center--2dCzy","text-md-left":"node_modules-bootstrap-dist-css-bootstrap-min__text-md-left--19D04","text-md-right":"node_modules-bootstrap-dist-css-bootstrap-min__text-md-right--OnowN","text-md-center":"node_modules-bootstrap-dist-css-bootstrap-min__text-md-center--2IBq1","text-lg-left":"node_modules-bootstrap-dist-css-bootstrap-min__text-lg-left--hg2ov","text-lg-right":"node_modules-bootstrap-dist-css-bootstrap-min__text-lg-right--6Mahj","text-lg-center":"node_modules-bootstrap-dist-css-bootstrap-min__text-lg-center--2_Nfe","text-xl-left":"node_modules-bootstrap-dist-css-bootstrap-min__text-xl-left--AxZoA","text-xl-right":"node_modules-bootstrap-dist-css-bootstrap-min__text-xl-right--2QUIZ","text-xl-center":"node_modules-bootstrap-dist-css-bootstrap-min__text-xl-center--3kAIZ","text-lowercase":"node_modules-bootstrap-dist-css-bootstrap-min__text-lowercase--2fjX6","text-uppercase":"node_modules-bootstrap-dist-css-bootstrap-min__text-uppercase--3Barn","text-capitalize":"node_modules-bootstrap-dist-css-bootstrap-min__text-capitalize--35PZS","font-weight-light":"node_modules-bootstrap-dist-css-bootstrap-min__font-weight-light--2qjBR","font-weight-normal":"node_modules-bootstrap-dist-css-bootstrap-min__font-weight-normal--2Hy4X","font-weight-bold":"node_modules-bootstrap-dist-css-bootstrap-min__font-weight-bold--1Sb5w","font-italic":"node_modules-bootstrap-dist-css-bootstrap-min__font-italic--wwR49","text-white":"node_modules-bootstrap-dist-css-bootstrap-min__text-white--ZjomA","text-primary":"node_modules-bootstrap-dist-css-bootstrap-min__text-primary--s5dEU","text-secondary":"node_modules-bootstrap-dist-css-bootstrap-min__text-secondary--1p6oV","text-success":"node_modules-bootstrap-dist-css-bootstrap-min__text-success--1ZQ5o","text-info":"node_modules-bootstrap-dist-css-bootstrap-min__text-info--1AU5u","text-warning":"node_modules-bootstrap-dist-css-bootstrap-min__text-warning--3cRPX","text-danger":"node_modules-bootstrap-dist-css-bootstrap-min__text-danger--2DWla","text-light":"node_modules-bootstrap-dist-css-bootstrap-min__text-light--3kx6P","text-dark":"node_modules-bootstrap-dist-css-bootstrap-min__text-dark--2atyF","text-body":"node_modules-bootstrap-dist-css-bootstrap-min__text-body--2NyaM","text-muted":"node_modules-bootstrap-dist-css-bootstrap-min__text-muted--1yR3q","text-black-50":"node_modules-bootstrap-dist-css-bootstrap-min__text-black-50--1693W","text-white-50":"node_modules-bootstrap-dist-css-bootstrap-min__text-white-50--2pS_o","text-hide":"node_modules-bootstrap-dist-css-bootstrap-min__text-hide--20Ia5","visible":"node_modules-bootstrap-dist-css-bootstrap-min__visible--1afj1","invisible":"node_modules-bootstrap-dist-css-bootstrap-min__invisible--2DJ28"};
 
 /***/ }),
-/* 77 */
+/* 103 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _history = __webpack_require__(44);
+
+exports.default = (0, _history.createBrowserHistory)();
+
+/***/ }),
+/* 104 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6966,15 +10385,15 @@ if (process.env.NODE_ENV === 'production') {
   // DCE check should happen before ReactDOM bundle executes so that
   // DevTools can report bad minification during injection.
   checkDCE();
-  module.exports = __webpack_require__(78);
+  module.exports = __webpack_require__(105);
 } else {
-  module.exports = __webpack_require__(81);
+  module.exports = __webpack_require__(108);
 }
 
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 78 */
+/* 105 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -6990,7 +10409,7 @@ if (process.env.NODE_ENV === 'production') {
 /*
  Modernizr 3.0.0pre (Custom Build) | MIT
 */
-var aa=__webpack_require__(6),ca=__webpack_require__(0),m=__webpack_require__(32),p=__webpack_require__(8),v=__webpack_require__(7),da=__webpack_require__(33),ea=__webpack_require__(34),fa=__webpack_require__(35),ha=__webpack_require__(11);
+var aa=__webpack_require__(6),ca=__webpack_require__(0),m=__webpack_require__(49),p=__webpack_require__(8),v=__webpack_require__(7),da=__webpack_require__(50),ea=__webpack_require__(51),fa=__webpack_require__(52),ha=__webpack_require__(11);
 function A(a){for(var b=arguments.length-1,c="https://reactjs.org/docs/error-decoder.html?invariant="+a,d=0;d<b;d++)c+="&args[]="+encodeURIComponent(arguments[d+1]);aa(!1,"Minified React error #"+a+"; visit %s for the full message or use the non-minified dev environment for full errors and additional helpful warnings. ",c)}ca?void 0:A("227");
 function ia(a,b,c,d,e,f,g,h,k){this._hasCaughtError=!1;this._caughtError=null;var n=Array.prototype.slice.call(arguments,3);try{b.apply(c,n)}catch(r){this._caughtError=r,this._hasCaughtError=!0}}
 var B={_caughtError:null,_hasCaughtError:!1,_rethrowError:null,_hasRethrowError:!1,invokeGuardedCallback:function(a,b,c,d,e,f,g,h,k){ia.apply(B,arguments)},invokeGuardedCallbackAndCatchFirstError:function(a,b,c,d,e,f,g,h,k){B.invokeGuardedCallback.apply(this,arguments);if(B.hasCaughtError()){var n=B.clearCaughtError();B._hasRethrowError||(B._hasRethrowError=!0,B._rethrowError=n)}},rethrowCaughtError:function(){return ka.apply(B,arguments)},hasCaughtError:function(){return B._hasCaughtError},clearCaughtError:function(){if(B._hasCaughtError){var a=
@@ -7219,7 +10638,7 @@ var vi={default:qi},wi=vi&&qi||vi;module.exports=wi.default?wi.default:wi;
 
 
 /***/ }),
-/* 79 */
+/* 106 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7234,7 +10653,7 @@ var vi={default:qi},wi=vi&&qi||vi;module.exports=wi.default?wi.default:wi;
  * @typechecks
  */
 
-var isNode = __webpack_require__(80);
+var isNode = __webpack_require__(107);
 
 /**
  * @param {*} object The object to check.
@@ -7247,7 +10666,7 @@ function isTextNode(object) {
 module.exports = isTextNode;
 
 /***/ }),
-/* 80 */
+/* 107 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7275,7 +10694,7 @@ function isNode(object) {
 module.exports = isNode;
 
 /***/ }),
-/* 81 */
+/* 108 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -7299,16 +10718,16 @@ if (process.env.NODE_ENV !== "production") {
 var invariant = __webpack_require__(6);
 var React = __webpack_require__(0);
 var warning = __webpack_require__(12);
-var ExecutionEnvironment = __webpack_require__(32);
+var ExecutionEnvironment = __webpack_require__(49);
 var _assign = __webpack_require__(8);
 var emptyFunction = __webpack_require__(7);
 var checkPropTypes = __webpack_require__(16);
-var getActiveElement = __webpack_require__(33);
-var shallowEqual = __webpack_require__(34);
-var containsNode = __webpack_require__(35);
+var getActiveElement = __webpack_require__(50);
+var shallowEqual = __webpack_require__(51);
+var containsNode = __webpack_require__(52);
 var emptyObject = __webpack_require__(11);
-var hyphenateStyleName = __webpack_require__(82);
-var camelizeStyleName = __webpack_require__(84);
+var hyphenateStyleName = __webpack_require__(109);
+var camelizeStyleName = __webpack_require__(111);
 
 // Relying on the `invariant()` implementation lets us
 // have preserve the format and params in the www builds.
@@ -24589,7 +28008,7 @@ module.exports = reactDom;
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
 
 /***/ }),
-/* 82 */
+/* 109 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24604,7 +28023,7 @@ module.exports = reactDom;
 
 
 
-var hyphenate = __webpack_require__(83);
+var hyphenate = __webpack_require__(110);
 
 var msPattern = /^ms-/;
 
@@ -24631,7 +28050,7 @@ function hyphenateStyleName(string) {
 module.exports = hyphenateStyleName;
 
 /***/ }),
-/* 83 */
+/* 110 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24667,7 +28086,7 @@ function hyphenate(string) {
 module.exports = hyphenate;
 
 /***/ }),
-/* 84 */
+/* 111 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24682,7 +28101,7 @@ module.exports = hyphenate;
 
 
 
-var camelize = __webpack_require__(85);
+var camelize = __webpack_require__(112);
 
 var msPattern = /^-ms-/;
 
@@ -24710,7 +28129,7 @@ function camelizeStyleName(string) {
 module.exports = camelizeStyleName;
 
 /***/ }),
-/* 85 */
+/* 112 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -24745,3130 +28164,7 @@ function camelize(string) {
 module.exports = camelize;
 
 /***/ }),
-/* 86 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__ = __webpack_require__(87);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserRouter", function() { return __WEBPACK_IMPORTED_MODULE_0__BrowserRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__HashRouter__ = __webpack_require__(91);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "HashRouter", function() { return __WEBPACK_IMPORTED_MODULE_1__HashRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Link__ = __webpack_require__(39);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Link", function() { return __WEBPACK_IMPORTED_MODULE_2__Link__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__ = __webpack_require__(93);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "MemoryRouter", function() { return __WEBPACK_IMPORTED_MODULE_3__MemoryRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__NavLink__ = __webpack_require__(95);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "NavLink", function() { return __WEBPACK_IMPORTED_MODULE_4__NavLink__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__Prompt__ = __webpack_require__(98);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Prompt", function() { return __WEBPACK_IMPORTED_MODULE_5__Prompt__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Redirect__ = __webpack_require__(99);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Redirect", function() { return __WEBPACK_IMPORTED_MODULE_6__Redirect__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__Route__ = __webpack_require__(41);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_7__Route__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__Router__ = __webpack_require__(21);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_8__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__StaticRouter__ = __webpack_require__(104);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_9__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__Switch__ = __webpack_require__(105);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_10__Switch__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__matchPath__ = __webpack_require__(106);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_11__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__withRouter__ = __webpack_require__(107);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_12__withRouter__["a"]; });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-/* 87 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createBrowserHistory__ = __webpack_require__(90);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createBrowserHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_history_createBrowserHistory__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(21);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-/**
- * The public API for a <Router> that uses HTML5 history.
- */
-
-var BrowserRouter = function (_React$Component) {
-  _inherits(BrowserRouter, _React$Component);
-
-  function BrowserRouter() {
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, BrowserRouter);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.history = __WEBPACK_IMPORTED_MODULE_3_history_createBrowserHistory___default.a(_this.props), _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  BrowserRouter.prototype.componentWillMount = function componentWillMount() {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!this.props.history, '<BrowserRouter> ignores the history prop. To use a custom history, ' + 'use `import { Router }` instead of `import { BrowserRouter as Router }`.');
-  };
-
-  BrowserRouter.prototype.render = function render() {
-    return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Router__["a" /* default */], { history: this.history, children: this.props.children });
-  };
-
-  return BrowserRouter;
-}(__WEBPACK_IMPORTED_MODULE_1_react___default.a.Component);
-
-BrowserRouter.propTypes = {
-  basename: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string,
-  forceRefresh: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.bool,
-  getUserConfirmation: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-  keyLength: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.number,
-  children: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.node
-};
-
-
-/* harmony default export */ __webpack_exports__["a"] = (BrowserRouter);
-
-/***/ }),
-/* 88 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(process) {/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var emptyFunction = __webpack_require__(7);
-var invariant = __webpack_require__(6);
-var warning = __webpack_require__(12);
-var assign = __webpack_require__(8);
-
-var ReactPropTypesSecret = __webpack_require__(17);
-var checkPropTypes = __webpack_require__(16);
-
-module.exports = function(isValidElement, throwOnDirectAccess) {
-  /* global Symbol */
-  var ITERATOR_SYMBOL = typeof Symbol === 'function' && Symbol.iterator;
-  var FAUX_ITERATOR_SYMBOL = '@@iterator'; // Before Symbol spec.
-
-  /**
-   * Returns the iterator method function contained on the iterable object.
-   *
-   * Be sure to invoke the function with the iterable as context:
-   *
-   *     var iteratorFn = getIteratorFn(myIterable);
-   *     if (iteratorFn) {
-   *       var iterator = iteratorFn.call(myIterable);
-   *       ...
-   *     }
-   *
-   * @param {?object} maybeIterable
-   * @return {?function}
-   */
-  function getIteratorFn(maybeIterable) {
-    var iteratorFn = maybeIterable && (ITERATOR_SYMBOL && maybeIterable[ITERATOR_SYMBOL] || maybeIterable[FAUX_ITERATOR_SYMBOL]);
-    if (typeof iteratorFn === 'function') {
-      return iteratorFn;
-    }
-  }
-
-  /**
-   * Collection of methods that allow declaration and validation of props that are
-   * supplied to React components. Example usage:
-   *
-   *   var Props = require('ReactPropTypes');
-   *   var MyArticle = React.createClass({
-   *     propTypes: {
-   *       // An optional string prop named "description".
-   *       description: Props.string,
-   *
-   *       // A required enum prop named "category".
-   *       category: Props.oneOf(['News','Photos']).isRequired,
-   *
-   *       // A prop named "dialog" that requires an instance of Dialog.
-   *       dialog: Props.instanceOf(Dialog).isRequired
-   *     },
-   *     render: function() { ... }
-   *   });
-   *
-   * A more formal specification of how these methods are used:
-   *
-   *   type := array|bool|func|object|number|string|oneOf([...])|instanceOf(...)
-   *   decl := ReactPropTypes.{type}(.isRequired)?
-   *
-   * Each and every declaration produces a function with the same signature. This
-   * allows the creation of custom validation functions. For example:
-   *
-   *  var MyLink = React.createClass({
-   *    propTypes: {
-   *      // An optional string or URI prop named "href".
-   *      href: function(props, propName, componentName) {
-   *        var propValue = props[propName];
-   *        if (propValue != null && typeof propValue !== 'string' &&
-   *            !(propValue instanceof URI)) {
-   *          return new Error(
-   *            'Expected a string or an URI for ' + propName + ' in ' +
-   *            componentName
-   *          );
-   *        }
-   *      }
-   *    },
-   *    render: function() {...}
-   *  });
-   *
-   * @internal
-   */
-
-  var ANONYMOUS = '<<anonymous>>';
-
-  // Important!
-  // Keep this list in sync with production version in `./factoryWithThrowingShims.js`.
-  var ReactPropTypes = {
-    array: createPrimitiveTypeChecker('array'),
-    bool: createPrimitiveTypeChecker('boolean'),
-    func: createPrimitiveTypeChecker('function'),
-    number: createPrimitiveTypeChecker('number'),
-    object: createPrimitiveTypeChecker('object'),
-    string: createPrimitiveTypeChecker('string'),
-    symbol: createPrimitiveTypeChecker('symbol'),
-
-    any: createAnyTypeChecker(),
-    arrayOf: createArrayOfTypeChecker,
-    element: createElementTypeChecker(),
-    instanceOf: createInstanceTypeChecker,
-    node: createNodeChecker(),
-    objectOf: createObjectOfTypeChecker,
-    oneOf: createEnumTypeChecker,
-    oneOfType: createUnionTypeChecker,
-    shape: createShapeTypeChecker,
-    exact: createStrictShapeTypeChecker,
-  };
-
-  /**
-   * inlined Object.is polyfill to avoid requiring consumers ship their own
-   * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/is
-   */
-  /*eslint-disable no-self-compare*/
-  function is(x, y) {
-    // SameValue algorithm
-    if (x === y) {
-      // Steps 1-5, 7-10
-      // Steps 6.b-6.e: +0 != -0
-      return x !== 0 || 1 / x === 1 / y;
-    } else {
-      // Step 6.a: NaN == NaN
-      return x !== x && y !== y;
-    }
-  }
-  /*eslint-enable no-self-compare*/
-
-  /**
-   * We use an Error-like object for backward compatibility as people may call
-   * PropTypes directly and inspect their output. However, we don't use real
-   * Errors anymore. We don't inspect their stack anyway, and creating them
-   * is prohibitively expensive if they are created too often, such as what
-   * happens in oneOfType() for any type before the one that matched.
-   */
-  function PropTypeError(message) {
-    this.message = message;
-    this.stack = '';
-  }
-  // Make `instanceof Error` still work for returned errors.
-  PropTypeError.prototype = Error.prototype;
-
-  function createChainableTypeChecker(validate) {
-    if (process.env.NODE_ENV !== 'production') {
-      var manualPropTypeCallCache = {};
-      var manualPropTypeWarningCount = 0;
-    }
-    function checkType(isRequired, props, propName, componentName, location, propFullName, secret) {
-      componentName = componentName || ANONYMOUS;
-      propFullName = propFullName || propName;
-
-      if (secret !== ReactPropTypesSecret) {
-        if (throwOnDirectAccess) {
-          // New behavior only for users of `prop-types` package
-          invariant(
-            false,
-            'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-            'Use `PropTypes.checkPropTypes()` to call them. ' +
-            'Read more at http://fb.me/use-check-prop-types'
-          );
-        } else if (process.env.NODE_ENV !== 'production' && typeof console !== 'undefined') {
-          // Old behavior for people using React.PropTypes
-          var cacheKey = componentName + ':' + propName;
-          if (
-            !manualPropTypeCallCache[cacheKey] &&
-            // Avoid spamming the console because they are often not actionable except for lib authors
-            manualPropTypeWarningCount < 3
-          ) {
-            warning(
-              false,
-              'You are manually calling a React.PropTypes validation ' +
-              'function for the `%s` prop on `%s`. This is deprecated ' +
-              'and will throw in the standalone `prop-types` package. ' +
-              'You may be seeing this warning due to a third-party PropTypes ' +
-              'library. See https://fb.me/react-warning-dont-call-proptypes ' + 'for details.',
-              propFullName,
-              componentName
-            );
-            manualPropTypeCallCache[cacheKey] = true;
-            manualPropTypeWarningCount++;
-          }
-        }
-      }
-      if (props[propName] == null) {
-        if (isRequired) {
-          if (props[propName] === null) {
-            return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required ' + ('in `' + componentName + '`, but its value is `null`.'));
-          }
-          return new PropTypeError('The ' + location + ' `' + propFullName + '` is marked as required in ' + ('`' + componentName + '`, but its value is `undefined`.'));
-        }
-        return null;
-      } else {
-        return validate(props, propName, componentName, location, propFullName);
-      }
-    }
-
-    var chainedCheckType = checkType.bind(null, false);
-    chainedCheckType.isRequired = checkType.bind(null, true);
-
-    return chainedCheckType;
-  }
-
-  function createPrimitiveTypeChecker(expectedType) {
-    function validate(props, propName, componentName, location, propFullName, secret) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== expectedType) {
-        // `propValue` being instance of, say, date/regexp, pass the 'object'
-        // check, but we can offer a more precise error message here rather than
-        // 'of type `object`'.
-        var preciseType = getPreciseType(propValue);
-
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + preciseType + '` supplied to `' + componentName + '`, expected ') + ('`' + expectedType + '`.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createAnyTypeChecker() {
-    return createChainableTypeChecker(emptyFunction.thatReturnsNull);
-  }
-
-  function createArrayOfTypeChecker(typeChecker) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (typeof typeChecker !== 'function') {
-        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside arrayOf.');
-      }
-      var propValue = props[propName];
-      if (!Array.isArray(propValue)) {
-        var propType = getPropType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an array.'));
-      }
-      for (var i = 0; i < propValue.length; i++) {
-        var error = typeChecker(propValue, i, componentName, location, propFullName + '[' + i + ']', ReactPropTypesSecret);
-        if (error instanceof Error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createElementTypeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      if (!isValidElement(propValue)) {
-        var propType = getPropType(propValue);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected a single ReactElement.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createInstanceTypeChecker(expectedClass) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!(props[propName] instanceof expectedClass)) {
-        var expectedClassName = expectedClass.name || ANONYMOUS;
-        var actualClassName = getClassName(props[propName]);
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + actualClassName + '` supplied to `' + componentName + '`, expected ') + ('instance of `' + expectedClassName + '`.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createEnumTypeChecker(expectedValues) {
-    if (!Array.isArray(expectedValues)) {
-      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOf, expected an instance of array.') : void 0;
-      return emptyFunction.thatReturnsNull;
-    }
-
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      for (var i = 0; i < expectedValues.length; i++) {
-        if (is(propValue, expectedValues[i])) {
-          return null;
-        }
-      }
-
-      var valuesString = JSON.stringify(expectedValues);
-      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of value `' + propValue + '` ' + ('supplied to `' + componentName + '`, expected one of ' + valuesString + '.'));
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createObjectOfTypeChecker(typeChecker) {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (typeof typeChecker !== 'function') {
-        return new PropTypeError('Property `' + propFullName + '` of component `' + componentName + '` has invalid PropType notation inside objectOf.');
-      }
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type ' + ('`' + propType + '` supplied to `' + componentName + '`, expected an object.'));
-      }
-      for (var key in propValue) {
-        if (propValue.hasOwnProperty(key)) {
-          var error = typeChecker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-          if (error instanceof Error) {
-            return error;
-          }
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createUnionTypeChecker(arrayOfTypeCheckers) {
-    if (!Array.isArray(arrayOfTypeCheckers)) {
-      process.env.NODE_ENV !== 'production' ? warning(false, 'Invalid argument supplied to oneOfType, expected an instance of array.') : void 0;
-      return emptyFunction.thatReturnsNull;
-    }
-
-    for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-      var checker = arrayOfTypeCheckers[i];
-      if (typeof checker !== 'function') {
-        warning(
-          false,
-          'Invalid argument supplied to oneOfType. Expected an array of check functions, but ' +
-          'received %s at index %s.',
-          getPostfixForTypeWarning(checker),
-          i
-        );
-        return emptyFunction.thatReturnsNull;
-      }
-    }
-
-    function validate(props, propName, componentName, location, propFullName) {
-      for (var i = 0; i < arrayOfTypeCheckers.length; i++) {
-        var checker = arrayOfTypeCheckers[i];
-        if (checker(props, propName, componentName, location, propFullName, ReactPropTypesSecret) == null) {
-          return null;
-        }
-      }
-
-      return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`.'));
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createNodeChecker() {
-    function validate(props, propName, componentName, location, propFullName) {
-      if (!isNode(props[propName])) {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` supplied to ' + ('`' + componentName + '`, expected a ReactNode.'));
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createShapeTypeChecker(shapeTypes) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      }
-      for (var key in shapeTypes) {
-        var checker = shapeTypes[key];
-        if (!checker) {
-          continue;
-        }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-        if (error) {
-          return error;
-        }
-      }
-      return null;
-    }
-    return createChainableTypeChecker(validate);
-  }
-
-  function createStrictShapeTypeChecker(shapeTypes) {
-    function validate(props, propName, componentName, location, propFullName) {
-      var propValue = props[propName];
-      var propType = getPropType(propValue);
-      if (propType !== 'object') {
-        return new PropTypeError('Invalid ' + location + ' `' + propFullName + '` of type `' + propType + '` ' + ('supplied to `' + componentName + '`, expected `object`.'));
-      }
-      // We need to check all keys in case some are required but missing from
-      // props.
-      var allKeys = assign({}, props[propName], shapeTypes);
-      for (var key in allKeys) {
-        var checker = shapeTypes[key];
-        if (!checker) {
-          return new PropTypeError(
-            'Invalid ' + location + ' `' + propFullName + '` key `' + key + '` supplied to `' + componentName + '`.' +
-            '\nBad object: ' + JSON.stringify(props[propName], null, '  ') +
-            '\nValid keys: ' +  JSON.stringify(Object.keys(shapeTypes), null, '  ')
-          );
-        }
-        var error = checker(propValue, key, componentName, location, propFullName + '.' + key, ReactPropTypesSecret);
-        if (error) {
-          return error;
-        }
-      }
-      return null;
-    }
-
-    return createChainableTypeChecker(validate);
-  }
-
-  function isNode(propValue) {
-    switch (typeof propValue) {
-      case 'number':
-      case 'string':
-      case 'undefined':
-        return true;
-      case 'boolean':
-        return !propValue;
-      case 'object':
-        if (Array.isArray(propValue)) {
-          return propValue.every(isNode);
-        }
-        if (propValue === null || isValidElement(propValue)) {
-          return true;
-        }
-
-        var iteratorFn = getIteratorFn(propValue);
-        if (iteratorFn) {
-          var iterator = iteratorFn.call(propValue);
-          var step;
-          if (iteratorFn !== propValue.entries) {
-            while (!(step = iterator.next()).done) {
-              if (!isNode(step.value)) {
-                return false;
-              }
-            }
-          } else {
-            // Iterator will provide entry [k,v] tuples rather than values.
-            while (!(step = iterator.next()).done) {
-              var entry = step.value;
-              if (entry) {
-                if (!isNode(entry[1])) {
-                  return false;
-                }
-              }
-            }
-          }
-        } else {
-          return false;
-        }
-
-        return true;
-      default:
-        return false;
-    }
-  }
-
-  function isSymbol(propType, propValue) {
-    // Native Symbol.
-    if (propType === 'symbol') {
-      return true;
-    }
-
-    // 19.4.3.5 Symbol.prototype[@@toStringTag] === 'Symbol'
-    if (propValue['@@toStringTag'] === 'Symbol') {
-      return true;
-    }
-
-    // Fallback for non-spec compliant Symbols which are polyfilled.
-    if (typeof Symbol === 'function' && propValue instanceof Symbol) {
-      return true;
-    }
-
-    return false;
-  }
-
-  // Equivalent of `typeof` but with special handling for array and regexp.
-  function getPropType(propValue) {
-    var propType = typeof propValue;
-    if (Array.isArray(propValue)) {
-      return 'array';
-    }
-    if (propValue instanceof RegExp) {
-      // Old webkits (at least until Android 4.0) return 'function' rather than
-      // 'object' for typeof a RegExp. We'll normalize this here so that /bla/
-      // passes PropTypes.object.
-      return 'object';
-    }
-    if (isSymbol(propType, propValue)) {
-      return 'symbol';
-    }
-    return propType;
-  }
-
-  // This handles more types than `getPropType`. Only used for error messages.
-  // See `createPrimitiveTypeChecker`.
-  function getPreciseType(propValue) {
-    if (typeof propValue === 'undefined' || propValue === null) {
-      return '' + propValue;
-    }
-    var propType = getPropType(propValue);
-    if (propType === 'object') {
-      if (propValue instanceof Date) {
-        return 'date';
-      } else if (propValue instanceof RegExp) {
-        return 'regexp';
-      }
-    }
-    return propType;
-  }
-
-  // Returns a string that is postfixed to a warning about an invalid type.
-  // For example, "undefined" or "of type array"
-  function getPostfixForTypeWarning(value) {
-    var type = getPreciseType(value);
-    switch (type) {
-      case 'array':
-      case 'object':
-        return 'an ' + type;
-      case 'boolean':
-      case 'date':
-      case 'regexp':
-        return 'a ' + type;
-      default:
-        return type;
-    }
-  }
-
-  // Returns class name of the object, if any.
-  function getClassName(propValue) {
-    if (!propValue.constructor || !propValue.constructor.name) {
-      return ANONYMOUS;
-    }
-    return propValue.constructor.name;
-  }
-
-  ReactPropTypes.checkPropTypes = checkPropTypes;
-  ReactPropTypes.PropTypes = ReactPropTypes;
-
-  return ReactPropTypes;
-};
-
-/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(2)))
-
-/***/ }),
-/* 89 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/**
- * Copyright (c) 2013-present, Facebook, Inc.
- *
- * This source code is licensed under the MIT license found in the
- * LICENSE file in the root directory of this source tree.
- */
-
-
-
-var emptyFunction = __webpack_require__(7);
-var invariant = __webpack_require__(6);
-var ReactPropTypesSecret = __webpack_require__(17);
-
-module.exports = function() {
-  function shim(props, propName, componentName, location, propFullName, secret) {
-    if (secret === ReactPropTypesSecret) {
-      // It is still safe when called from React.
-      return;
-    }
-    invariant(
-      false,
-      'Calling PropTypes validators directly is not supported by the `prop-types` package. ' +
-      'Use PropTypes.checkPropTypes() to call them. ' +
-      'Read more at http://fb.me/use-check-prop-types'
-    );
-  };
-  shim.isRequired = shim;
-  function getShim() {
-    return shim;
-  };
-  // Important!
-  // Keep this list in sync with production version in `./factoryWithTypeCheckers.js`.
-  var ReactPropTypes = {
-    array: shim,
-    bool: shim,
-    func: shim,
-    number: shim,
-    object: shim,
-    string: shim,
-    symbol: shim,
-
-    any: shim,
-    arrayOf: getShim,
-    element: shim,
-    instanceOf: getShim,
-    node: shim,
-    objectOf: getShim,
-    oneOf: getShim,
-    oneOfType: getShim,
-    shape: getShim,
-    exact: getShim
-  };
-
-  ReactPropTypes.checkPropTypes = emptyFunction;
-  ReactPropTypes.PropTypes = ReactPropTypes;
-
-  return ReactPropTypes;
-};
-
-
-/***/ }),
-/* 90 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _warning = __webpack_require__(1);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-var _invariant = __webpack_require__(5);
-
-var _invariant2 = _interopRequireDefault(_invariant);
-
-var _LocationUtils = __webpack_require__(19);
-
-var _PathUtils = __webpack_require__(9);
-
-var _createTransitionManager = __webpack_require__(20);
-
-var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
-
-var _DOMUtils = __webpack_require__(38);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var PopStateEvent = 'popstate';
-var HashChangeEvent = 'hashchange';
-
-var getHistoryState = function getHistoryState() {
-  try {
-    return window.history.state || {};
-  } catch (e) {
-    // IE 11 sometimes throws when accessing window.history.state
-    // See https://github.com/ReactTraining/history/pull/289
-    return {};
-  }
-};
-
-/**
- * Creates a history object that uses the HTML5 history API including
- * pushState, replaceState, and the popstate event.
- */
-var createBrowserHistory = function createBrowserHistory() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Browser history needs a DOM');
-
-  var globalHistory = window.history;
-  var canUseHistory = (0, _DOMUtils.supportsHistory)();
-  var needsHashChangeListener = !(0, _DOMUtils.supportsPopStateOnHashChange)();
-
-  var _props$forceRefresh = props.forceRefresh,
-      forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
-      _props$getUserConfirm = props.getUserConfirmation,
-      getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
-      _props$keyLength = props.keyLength,
-      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
-
-  var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
-
-  var getDOMLocation = function getDOMLocation(historyState) {
-    var _ref = historyState || {},
-        key = _ref.key,
-        state = _ref.state;
-
-    var _window$location = window.location,
-        pathname = _window$location.pathname,
-        search = _window$location.search,
-        hash = _window$location.hash;
-
-
-    var path = pathname + search + hash;
-
-    (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
-
-    if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
-
-    return (0, _LocationUtils.createLocation)(path, state, key);
-  };
-
-  var createKey = function createKey() {
-    return Math.random().toString(36).substr(2, keyLength);
-  };
-
-  var transitionManager = (0, _createTransitionManager2.default)();
-
-  var setState = function setState(nextState) {
-    _extends(history, nextState);
-
-    history.length = globalHistory.length;
-
-    transitionManager.notifyListeners(history.location, history.action);
-  };
-
-  var handlePopState = function handlePopState(event) {
-    // Ignore extraneous popstate events in WebKit.
-    if ((0, _DOMUtils.isExtraneousPopstateEvent)(event)) return;
-
-    handlePop(getDOMLocation(event.state));
-  };
-
-  var handleHashChange = function handleHashChange() {
-    handlePop(getDOMLocation(getHistoryState()));
-  };
-
-  var forceNextPop = false;
-
-  var handlePop = function handlePop(location) {
-    if (forceNextPop) {
-      forceNextPop = false;
-      setState();
-    } else {
-      var action = 'POP';
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (ok) {
-          setState({ action: action, location: location });
-        } else {
-          revertPop(location);
-        }
-      });
-    }
-  };
-
-  var revertPop = function revertPop(fromLocation) {
-    var toLocation = history.location;
-
-    // TODO: We could probably make this more reliable by
-    // keeping a list of keys we've seen in sessionStorage.
-    // Instead, we just default to 0 for keys we don't know.
-
-    var toIndex = allKeys.indexOf(toLocation.key);
-
-    if (toIndex === -1) toIndex = 0;
-
-    var fromIndex = allKeys.indexOf(fromLocation.key);
-
-    if (fromIndex === -1) fromIndex = 0;
-
-    var delta = toIndex - fromIndex;
-
-    if (delta) {
-      forceNextPop = true;
-      go(delta);
-    }
-  };
-
-  var initialLocation = getDOMLocation(getHistoryState());
-  var allKeys = [initialLocation.key];
-
-  // Public interface
-
-  var createHref = function createHref(location) {
-    return basename + (0, _PathUtils.createPath)(location);
-  };
-
-  var push = function push(path, state) {
-    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'PUSH';
-    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var href = createHref(location);
-      var key = location.key,
-          state = location.state;
-
-
-      if (canUseHistory) {
-        globalHistory.pushState({ key: key, state: state }, null, href);
-
-        if (forceRefresh) {
-          window.location.href = href;
-        } else {
-          var prevIndex = allKeys.indexOf(history.location.key);
-          var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
-
-          nextKeys.push(location.key);
-          allKeys = nextKeys;
-
-          setState({ action: action, location: location });
-        }
-      } else {
-        (0, _warning2.default)(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
-
-        window.location.href = href;
-      }
-    });
-  };
-
-  var replace = function replace(path, state) {
-    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'REPLACE';
-    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var href = createHref(location);
-      var key = location.key,
-          state = location.state;
-
-
-      if (canUseHistory) {
-        globalHistory.replaceState({ key: key, state: state }, null, href);
-
-        if (forceRefresh) {
-          window.location.replace(href);
-        } else {
-          var prevIndex = allKeys.indexOf(history.location.key);
-
-          if (prevIndex !== -1) allKeys[prevIndex] = location.key;
-
-          setState({ action: action, location: location });
-        }
-      } else {
-        (0, _warning2.default)(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
-
-        window.location.replace(href);
-      }
-    });
-  };
-
-  var go = function go(n) {
-    globalHistory.go(n);
-  };
-
-  var goBack = function goBack() {
-    return go(-1);
-  };
-
-  var goForward = function goForward() {
-    return go(1);
-  };
-
-  var listenerCount = 0;
-
-  var checkDOMListeners = function checkDOMListeners(delta) {
-    listenerCount += delta;
-
-    if (listenerCount === 1) {
-      (0, _DOMUtils.addEventListener)(window, PopStateEvent, handlePopState);
-
-      if (needsHashChangeListener) (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
-    } else if (listenerCount === 0) {
-      (0, _DOMUtils.removeEventListener)(window, PopStateEvent, handlePopState);
-
-      if (needsHashChangeListener) (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
-    }
-  };
-
-  var isBlocked = false;
-
-  var block = function block() {
-    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-    var unblock = transitionManager.setPrompt(prompt);
-
-    if (!isBlocked) {
-      checkDOMListeners(1);
-      isBlocked = true;
-    }
-
-    return function () {
-      if (isBlocked) {
-        isBlocked = false;
-        checkDOMListeners(-1);
-      }
-
-      return unblock();
-    };
-  };
-
-  var listen = function listen(listener) {
-    var unlisten = transitionManager.appendListener(listener);
-    checkDOMListeners(1);
-
-    return function () {
-      checkDOMListeners(-1);
-      unlisten();
-    };
-  };
-
-  var history = {
-    length: globalHistory.length,
-    action: 'POP',
-    location: initialLocation,
-    createHref: createHref,
-    push: push,
-    replace: replace,
-    go: go,
-    goBack: goBack,
-    goForward: goForward,
-    block: block,
-    listen: listen
-  };
-
-  return history;
-};
-
-exports.default = createBrowserHistory;
-
-/***/ }),
-/* 91 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createHashHistory__ = __webpack_require__(92);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_history_createHashHistory___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_history_createHashHistory__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(21);
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-
-
-
-
-
-
-/**
- * The public API for a <Router> that uses window.location.hash.
- */
-
-var HashRouter = function (_React$Component) {
-  _inherits(HashRouter, _React$Component);
-
-  function HashRouter() {
-    var _temp, _this, _ret;
-
-    _classCallCheck(this, HashRouter);
-
-    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-      args[_key] = arguments[_key];
-    }
-
-    return _ret = (_temp = (_this = _possibleConstructorReturn(this, _React$Component.call.apply(_React$Component, [this].concat(args))), _this), _this.history = __WEBPACK_IMPORTED_MODULE_3_history_createHashHistory___default.a(_this.props), _temp), _possibleConstructorReturn(_this, _ret);
-  }
-
-  HashRouter.prototype.componentWillMount = function componentWillMount() {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!this.props.history, '<HashRouter> ignores the history prop. To use a custom history, ' + 'use `import { Router }` instead of `import { HashRouter as Router }`.');
-  };
-
-  HashRouter.prototype.render = function render() {
-    return __WEBPACK_IMPORTED_MODULE_1_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_4__Router__["a" /* default */], { history: this.history, children: this.props.children });
-  };
-
-  return HashRouter;
-}(__WEBPACK_IMPORTED_MODULE_1_react___default.a.Component);
-
-HashRouter.propTypes = {
-  basename: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.string,
-  getUserConfirmation: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.func,
-  hashType: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.oneOf(['hashbang', 'noslash', 'slash']),
-  children: __WEBPACK_IMPORTED_MODULE_2_prop_types___default.a.node
-};
-
-
-/* harmony default export */ __webpack_exports__["a"] = (HashRouter);
-
-/***/ }),
-/* 92 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _warning = __webpack_require__(1);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-var _invariant = __webpack_require__(5);
-
-var _invariant2 = _interopRequireDefault(_invariant);
-
-var _LocationUtils = __webpack_require__(19);
-
-var _PathUtils = __webpack_require__(9);
-
-var _createTransitionManager = __webpack_require__(20);
-
-var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
-
-var _DOMUtils = __webpack_require__(38);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var HashChangeEvent = 'hashchange';
-
-var HashPathCoders = {
-  hashbang: {
-    encodePath: function encodePath(path) {
-      return path.charAt(0) === '!' ? path : '!/' + (0, _PathUtils.stripLeadingSlash)(path);
-    },
-    decodePath: function decodePath(path) {
-      return path.charAt(0) === '!' ? path.substr(1) : path;
-    }
-  },
-  noslash: {
-    encodePath: _PathUtils.stripLeadingSlash,
-    decodePath: _PathUtils.addLeadingSlash
-  },
-  slash: {
-    encodePath: _PathUtils.addLeadingSlash,
-    decodePath: _PathUtils.addLeadingSlash
-  }
-};
-
-var getHashPath = function getHashPath() {
-  // We can't use window.location.hash here because it's not
-  // consistent across browsers - Firefox will pre-decode it!
-  var href = window.location.href;
-  var hashIndex = href.indexOf('#');
-  return hashIndex === -1 ? '' : href.substring(hashIndex + 1);
-};
-
-var pushHashPath = function pushHashPath(path) {
-  return window.location.hash = path;
-};
-
-var replaceHashPath = function replaceHashPath(path) {
-  var hashIndex = window.location.href.indexOf('#');
-
-  window.location.replace(window.location.href.slice(0, hashIndex >= 0 ? hashIndex : 0) + '#' + path);
-};
-
-var createHashHistory = function createHashHistory() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  (0, _invariant2.default)(_DOMUtils.canUseDOM, 'Hash history needs a DOM');
-
-  var globalHistory = window.history;
-  var canGoWithoutReload = (0, _DOMUtils.supportsGoWithoutReloadUsingHash)();
-
-  var _props$getUserConfirm = props.getUserConfirmation,
-      getUserConfirmation = _props$getUserConfirm === undefined ? _DOMUtils.getConfirmation : _props$getUserConfirm,
-      _props$hashType = props.hashType,
-      hashType = _props$hashType === undefined ? 'slash' : _props$hashType;
-
-  var basename = props.basename ? (0, _PathUtils.stripTrailingSlash)((0, _PathUtils.addLeadingSlash)(props.basename)) : '';
-
-  var _HashPathCoders$hashT = HashPathCoders[hashType],
-      encodePath = _HashPathCoders$hashT.encodePath,
-      decodePath = _HashPathCoders$hashT.decodePath;
-
-
-  var getDOMLocation = function getDOMLocation() {
-    var path = decodePath(getHashPath());
-
-    (0, _warning2.default)(!basename || (0, _PathUtils.hasBasename)(path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
-
-    if (basename) path = (0, _PathUtils.stripBasename)(path, basename);
-
-    return (0, _LocationUtils.createLocation)(path);
-  };
-
-  var transitionManager = (0, _createTransitionManager2.default)();
-
-  var setState = function setState(nextState) {
-    _extends(history, nextState);
-
-    history.length = globalHistory.length;
-
-    transitionManager.notifyListeners(history.location, history.action);
-  };
-
-  var forceNextPop = false;
-  var ignorePath = null;
-
-  var handleHashChange = function handleHashChange() {
-    var path = getHashPath();
-    var encodedPath = encodePath(path);
-
-    if (path !== encodedPath) {
-      // Ensure we always have a properly-encoded hash.
-      replaceHashPath(encodedPath);
-    } else {
-      var location = getDOMLocation();
-      var prevLocation = history.location;
-
-      if (!forceNextPop && (0, _LocationUtils.locationsAreEqual)(prevLocation, location)) return; // A hashchange doesn't always == location change.
-
-      if (ignorePath === (0, _PathUtils.createPath)(location)) return; // Ignore this change; we already setState in push/replace.
-
-      ignorePath = null;
-
-      handlePop(location);
-    }
-  };
-
-  var handlePop = function handlePop(location) {
-    if (forceNextPop) {
-      forceNextPop = false;
-      setState();
-    } else {
-      var action = 'POP';
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (ok) {
-          setState({ action: action, location: location });
-        } else {
-          revertPop(location);
-        }
-      });
-    }
-  };
-
-  var revertPop = function revertPop(fromLocation) {
-    var toLocation = history.location;
-
-    // TODO: We could probably make this more reliable by
-    // keeping a list of paths we've seen in sessionStorage.
-    // Instead, we just default to 0 for paths we don't know.
-
-    var toIndex = allPaths.lastIndexOf((0, _PathUtils.createPath)(toLocation));
-
-    if (toIndex === -1) toIndex = 0;
-
-    var fromIndex = allPaths.lastIndexOf((0, _PathUtils.createPath)(fromLocation));
-
-    if (fromIndex === -1) fromIndex = 0;
-
-    var delta = toIndex - fromIndex;
-
-    if (delta) {
-      forceNextPop = true;
-      go(delta);
-    }
-  };
-
-  // Ensure the hash is encoded properly before doing anything else.
-  var path = getHashPath();
-  var encodedPath = encodePath(path);
-
-  if (path !== encodedPath) replaceHashPath(encodedPath);
-
-  var initialLocation = getDOMLocation();
-  var allPaths = [(0, _PathUtils.createPath)(initialLocation)];
-
-  // Public interface
-
-  var createHref = function createHref(location) {
-    return '#' + encodePath(basename + (0, _PathUtils.createPath)(location));
-  };
-
-  var push = function push(path, state) {
-    (0, _warning2.default)(state === undefined, 'Hash history cannot push state; it is ignored');
-
-    var action = 'PUSH';
-    var location = (0, _LocationUtils.createLocation)(path, undefined, undefined, history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var path = (0, _PathUtils.createPath)(location);
-      var encodedPath = encodePath(basename + path);
-      var hashChanged = getHashPath() !== encodedPath;
-
-      if (hashChanged) {
-        // We cannot tell if a hashchange was caused by a PUSH, so we'd
-        // rather setState here and ignore the hashchange. The caveat here
-        // is that other hash histories in the page will consider it a POP.
-        ignorePath = path;
-        pushHashPath(encodedPath);
-
-        var prevIndex = allPaths.lastIndexOf((0, _PathUtils.createPath)(history.location));
-        var nextPaths = allPaths.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
-
-        nextPaths.push(path);
-        allPaths = nextPaths;
-
-        setState({ action: action, location: location });
-      } else {
-        (0, _warning2.default)(false, 'Hash history cannot PUSH the same path; a new entry will not be added to the history stack');
-
-        setState();
-      }
-    });
-  };
-
-  var replace = function replace(path, state) {
-    (0, _warning2.default)(state === undefined, 'Hash history cannot replace state; it is ignored');
-
-    var action = 'REPLACE';
-    var location = (0, _LocationUtils.createLocation)(path, undefined, undefined, history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var path = (0, _PathUtils.createPath)(location);
-      var encodedPath = encodePath(basename + path);
-      var hashChanged = getHashPath() !== encodedPath;
-
-      if (hashChanged) {
-        // We cannot tell if a hashchange was caused by a REPLACE, so we'd
-        // rather setState here and ignore the hashchange. The caveat here
-        // is that other hash histories in the page will consider it a POP.
-        ignorePath = path;
-        replaceHashPath(encodedPath);
-      }
-
-      var prevIndex = allPaths.indexOf((0, _PathUtils.createPath)(history.location));
-
-      if (prevIndex !== -1) allPaths[prevIndex] = path;
-
-      setState({ action: action, location: location });
-    });
-  };
-
-  var go = function go(n) {
-    (0, _warning2.default)(canGoWithoutReload, 'Hash history go(n) causes a full page reload in this browser');
-
-    globalHistory.go(n);
-  };
-
-  var goBack = function goBack() {
-    return go(-1);
-  };
-
-  var goForward = function goForward() {
-    return go(1);
-  };
-
-  var listenerCount = 0;
-
-  var checkDOMListeners = function checkDOMListeners(delta) {
-    listenerCount += delta;
-
-    if (listenerCount === 1) {
-      (0, _DOMUtils.addEventListener)(window, HashChangeEvent, handleHashChange);
-    } else if (listenerCount === 0) {
-      (0, _DOMUtils.removeEventListener)(window, HashChangeEvent, handleHashChange);
-    }
-  };
-
-  var isBlocked = false;
-
-  var block = function block() {
-    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-    var unblock = transitionManager.setPrompt(prompt);
-
-    if (!isBlocked) {
-      checkDOMListeners(1);
-      isBlocked = true;
-    }
-
-    return function () {
-      if (isBlocked) {
-        isBlocked = false;
-        checkDOMListeners(-1);
-      }
-
-      return unblock();
-    };
-  };
-
-  var listen = function listen(listener) {
-    var unlisten = transitionManager.appendListener(listener);
-    checkDOMListeners(1);
-
-    return function () {
-      checkDOMListeners(-1);
-      unlisten();
-    };
-  };
-
-  var history = {
-    length: globalHistory.length,
-    action: 'POP',
-    location: initialLocation,
-    createHref: createHref,
-    push: push,
-    replace: replace,
-    go: go,
-    goBack: goBack,
-    goForward: goForward,
-    block: block,
-    listen: listen
-  };
-
-  return history;
-};
-
-exports.default = createHashHistory;
-
-/***/ }),
-/* 93 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__ = __webpack_require__(40);
-// Written in this round about way for babel-transform-imports
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_MemoryRouter__["a" /* default */]);
-
-/***/ }),
-/* 94 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-exports.__esModule = true;
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _warning = __webpack_require__(1);
-
-var _warning2 = _interopRequireDefault(_warning);
-
-var _PathUtils = __webpack_require__(9);
-
-var _LocationUtils = __webpack_require__(19);
-
-var _createTransitionManager = __webpack_require__(20);
-
-var _createTransitionManager2 = _interopRequireDefault(_createTransitionManager);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var clamp = function clamp(n, lowerBound, upperBound) {
-  return Math.min(Math.max(n, lowerBound), upperBound);
-};
-
-/**
- * Creates a history object that stores locations in memory.
- */
-var createMemoryHistory = function createMemoryHistory() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var getUserConfirmation = props.getUserConfirmation,
-      _props$initialEntries = props.initialEntries,
-      initialEntries = _props$initialEntries === undefined ? ['/'] : _props$initialEntries,
-      _props$initialIndex = props.initialIndex,
-      initialIndex = _props$initialIndex === undefined ? 0 : _props$initialIndex,
-      _props$keyLength = props.keyLength,
-      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
-
-
-  var transitionManager = (0, _createTransitionManager2.default)();
-
-  var setState = function setState(nextState) {
-    _extends(history, nextState);
-
-    history.length = history.entries.length;
-
-    transitionManager.notifyListeners(history.location, history.action);
-  };
-
-  var createKey = function createKey() {
-    return Math.random().toString(36).substr(2, keyLength);
-  };
-
-  var index = clamp(initialIndex, 0, initialEntries.length - 1);
-  var entries = initialEntries.map(function (entry) {
-    return typeof entry === 'string' ? (0, _LocationUtils.createLocation)(entry, undefined, createKey()) : (0, _LocationUtils.createLocation)(entry, undefined, entry.key || createKey());
-  });
-
-  // Public interface
-
-  var createHref = _PathUtils.createPath;
-
-  var push = function push(path, state) {
-    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'PUSH';
-    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var prevIndex = history.index;
-      var nextIndex = prevIndex + 1;
-
-      var nextEntries = history.entries.slice(0);
-      if (nextEntries.length > nextIndex) {
-        nextEntries.splice(nextIndex, nextEntries.length - nextIndex, location);
-      } else {
-        nextEntries.push(location);
-      }
-
-      setState({
-        action: action,
-        location: location,
-        index: nextIndex,
-        entries: nextEntries
-      });
-    });
-  };
-
-  var replace = function replace(path, state) {
-    (0, _warning2.default)(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'REPLACE';
-    var location = (0, _LocationUtils.createLocation)(path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      history.entries[history.index] = location;
-
-      setState({ action: action, location: location });
-    });
-  };
-
-  var go = function go(n) {
-    var nextIndex = clamp(history.index + n, 0, history.entries.length - 1);
-
-    var action = 'POP';
-    var location = history.entries[nextIndex];
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (ok) {
-        setState({
-          action: action,
-          location: location,
-          index: nextIndex
-        });
-      } else {
-        // Mimic the behavior of DOM histories by
-        // causing a render after a cancelled POP.
-        setState();
-      }
-    });
-  };
-
-  var goBack = function goBack() {
-    return go(-1);
-  };
-
-  var goForward = function goForward() {
-    return go(1);
-  };
-
-  var canGo = function canGo(n) {
-    var nextIndex = history.index + n;
-    return nextIndex >= 0 && nextIndex < history.entries.length;
-  };
-
-  var block = function block() {
-    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-    return transitionManager.setPrompt(prompt);
-  };
-
-  var listen = function listen(listener) {
-    return transitionManager.appendListener(listener);
-  };
-
-  var history = {
-    length: entries.length,
-    action: 'POP',
-    location: entries[index],
-    index: index,
-    entries: entries,
-    createHref: createHref,
-    push: push,
-    replace: replace,
-    go: go,
-    goBack: goBack,
-    goForward: goForward,
-    canGo: canGo,
-    block: block,
-    listen: listen
-  };
-
-  return history;
-};
-
-exports.default = createMemoryHistory;
-
-/***/ }),
-/* 95 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types__ = __webpack_require__(4);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_prop_types___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_prop_types__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Route__ = __webpack_require__(41);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Link__ = __webpack_require__(39);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
-
-
-
-
-
-
-/**
- * A <Link> wrapper that knows if it's "active" or not.
- */
-var NavLink = function NavLink(_ref) {
-  var to = _ref.to,
-      exact = _ref.exact,
-      strict = _ref.strict,
-      location = _ref.location,
-      activeClassName = _ref.activeClassName,
-      className = _ref.className,
-      activeStyle = _ref.activeStyle,
-      style = _ref.style,
-      getIsActive = _ref.isActive,
-      ariaCurrent = _ref.ariaCurrent,
-      rest = _objectWithoutProperties(_ref, ['to', 'exact', 'strict', 'location', 'activeClassName', 'className', 'activeStyle', 'style', 'isActive', 'ariaCurrent']);
-
-  return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_2__Route__["a" /* default */], {
-    path: (typeof to === 'undefined' ? 'undefined' : _typeof(to)) === 'object' ? to.pathname : to,
-    exact: exact,
-    strict: strict,
-    location: location,
-    children: function children(_ref2) {
-      var location = _ref2.location,
-          match = _ref2.match;
-
-      var isActive = !!(getIsActive ? getIsActive(match, location) : match);
-
-      return __WEBPACK_IMPORTED_MODULE_0_react___default.a.createElement(__WEBPACK_IMPORTED_MODULE_3__Link__["a" /* default */], _extends({
-        to: to,
-        className: isActive ? [className, activeClassName].filter(function (i) {
-          return i;
-        }).join(' ') : className,
-        style: isActive ? _extends({}, style, activeStyle) : style,
-        'aria-current': isActive && ariaCurrent
-      }, rest));
-    }
-  });
-};
-
-NavLink.propTypes = {
-  to: __WEBPACK_IMPORTED_MODULE_3__Link__["a" /* default */].propTypes.to,
-  exact: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  strict: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.bool,
-  location: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  activeClassName: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  className: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.string,
-  activeStyle: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  style: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.object,
-  isActive: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.func,
-  ariaCurrent: __WEBPACK_IMPORTED_MODULE_1_prop_types___default.a.oneOf(['page', 'step', 'location', 'true'])
-};
-
-NavLink.defaultProps = {
-  activeClassName: 'active',
-  ariaCurrent: 'true'
-};
-
-/* harmony default export */ __webpack_exports__["a"] = (NavLink);
-
-/***/ }),
-/* 96 */
-/***/ (function(module, exports, __webpack_require__) {
-
-var isarray = __webpack_require__(97)
-
-/**
- * Expose `pathToRegexp`.
- */
-module.exports = pathToRegexp
-module.exports.parse = parse
-module.exports.compile = compile
-module.exports.tokensToFunction = tokensToFunction
-module.exports.tokensToRegExp = tokensToRegExp
-
-/**
- * The main path matching regexp utility.
- *
- * @type {RegExp}
- */
-var PATH_REGEXP = new RegExp([
-  // Match escaped characters that would otherwise appear in future matches.
-  // This allows the user to escape special characters that won't transform.
-  '(\\\\.)',
-  // Match Express-style parameters and un-named parameters with a prefix
-  // and optional suffixes. Matches appear as:
-  //
-  // "/:test(\\d+)?" => ["/", "test", "\d+", undefined, "?", undefined]
-  // "/route(\\d+)"  => [undefined, undefined, undefined, "\d+", undefined, undefined]
-  // "/*"            => ["/", undefined, undefined, undefined, undefined, "*"]
-  '([\\/.])?(?:(?:\\:(\\w+)(?:\\(((?:\\\\.|[^\\\\()])+)\\))?|\\(((?:\\\\.|[^\\\\()])+)\\))([+*?])?|(\\*))'
-].join('|'), 'g')
-
-/**
- * Parse a string for the raw tokens.
- *
- * @param  {string}  str
- * @param  {Object=} options
- * @return {!Array}
- */
-function parse (str, options) {
-  var tokens = []
-  var key = 0
-  var index = 0
-  var path = ''
-  var defaultDelimiter = options && options.delimiter || '/'
-  var res
-
-  while ((res = PATH_REGEXP.exec(str)) != null) {
-    var m = res[0]
-    var escaped = res[1]
-    var offset = res.index
-    path += str.slice(index, offset)
-    index = offset + m.length
-
-    // Ignore already escaped sequences.
-    if (escaped) {
-      path += escaped[1]
-      continue
-    }
-
-    var next = str[index]
-    var prefix = res[2]
-    var name = res[3]
-    var capture = res[4]
-    var group = res[5]
-    var modifier = res[6]
-    var asterisk = res[7]
-
-    // Push the current path onto the tokens.
-    if (path) {
-      tokens.push(path)
-      path = ''
-    }
-
-    var partial = prefix != null && next != null && next !== prefix
-    var repeat = modifier === '+' || modifier === '*'
-    var optional = modifier === '?' || modifier === '*'
-    var delimiter = res[2] || defaultDelimiter
-    var pattern = capture || group
-
-    tokens.push({
-      name: name || key++,
-      prefix: prefix || '',
-      delimiter: delimiter,
-      optional: optional,
-      repeat: repeat,
-      partial: partial,
-      asterisk: !!asterisk,
-      pattern: pattern ? escapeGroup(pattern) : (asterisk ? '.*' : '[^' + escapeString(delimiter) + ']+?')
-    })
-  }
-
-  // Match any characters still remaining.
-  if (index < str.length) {
-    path += str.substr(index)
-  }
-
-  // If the path exists, push it onto the end.
-  if (path) {
-    tokens.push(path)
-  }
-
-  return tokens
-}
-
-/**
- * Compile a string to a template function for the path.
- *
- * @param  {string}             str
- * @param  {Object=}            options
- * @return {!function(Object=, Object=)}
- */
-function compile (str, options) {
-  return tokensToFunction(parse(str, options))
-}
-
-/**
- * Prettier encoding of URI path segments.
- *
- * @param  {string}
- * @return {string}
- */
-function encodeURIComponentPretty (str) {
-  return encodeURI(str).replace(/[\/?#]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-  })
-}
-
-/**
- * Encode the asterisk parameter. Similar to `pretty`, but allows slashes.
- *
- * @param  {string}
- * @return {string}
- */
-function encodeAsterisk (str) {
-  return encodeURI(str).replace(/[?#]/g, function (c) {
-    return '%' + c.charCodeAt(0).toString(16).toUpperCase()
-  })
-}
-
-/**
- * Expose a method for transforming tokens into the path function.
- */
-function tokensToFunction (tokens) {
-  // Compile all the tokens into regexps.
-  var matches = new Array(tokens.length)
-
-  // Compile all the patterns before compilation.
-  for (var i = 0; i < tokens.length; i++) {
-    if (typeof tokens[i] === 'object') {
-      matches[i] = new RegExp('^(?:' + tokens[i].pattern + ')$')
-    }
-  }
-
-  return function (obj, opts) {
-    var path = ''
-    var data = obj || {}
-    var options = opts || {}
-    var encode = options.pretty ? encodeURIComponentPretty : encodeURIComponent
-
-    for (var i = 0; i < tokens.length; i++) {
-      var token = tokens[i]
-
-      if (typeof token === 'string') {
-        path += token
-
-        continue
-      }
-
-      var value = data[token.name]
-      var segment
-
-      if (value == null) {
-        if (token.optional) {
-          // Prepend partial segment prefixes.
-          if (token.partial) {
-            path += token.prefix
-          }
-
-          continue
-        } else {
-          throw new TypeError('Expected "' + token.name + '" to be defined')
-        }
-      }
-
-      if (isarray(value)) {
-        if (!token.repeat) {
-          throw new TypeError('Expected "' + token.name + '" to not repeat, but received `' + JSON.stringify(value) + '`')
-        }
-
-        if (value.length === 0) {
-          if (token.optional) {
-            continue
-          } else {
-            throw new TypeError('Expected "' + token.name + '" to not be empty')
-          }
-        }
-
-        for (var j = 0; j < value.length; j++) {
-          segment = encode(value[j])
-
-          if (!matches[i].test(segment)) {
-            throw new TypeError('Expected all "' + token.name + '" to match "' + token.pattern + '", but received `' + JSON.stringify(segment) + '`')
-          }
-
-          path += (j === 0 ? token.prefix : token.delimiter) + segment
-        }
-
-        continue
-      }
-
-      segment = token.asterisk ? encodeAsterisk(value) : encode(value)
-
-      if (!matches[i].test(segment)) {
-        throw new TypeError('Expected "' + token.name + '" to match "' + token.pattern + '", but received "' + segment + '"')
-      }
-
-      path += token.prefix + segment
-    }
-
-    return path
-  }
-}
-
-/**
- * Escape a regular expression string.
- *
- * @param  {string} str
- * @return {string}
- */
-function escapeString (str) {
-  return str.replace(/([.+*?=^!:${}()[\]|\/\\])/g, '\\$1')
-}
-
-/**
- * Escape the capturing group by escaping special characters and meaning.
- *
- * @param  {string} group
- * @return {string}
- */
-function escapeGroup (group) {
-  return group.replace(/([=!:$\/()])/g, '\\$1')
-}
-
-/**
- * Attach the keys as a property of the regexp.
- *
- * @param  {!RegExp} re
- * @param  {Array}   keys
- * @return {!RegExp}
- */
-function attachKeys (re, keys) {
-  re.keys = keys
-  return re
-}
-
-/**
- * Get the flags for a regexp from the options.
- *
- * @param  {Object} options
- * @return {string}
- */
-function flags (options) {
-  return options.sensitive ? '' : 'i'
-}
-
-/**
- * Pull out keys from a regexp.
- *
- * @param  {!RegExp} path
- * @param  {!Array}  keys
- * @return {!RegExp}
- */
-function regexpToRegexp (path, keys) {
-  // Use a negative lookahead to match only capturing groups.
-  var groups = path.source.match(/\((?!\?)/g)
-
-  if (groups) {
-    for (var i = 0; i < groups.length; i++) {
-      keys.push({
-        name: i,
-        prefix: null,
-        delimiter: null,
-        optional: false,
-        repeat: false,
-        partial: false,
-        asterisk: false,
-        pattern: null
-      })
-    }
-  }
-
-  return attachKeys(path, keys)
-}
-
-/**
- * Transform an array into a regexp.
- *
- * @param  {!Array}  path
- * @param  {Array}   keys
- * @param  {!Object} options
- * @return {!RegExp}
- */
-function arrayToRegexp (path, keys, options) {
-  var parts = []
-
-  for (var i = 0; i < path.length; i++) {
-    parts.push(pathToRegexp(path[i], keys, options).source)
-  }
-
-  var regexp = new RegExp('(?:' + parts.join('|') + ')', flags(options))
-
-  return attachKeys(regexp, keys)
-}
-
-/**
- * Create a path regexp from string input.
- *
- * @param  {string}  path
- * @param  {!Array}  keys
- * @param  {!Object} options
- * @return {!RegExp}
- */
-function stringToRegexp (path, keys, options) {
-  return tokensToRegExp(parse(path, options), keys, options)
-}
-
-/**
- * Expose a function for taking tokens and returning a RegExp.
- *
- * @param  {!Array}          tokens
- * @param  {(Array|Object)=} keys
- * @param  {Object=}         options
- * @return {!RegExp}
- */
-function tokensToRegExp (tokens, keys, options) {
-  if (!isarray(keys)) {
-    options = /** @type {!Object} */ (keys || options)
-    keys = []
-  }
-
-  options = options || {}
-
-  var strict = options.strict
-  var end = options.end !== false
-  var route = ''
-
-  // Iterate over the tokens and create our regexp string.
-  for (var i = 0; i < tokens.length; i++) {
-    var token = tokens[i]
-
-    if (typeof token === 'string') {
-      route += escapeString(token)
-    } else {
-      var prefix = escapeString(token.prefix)
-      var capture = '(?:' + token.pattern + ')'
-
-      keys.push(token)
-
-      if (token.repeat) {
-        capture += '(?:' + prefix + capture + ')*'
-      }
-
-      if (token.optional) {
-        if (!token.partial) {
-          capture = '(?:' + prefix + '(' + capture + '))?'
-        } else {
-          capture = prefix + '(' + capture + ')?'
-        }
-      } else {
-        capture = prefix + '(' + capture + ')'
-      }
-
-      route += capture
-    }
-  }
-
-  var delimiter = escapeString(options.delimiter || '/')
-  var endsWithDelimiter = route.slice(-delimiter.length) === delimiter
-
-  // In non-strict mode we allow a slash at the end of match. If the path to
-  // match already ends with a slash, we remove it for consistency. The slash
-  // is valid at the end of a path match, not in the middle. This is important
-  // in non-ending mode, where "/test/" shouldn't match "/test//route".
-  if (!strict) {
-    route = (endsWithDelimiter ? route.slice(0, -delimiter.length) : route) + '(?:' + delimiter + '(?=$))?'
-  }
-
-  if (end) {
-    route += '$'
-  } else {
-    // In non-ending mode, we need the capturing groups to match as much as
-    // possible by using a positive lookahead to the end or next path segment.
-    route += strict && endsWithDelimiter ? '' : '(?=' + delimiter + '|$)'
-  }
-
-  return attachKeys(new RegExp('^' + route, flags(options)), keys)
-}
-
-/**
- * Normalize the given path string, returning a regular expression.
- *
- * An empty array can be passed in for the keys, which will hold the
- * placeholder key descriptions. For example, using `/user/:id`, `keys` will
- * contain `[{ name: 'id', delimiter: '/', optional: false, repeat: false }]`.
- *
- * @param  {(string|RegExp|Array)} path
- * @param  {(Array|Object)=}       keys
- * @param  {Object=}               options
- * @return {!RegExp}
- */
-function pathToRegexp (path, keys, options) {
-  if (!isarray(keys)) {
-    options = /** @type {!Object} */ (keys || options)
-    keys = []
-  }
-
-  options = options || {}
-
-  if (path instanceof RegExp) {
-    return regexpToRegexp(path, /** @type {!Array} */ (keys))
-  }
-
-  if (isarray(path)) {
-    return arrayToRegexp(/** @type {!Array} */ (path), /** @type {!Array} */ (keys), options)
-  }
-
-  return stringToRegexp(/** @type {string} */ (path), /** @type {!Array} */ (keys), options)
-}
-
-
-/***/ }),
-/* 97 */
-/***/ (function(module, exports) {
-
-module.exports = Array.isArray || function (arr) {
-  return Object.prototype.toString.call(arr) == '[object Array]';
-};
-
-
-/***/ }),
-/* 98 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__ = __webpack_require__(42);
-// Written in this round about way for babel-transform-imports
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Prompt__["a" /* default */]);
-
-/***/ }),
-/* 99 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__ = __webpack_require__(43);
-// Written in this round about way for babel-transform-imports
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Redirect__["a" /* default */]);
-
-/***/ }),
-/* 100 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__createBrowserHistory__ = __webpack_require__(101);
-/* unused harmony reexport createBrowserHistory */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__createHashHistory__ = __webpack_require__(102);
-/* unused harmony reexport createHashHistory */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__createMemoryHistory__ = __webpack_require__(103);
-/* unused harmony reexport createMemoryHistory */
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__LocationUtils__ = __webpack_require__(15);
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["a"]; });
-/* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "b", function() { return __WEBPACK_IMPORTED_MODULE_3__LocationUtils__["b"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__PathUtils__ = __webpack_require__(10);
-/* unused harmony reexport parsePath */
-/* unused harmony reexport createPath */
-
-
-
-
-
-
-
-
-
-
-/***/ }),
-/* 101 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(44);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-
-
-
-
-
-
-
-var PopStateEvent = 'popstate';
-var HashChangeEvent = 'hashchange';
-
-var getHistoryState = function getHistoryState() {
-  try {
-    return window.history.state || {};
-  } catch (e) {
-    // IE 11 sometimes throws when accessing window.history.state
-    // See https://github.com/ReactTraining/history/pull/289
-    return {};
-  }
-};
-
-/**
- * Creates a history object that uses the HTML5 history API including
- * pushState, replaceState, and the popstate event.
- */
-var createBrowserHistory = function createBrowserHistory() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  __WEBPACK_IMPORTED_MODULE_1_invariant___default.a(__WEBPACK_IMPORTED_MODULE_5__DOMUtils__["b" /* canUseDOM */], 'Browser history needs a DOM');
-
-  var globalHistory = window.history;
-  var canUseHistory = __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["g" /* supportsHistory */]();
-  var needsHashChangeListener = !__WEBPACK_IMPORTED_MODULE_5__DOMUtils__["h" /* supportsPopStateOnHashChange */]();
-
-  var _props$forceRefresh = props.forceRefresh,
-      forceRefresh = _props$forceRefresh === undefined ? false : _props$forceRefresh,
-      _props$getUserConfirm = props.getUserConfirmation,
-      getUserConfirmation = _props$getUserConfirm === undefined ? __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["c" /* getConfirmation */] : _props$getUserConfirm,
-      _props$keyLength = props.keyLength,
-      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
-
-  var basename = props.basename ? __WEBPACK_IMPORTED_MODULE_3__PathUtils__["g" /* stripTrailingSlash */](__WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */](props.basename)) : '';
-
-  var getDOMLocation = function getDOMLocation(historyState) {
-    var _ref = historyState || {},
-        key = _ref.key,
-        state = _ref.state;
-
-    var _window$location = window.location,
-        pathname = _window$location.pathname,
-        search = _window$location.search,
-        hash = _window$location.hash;
-
-
-    var path = pathname + search + hash;
-
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!basename || __WEBPACK_IMPORTED_MODULE_3__PathUtils__["c" /* hasBasename */](path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
-
-    if (basename) path = __WEBPACK_IMPORTED_MODULE_3__PathUtils__["e" /* stripBasename */](path, basename);
-
-    return __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, key);
-  };
-
-  var createKey = function createKey() {
-    return Math.random().toString(36).substr(2, keyLength);
-  };
-
-  var transitionManager = __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__["a" /* default */]();
-
-  var setState = function setState(nextState) {
-    _extends(history, nextState);
-
-    history.length = globalHistory.length;
-
-    transitionManager.notifyListeners(history.location, history.action);
-  };
-
-  var handlePopState = function handlePopState(event) {
-    // Ignore extraneous popstate events in WebKit.
-    if (__WEBPACK_IMPORTED_MODULE_5__DOMUtils__["d" /* isExtraneousPopstateEvent */](event)) return;
-
-    handlePop(getDOMLocation(event.state));
-  };
-
-  var handleHashChange = function handleHashChange() {
-    handlePop(getDOMLocation(getHistoryState()));
-  };
-
-  var forceNextPop = false;
-
-  var handlePop = function handlePop(location) {
-    if (forceNextPop) {
-      forceNextPop = false;
-      setState();
-    } else {
-      var action = 'POP';
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (ok) {
-          setState({ action: action, location: location });
-        } else {
-          revertPop(location);
-        }
-      });
-    }
-  };
-
-  var revertPop = function revertPop(fromLocation) {
-    var toLocation = history.location;
-
-    // TODO: We could probably make this more reliable by
-    // keeping a list of keys we've seen in sessionStorage.
-    // Instead, we just default to 0 for keys we don't know.
-
-    var toIndex = allKeys.indexOf(toLocation.key);
-
-    if (toIndex === -1) toIndex = 0;
-
-    var fromIndex = allKeys.indexOf(fromLocation.key);
-
-    if (fromIndex === -1) fromIndex = 0;
-
-    var delta = toIndex - fromIndex;
-
-    if (delta) {
-      forceNextPop = true;
-      go(delta);
-    }
-  };
-
-  var initialLocation = getDOMLocation(getHistoryState());
-  var allKeys = [initialLocation.key];
-
-  // Public interface
-
-  var createHref = function createHref(location) {
-    return basename + __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location);
-  };
-
-  var push = function push(path, state) {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'PUSH';
-    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var href = createHref(location);
-      var key = location.key,
-          state = location.state;
-
-
-      if (canUseHistory) {
-        globalHistory.pushState({ key: key, state: state }, null, href);
-
-        if (forceRefresh) {
-          window.location.href = href;
-        } else {
-          var prevIndex = allKeys.indexOf(history.location.key);
-          var nextKeys = allKeys.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
-
-          nextKeys.push(location.key);
-          allKeys = nextKeys;
-
-          setState({ action: action, location: location });
-        }
-      } else {
-        __WEBPACK_IMPORTED_MODULE_0_warning___default.a(state === undefined, 'Browser history cannot push state in browsers that do not support HTML5 history');
-
-        window.location.href = href;
-      }
-    });
-  };
-
-  var replace = function replace(path, state) {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'REPLACE';
-    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var href = createHref(location);
-      var key = location.key,
-          state = location.state;
-
-
-      if (canUseHistory) {
-        globalHistory.replaceState({ key: key, state: state }, null, href);
-
-        if (forceRefresh) {
-          window.location.replace(href);
-        } else {
-          var prevIndex = allKeys.indexOf(history.location.key);
-
-          if (prevIndex !== -1) allKeys[prevIndex] = location.key;
-
-          setState({ action: action, location: location });
-        }
-      } else {
-        __WEBPACK_IMPORTED_MODULE_0_warning___default.a(state === undefined, 'Browser history cannot replace state in browsers that do not support HTML5 history');
-
-        window.location.replace(href);
-      }
-    });
-  };
-
-  var go = function go(n) {
-    globalHistory.go(n);
-  };
-
-  var goBack = function goBack() {
-    return go(-1);
-  };
-
-  var goForward = function goForward() {
-    return go(1);
-  };
-
-  var listenerCount = 0;
-
-  var checkDOMListeners = function checkDOMListeners(delta) {
-    listenerCount += delta;
-
-    if (listenerCount === 1) {
-      __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["a" /* addEventListener */](window, PopStateEvent, handlePopState);
-
-      if (needsHashChangeListener) __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["a" /* addEventListener */](window, HashChangeEvent, handleHashChange);
-    } else if (listenerCount === 0) {
-      __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["e" /* removeEventListener */](window, PopStateEvent, handlePopState);
-
-      if (needsHashChangeListener) __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["e" /* removeEventListener */](window, HashChangeEvent, handleHashChange);
-    }
-  };
-
-  var isBlocked = false;
-
-  var block = function block() {
-    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-    var unblock = transitionManager.setPrompt(prompt);
-
-    if (!isBlocked) {
-      checkDOMListeners(1);
-      isBlocked = true;
-    }
-
-    return function () {
-      if (isBlocked) {
-        isBlocked = false;
-        checkDOMListeners(-1);
-      }
-
-      return unblock();
-    };
-  };
-
-  var listen = function listen(listener) {
-    var unlisten = transitionManager.appendListener(listener);
-    checkDOMListeners(1);
-
-    return function () {
-      checkDOMListeners(-1);
-      unlisten();
-    };
-  };
-
-  var history = {
-    length: globalHistory.length,
-    action: 'POP',
-    location: initialLocation,
-    createHref: createHref,
-    push: push,
-    replace: replace,
-    go: go,
-    goBack: goBack,
-    goForward: goForward,
-    block: block,
-    listen: listen
-  };
-
-  return history;
-};
-
-/* unused harmony default export */ var _unused_webpack_default_export = (createBrowserHistory);
-
-/***/ }),
-/* 102 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_invariant___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_invariant__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__PathUtils__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__ = __webpack_require__(23);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__DOMUtils__ = __webpack_require__(44);
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-
-
-
-
-
-
-
-var HashChangeEvent = 'hashchange';
-
-var HashPathCoders = {
-  hashbang: {
-    encodePath: function encodePath(path) {
-      return path.charAt(0) === '!' ? path : '!/' + __WEBPACK_IMPORTED_MODULE_3__PathUtils__["f" /* stripLeadingSlash */](path);
-    },
-    decodePath: function decodePath(path) {
-      return path.charAt(0) === '!' ? path.substr(1) : path;
-    }
-  },
-  noslash: {
-    encodePath: __WEBPACK_IMPORTED_MODULE_3__PathUtils__["f" /* stripLeadingSlash */],
-    decodePath: __WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */]
-  },
-  slash: {
-    encodePath: __WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */],
-    decodePath: __WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */]
-  }
-};
-
-var getHashPath = function getHashPath() {
-  // We can't use window.location.hash here because it's not
-  // consistent across browsers - Firefox will pre-decode it!
-  var href = window.location.href;
-  var hashIndex = href.indexOf('#');
-  return hashIndex === -1 ? '' : href.substring(hashIndex + 1);
-};
-
-var pushHashPath = function pushHashPath(path) {
-  return window.location.hash = path;
-};
-
-var replaceHashPath = function replaceHashPath(path) {
-  var hashIndex = window.location.href.indexOf('#');
-
-  window.location.replace(window.location.href.slice(0, hashIndex >= 0 ? hashIndex : 0) + '#' + path);
-};
-
-var createHashHistory = function createHashHistory() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  __WEBPACK_IMPORTED_MODULE_1_invariant___default.a(__WEBPACK_IMPORTED_MODULE_5__DOMUtils__["b" /* canUseDOM */], 'Hash history needs a DOM');
-
-  var globalHistory = window.history;
-  var canGoWithoutReload = __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["f" /* supportsGoWithoutReloadUsingHash */]();
-
-  var _props$getUserConfirm = props.getUserConfirmation,
-      getUserConfirmation = _props$getUserConfirm === undefined ? __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["c" /* getConfirmation */] : _props$getUserConfirm,
-      _props$hashType = props.hashType,
-      hashType = _props$hashType === undefined ? 'slash' : _props$hashType;
-
-  var basename = props.basename ? __WEBPACK_IMPORTED_MODULE_3__PathUtils__["g" /* stripTrailingSlash */](__WEBPACK_IMPORTED_MODULE_3__PathUtils__["a" /* addLeadingSlash */](props.basename)) : '';
-
-  var _HashPathCoders$hashT = HashPathCoders[hashType],
-      encodePath = _HashPathCoders$hashT.encodePath,
-      decodePath = _HashPathCoders$hashT.decodePath;
-
-
-  var getDOMLocation = function getDOMLocation() {
-    var path = decodePath(getHashPath());
-
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!basename || __WEBPACK_IMPORTED_MODULE_3__PathUtils__["c" /* hasBasename */](path, basename), 'You are attempting to use a basename on a page whose URL path does not begin ' + 'with the basename. Expected path "' + path + '" to begin with "' + basename + '".');
-
-    if (basename) path = __WEBPACK_IMPORTED_MODULE_3__PathUtils__["e" /* stripBasename */](path, basename);
-
-    return __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path);
-  };
-
-  var transitionManager = __WEBPACK_IMPORTED_MODULE_4__createTransitionManager__["a" /* default */]();
-
-  var setState = function setState(nextState) {
-    _extends(history, nextState);
-
-    history.length = globalHistory.length;
-
-    transitionManager.notifyListeners(history.location, history.action);
-  };
-
-  var forceNextPop = false;
-  var ignorePath = null;
-
-  var handleHashChange = function handleHashChange() {
-    var path = getHashPath();
-    var encodedPath = encodePath(path);
-
-    if (path !== encodedPath) {
-      // Ensure we always have a properly-encoded hash.
-      replaceHashPath(encodedPath);
-    } else {
-      var location = getDOMLocation();
-      var prevLocation = history.location;
-
-      if (!forceNextPop && __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["b" /* locationsAreEqual */](prevLocation, location)) return; // A hashchange doesn't always == location change.
-
-      if (ignorePath === __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location)) return; // Ignore this change; we already setState in push/replace.
-
-      ignorePath = null;
-
-      handlePop(location);
-    }
-  };
-
-  var handlePop = function handlePop(location) {
-    if (forceNextPop) {
-      forceNextPop = false;
-      setState();
-    } else {
-      var action = 'POP';
-
-      transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-        if (ok) {
-          setState({ action: action, location: location });
-        } else {
-          revertPop(location);
-        }
-      });
-    }
-  };
-
-  var revertPop = function revertPop(fromLocation) {
-    var toLocation = history.location;
-
-    // TODO: We could probably make this more reliable by
-    // keeping a list of paths we've seen in sessionStorage.
-    // Instead, we just default to 0 for paths we don't know.
-
-    var toIndex = allPaths.lastIndexOf(__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](toLocation));
-
-    if (toIndex === -1) toIndex = 0;
-
-    var fromIndex = allPaths.lastIndexOf(__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](fromLocation));
-
-    if (fromIndex === -1) fromIndex = 0;
-
-    var delta = toIndex - fromIndex;
-
-    if (delta) {
-      forceNextPop = true;
-      go(delta);
-    }
-  };
-
-  // Ensure the hash is encoded properly before doing anything else.
-  var path = getHashPath();
-  var encodedPath = encodePath(path);
-
-  if (path !== encodedPath) replaceHashPath(encodedPath);
-
-  var initialLocation = getDOMLocation();
-  var allPaths = [__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](initialLocation)];
-
-  // Public interface
-
-  var createHref = function createHref(location) {
-    return '#' + encodePath(basename + __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location));
-  };
-
-  var push = function push(path, state) {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(state === undefined, 'Hash history cannot push state; it is ignored');
-
-    var action = 'PUSH';
-    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, undefined, undefined, history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var path = __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location);
-      var encodedPath = encodePath(basename + path);
-      var hashChanged = getHashPath() !== encodedPath;
-
-      if (hashChanged) {
-        // We cannot tell if a hashchange was caused by a PUSH, so we'd
-        // rather setState here and ignore the hashchange. The caveat here
-        // is that other hash histories in the page will consider it a POP.
-        ignorePath = path;
-        pushHashPath(encodedPath);
-
-        var prevIndex = allPaths.lastIndexOf(__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](history.location));
-        var nextPaths = allPaths.slice(0, prevIndex === -1 ? 0 : prevIndex + 1);
-
-        nextPaths.push(path);
-        allPaths = nextPaths;
-
-        setState({ action: action, location: location });
-      } else {
-        __WEBPACK_IMPORTED_MODULE_0_warning___default.a(false, 'Hash history cannot PUSH the same path; a new entry will not be added to the history stack');
-
-        setState();
-      }
-    });
-  };
-
-  var replace = function replace(path, state) {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(state === undefined, 'Hash history cannot replace state; it is ignored');
-
-    var action = 'REPLACE';
-    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, undefined, undefined, history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var path = __WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](location);
-      var encodedPath = encodePath(basename + path);
-      var hashChanged = getHashPath() !== encodedPath;
-
-      if (hashChanged) {
-        // We cannot tell if a hashchange was caused by a REPLACE, so we'd
-        // rather setState here and ignore the hashchange. The caveat here
-        // is that other hash histories in the page will consider it a POP.
-        ignorePath = path;
-        replaceHashPath(encodedPath);
-      }
-
-      var prevIndex = allPaths.indexOf(__WEBPACK_IMPORTED_MODULE_3__PathUtils__["b" /* createPath */](history.location));
-
-      if (prevIndex !== -1) allPaths[prevIndex] = path;
-
-      setState({ action: action, location: location });
-    });
-  };
-
-  var go = function go(n) {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(canGoWithoutReload, 'Hash history go(n) causes a full page reload in this browser');
-
-    globalHistory.go(n);
-  };
-
-  var goBack = function goBack() {
-    return go(-1);
-  };
-
-  var goForward = function goForward() {
-    return go(1);
-  };
-
-  var listenerCount = 0;
-
-  var checkDOMListeners = function checkDOMListeners(delta) {
-    listenerCount += delta;
-
-    if (listenerCount === 1) {
-      __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["a" /* addEventListener */](window, HashChangeEvent, handleHashChange);
-    } else if (listenerCount === 0) {
-      __WEBPACK_IMPORTED_MODULE_5__DOMUtils__["e" /* removeEventListener */](window, HashChangeEvent, handleHashChange);
-    }
-  };
-
-  var isBlocked = false;
-
-  var block = function block() {
-    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-    var unblock = transitionManager.setPrompt(prompt);
-
-    if (!isBlocked) {
-      checkDOMListeners(1);
-      isBlocked = true;
-    }
-
-    return function () {
-      if (isBlocked) {
-        isBlocked = false;
-        checkDOMListeners(-1);
-      }
-
-      return unblock();
-    };
-  };
-
-  var listen = function listen(listener) {
-    var unlisten = transitionManager.appendListener(listener);
-    checkDOMListeners(1);
-
-    return function () {
-      checkDOMListeners(-1);
-      unlisten();
-    };
-  };
-
-  var history = {
-    length: globalHistory.length,
-    action: 'POP',
-    location: initialLocation,
-    createHref: createHref,
-    push: push,
-    replace: replace,
-    go: go,
-    goBack: goBack,
-    goForward: goForward,
-    block: block,
-    listen: listen
-  };
-
-  return history;
-};
-
-/* unused harmony default export */ var _unused_webpack_default_export = (createHashHistory);
-
-/***/ }),
-/* 103 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_warning___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_warning__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__PathUtils__ = __webpack_require__(10);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__LocationUtils__ = __webpack_require__(15);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__ = __webpack_require__(23);
-var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-
-
-
-
-
-var clamp = function clamp(n, lowerBound, upperBound) {
-  return Math.min(Math.max(n, lowerBound), upperBound);
-};
-
-/**
- * Creates a history object that stores locations in memory.
- */
-var createMemoryHistory = function createMemoryHistory() {
-  var props = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var getUserConfirmation = props.getUserConfirmation,
-      _props$initialEntries = props.initialEntries,
-      initialEntries = _props$initialEntries === undefined ? ['/'] : _props$initialEntries,
-      _props$initialIndex = props.initialIndex,
-      initialIndex = _props$initialIndex === undefined ? 0 : _props$initialIndex,
-      _props$keyLength = props.keyLength,
-      keyLength = _props$keyLength === undefined ? 6 : _props$keyLength;
-
-
-  var transitionManager = __WEBPACK_IMPORTED_MODULE_3__createTransitionManager__["a" /* default */]();
-
-  var setState = function setState(nextState) {
-    _extends(history, nextState);
-
-    history.length = history.entries.length;
-
-    transitionManager.notifyListeners(history.location, history.action);
-  };
-
-  var createKey = function createKey() {
-    return Math.random().toString(36).substr(2, keyLength);
-  };
-
-  var index = clamp(initialIndex, 0, initialEntries.length - 1);
-  var entries = initialEntries.map(function (entry) {
-    return typeof entry === 'string' ? __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](entry, undefined, createKey()) : __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](entry, undefined, entry.key || createKey());
-  });
-
-  // Public interface
-
-  var createHref = __WEBPACK_IMPORTED_MODULE_1__PathUtils__["b" /* createPath */];
-
-  var push = function push(path, state) {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to push when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'PUSH';
-    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      var prevIndex = history.index;
-      var nextIndex = prevIndex + 1;
-
-      var nextEntries = history.entries.slice(0);
-      if (nextEntries.length > nextIndex) {
-        nextEntries.splice(nextIndex, nextEntries.length - nextIndex, location);
-      } else {
-        nextEntries.push(location);
-      }
-
-      setState({
-        action: action,
-        location: location,
-        index: nextIndex,
-        entries: nextEntries
-      });
-    });
-  };
-
-  var replace = function replace(path, state) {
-    __WEBPACK_IMPORTED_MODULE_0_warning___default.a(!((typeof path === 'undefined' ? 'undefined' : _typeof(path)) === 'object' && path.state !== undefined && state !== undefined), 'You should avoid providing a 2nd state argument to replace when the 1st ' + 'argument is a location-like object that already has state; it is ignored');
-
-    var action = 'REPLACE';
-    var location = __WEBPACK_IMPORTED_MODULE_2__LocationUtils__["a" /* createLocation */](path, state, createKey(), history.location);
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (!ok) return;
-
-      history.entries[history.index] = location;
-
-      setState({ action: action, location: location });
-    });
-  };
-
-  var go = function go(n) {
-    var nextIndex = clamp(history.index + n, 0, history.entries.length - 1);
-
-    var action = 'POP';
-    var location = history.entries[nextIndex];
-
-    transitionManager.confirmTransitionTo(location, action, getUserConfirmation, function (ok) {
-      if (ok) {
-        setState({
-          action: action,
-          location: location,
-          index: nextIndex
-        });
-      } else {
-        // Mimic the behavior of DOM histories by
-        // causing a render after a cancelled POP.
-        setState();
-      }
-    });
-  };
-
-  var goBack = function goBack() {
-    return go(-1);
-  };
-
-  var goForward = function goForward() {
-    return go(1);
-  };
-
-  var canGo = function canGo(n) {
-    var nextIndex = history.index + n;
-    return nextIndex >= 0 && nextIndex < history.entries.length;
-  };
-
-  var block = function block() {
-    var prompt = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-    return transitionManager.setPrompt(prompt);
-  };
-
-  var listen = function listen(listener) {
-    return transitionManager.appendListener(listener);
-  };
-
-  var history = {
-    length: entries.length,
-    action: 'POP',
-    location: entries[index],
-    index: index,
-    entries: entries,
-    createHref: createHref,
-    push: push,
-    replace: replace,
-    go: go,
-    goBack: goBack,
-    goForward: goForward,
-    canGo: canGo,
-    block: block,
-    listen: listen
-  };
-
-  return history;
-};
-
-/* unused harmony default export */ var _unused_webpack_default_export = (createMemoryHistory);
-
-/***/ }),
-/* 104 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__ = __webpack_require__(45);
-// Written in this round about way for babel-transform-imports
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_StaticRouter__["a" /* default */]);
-
-/***/ }),
-/* 105 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__ = __webpack_require__(46);
-// Written in this round about way for babel-transform-imports
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_Switch__["a" /* default */]);
-
-/***/ }),
-/* 106 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__ = __webpack_require__(14);
-// Written in this round about way for babel-transform-imports
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_matchPath__["a" /* default */]);
-
-/***/ }),
-/* 107 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__ = __webpack_require__(47);
-// Written in this round about way for babel-transform-imports
-
-
-/* harmony default export */ __webpack_exports__["a"] = (__WEBPACK_IMPORTED_MODULE_0_react_router_es_withRouter__["a" /* default */]);
-
-/***/ }),
-/* 108 */
-/***/ (function(module, exports, __webpack_require__) {
-
-/**
- * Copyright 2015, Yahoo! Inc.
- * Copyrights licensed under the New BSD License. See the accompanying LICENSE file for terms.
- */
-(function (global, factory) {
-     true ? module.exports = factory() :
-    typeof define === 'function' && define.amd ? define(factory) :
-    (global.hoistNonReactStatics = factory());
-}(this, (function () {
-    'use strict';
-    
-    var REACT_STATICS = {
-        childContextTypes: true,
-        contextTypes: true,
-        defaultProps: true,
-        displayName: true,
-        getDefaultProps: true,
-        getDerivedStateFromProps: true,
-        mixins: true,
-        propTypes: true,
-        type: true
-    };
-    
-    var KNOWN_STATICS = {
-        name: true,
-        length: true,
-        prototype: true,
-        caller: true,
-        callee: true,
-        arguments: true,
-        arity: true
-    };
-    
-    var defineProperty = Object.defineProperty;
-    var getOwnPropertyNames = Object.getOwnPropertyNames;
-    var getOwnPropertySymbols = Object.getOwnPropertySymbols;
-    var getOwnPropertyDescriptor = Object.getOwnPropertyDescriptor;
-    var getPrototypeOf = Object.getPrototypeOf;
-    var objectPrototype = getPrototypeOf && getPrototypeOf(Object);
-    
-    return function hoistNonReactStatics(targetComponent, sourceComponent, blacklist) {
-        if (typeof sourceComponent !== 'string') { // don't hoist over string (html) components
-            
-            if (objectPrototype) {
-                var inheritedComponent = getPrototypeOf(sourceComponent);
-                if (inheritedComponent && inheritedComponent !== objectPrototype) {
-                    hoistNonReactStatics(targetComponent, inheritedComponent, blacklist);
-                }
-            }
-            
-            var keys = getOwnPropertyNames(sourceComponent);
-            
-            if (getOwnPropertySymbols) {
-                keys = keys.concat(getOwnPropertySymbols(sourceComponent));
-            }
-            
-            for (var i = 0; i < keys.length; ++i) {
-                var key = keys[i];
-                if (!REACT_STATICS[key] && !KNOWN_STATICS[key] && (!blacklist || !blacklist[key])) {
-                    var descriptor = getOwnPropertyDescriptor(sourceComponent, key);
-                    try { // Avoid failures from read-only properties
-                        defineProperty(targetComponent, key, descriptor);
-                    } catch (e) {}
-                }
-            }
-            
-            return targetComponent;
-        }
-        
-        return targetComponent;
-    };
-})));
-
-
-/***/ }),
-/* 109 */
+/* 113 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27883,13 +28179,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Route", function() { return __WEBPACK_IMPORTED_MODULE_3__Route__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Router__ = __webpack_require__(13);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Router", function() { return __WEBPACK_IMPORTED_MODULE_4__Router__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__StaticRouter__ = __webpack_require__(45);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__StaticRouter__ = __webpack_require__(46);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "StaticRouter", function() { return __WEBPACK_IMPORTED_MODULE_5__StaticRouter__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Switch__ = __webpack_require__(46);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__Switch__ = __webpack_require__(47);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "Switch", function() { return __WEBPACK_IMPORTED_MODULE_6__Switch__["a"]; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__matchPath__ = __webpack_require__(14);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "matchPath", function() { return __WEBPACK_IMPORTED_MODULE_7__matchPath__["a"]; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__withRouter__ = __webpack_require__(47);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__withRouter__ = __webpack_require__(48);
 /* harmony reexport (binding) */ __webpack_require__.d(__webpack_exports__, "withRouter", function() { return __WEBPACK_IMPORTED_MODULE_8__withRouter__["a"]; });
 
 
@@ -27911,7 +28207,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /***/ }),
-/* 110 */
+/* 114 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -27922,7 +28218,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = setAuthorizationToken;
 
-var _axios = __webpack_require__(24);
+var _axios = __webpack_require__(26);
 
 var _axios2 = _interopRequireDefault(_axios);
 

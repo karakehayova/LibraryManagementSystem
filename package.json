@@ -43,5 +43,8 @@
     "webpack": "3.1.0",
     "webpack-combine-loaders": "2.0.3",
     "webpack-dev-server": "2.4.1"
+  },
+  "devDependencies": {
+    "react-table": "^6.8.6"
   }
 }
