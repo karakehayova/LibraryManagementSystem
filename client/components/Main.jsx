@@ -1,17 +1,22 @@
+import App from '../pages/App.jsx'
+import LoginForm from './LoginForm'
+import RegisterForm from './RegisterForm'
+import ErrorPage from './ErrorPage'
+import Info from './Info'
+import Home from './Home'
 import React from 'react'
-import {getUser} from '../auth'
+import { Router, Route, Switch } from 'react-router-dom'
 
-export class Main extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
-  }
+const Main = ()=>(
+  <main>
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/login' component={LoginForm} />
+      <Route exact path='/error' component={ErrorPage} />
+      <Route exact path='/register' component={RegisterForm} />
+			<Route exact path='/info' component={Info} />
+    </Switch>
+  </main>
+)
 
-  render () {
-    return <div>
-			Test User
-    </div>
-  }
-}
 export default Main

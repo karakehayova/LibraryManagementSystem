@@ -49,8 +49,6 @@ export class LoginForm extends React.Component {
     </form>
 
     return <div>
-      {/* TEST */}
-      {/* <NotificationSystem ref='notificationSystem' /> */}
       {form}
     </div>
   }
