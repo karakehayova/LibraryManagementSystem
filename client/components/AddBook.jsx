@@ -85,10 +85,8 @@ export class AddBook extends React.Component {
     </form>
 
     return <div>
-      {/* TEST */}
-      {/* <NotificationSystem ref='notificationSystem' /> */}
       {form}
     </div>
   }
 }
-export default LoginForm
+export default AddBook
