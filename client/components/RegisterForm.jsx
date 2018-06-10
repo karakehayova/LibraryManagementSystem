@@ -10,8 +10,8 @@ export class RegisterForm extends Component {
         password: '',
         first_name: '',
         last_name: '',
-				email: '',
-				admin: 0
+        email: '',
+        admin: 0
       }
     }
 
@@ -61,7 +61,7 @@ export class RegisterForm extends Component {
         <div className='form-group'>
           <input onChange={this.handleInputChange} type='password' name='password_confirmation' className='form-control input-lg' placeholder='Confirm Password' />
         </div>
-				<div className='form-group'>
+        <div className='form-group'>
           <input onChange={this.handleInputChange} type='text' name='admin' className='form-control input-lg' placeholder='Admin role' />
         </div>
         <div className='form-group'>

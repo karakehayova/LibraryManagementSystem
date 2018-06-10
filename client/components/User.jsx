@@ -5,41 +5,42 @@ import { capitalize, splitByCapital } from '../util'
 import { getUser } from '../auth'
 import history from '../history'
 
+import BooksTable from './BooksTable'
+
 export class User extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			user: {},
-			id: ''
-		}
-	}
+  constructor (props) {
+    super(props)
+    this.state = {
+      user: {},
+      id: ''
+    }
+  }
 
-	componentDidMount() {
-		if (this.state.id) {
-			getUserByID(this.state.id)
+  componentDidMount () {
+    if (this.state.id) {
+      getUserByID(this.state.id)
 				.then((response) => {
-					console.log(response)
-					this.setState({ user: response })
-				})
-				.catch((error)=>{
-					console.log(error)
-				})
-		}
-	}
+  console.log(response)
+  this.setState({ user: response })
+})
+				.catch((error) => {
+  console.log(error)
+})
+    }
+  }
 
-	static getDerivedStateFromProps(nextProps, prevState) {
-		if (prevState.id !== nextProps.match.params.id) {
-			return { id: nextProps.match.params.id }
-		}
-		return null
-	}
+  static getDerivedStateFromProps (nextProps, prevState) {
+    if (prevState.id !== nextProps.match.params.id) {
+      return { id: nextProps.match.params.id }
+    }
+    return null
+  }
 
-	render() {
-		console.log(this.state.user)
-		return <div>
-			Test
-			</div>
-	}
+  render () {
+    return <div>
+      <BooksTable userId={this.state.id} />
+    </div>
+  }
 }
 
 export default User

@@ -1,19 +1,16 @@
-module.exports = {
-	getBooks: getBooks,
-	borrowBook: borrowBook
-}
 var sqlite3 = require('sqlite3').verbose()
-var _ = require('lodash')
-var utils = require('./utility')
-var db = new sqlite3.Database('./library.db')
 var dbUtils = require('./dbUtils')
+var users = require('./users')
+var utils = require('./utils')
+var db = new sqlite3.Database('./library.db')
+var _ = require('lodash')
 
-function getBooks () {
+function getBooks (condition) {
   return new Promise((resolve, reject) => {
     db.serialize(function () {
-      let stmt = `SELECT * from books`
-      db.all(stmt, [], (err, rows) => {
-				console.log(rows)
+      let query = dbUtils.getBooks(condition)
+
+      db.all(query, [], (err, rows) => {
         if (err) {
           reject(err)
         }
@@ -23,7 +20,78 @@ function getBooks () {
   })
 }
 
-function borrowBook(bookId, userId) {
+function getBook (id) {
+  return new Promise((resolve, reject) => {
+    db.serialize(function () {
+      let query = dbUtils.getBooks({}, id)
+
+      db.all(query, [], (err, book) => {
+        if (err) {
+          reject(err)
+        }
+        if (book !== undefined && book.length !== 0) {
+          if (!book[0].user_id) {
+            resolve(book)
+          } else {
+            users.getUser(book[0].user_id).then((user) => {
+              book[0].user = user
+              resolve(book)
+            })
+          }
+        } else {
+          resolve('No such book')
+        }
+      })
+    })
+  })
+}
+
+function addBook (bookData) {
+  return new Promise((resolve, reject) => {
+    db.serialize(function () {
+      let { query, params } = dbUtils.insert('books', bookData)
+      db.run(query, params, (err) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve('Book successfully added.')
+        }
+      })
+    })
+  })
+}
+
+function editBook (data) {
+  return new Promise((resolve, reject) => {
+    db.serialize(function () {
+      let { query, params } = dbUtils.update('books', data.id, data.data)
+
+      db.run(query, params, (err, rows) => {
+        if (err) {
+          reject(err)
+        }
+        resolve('Book successfully edidted.')
+      })
+    })
+  })
+}
+
+function deleteBook (id) {
+  return new Promise((resolve, reject) => {
+    db.serialize(function () {
+      let query = dbUtils.deleteById('books', id)
+
+      db.run(query, [], (err, rows) => {
+        if (err) {
+          reject(err)
+        }
+        resolve('Book successfully deleted.')
+      })
+    })
+  })
+}
+
+function borrowBook (bookId, userId) {
   return new Promise((resolve, reject) => {
     db.serialize(function () {
       getBook(bookId).then((book) => {
@@ -38,9 +106,9 @@ function borrowBook(bookId, userId) {
               }
             })
 
-            let now = new Date();
-            let returnDate = new Date();
-            returnDate.setMonth(now.getMonth() + 1);
+            let now = new Date()
+            let returnDate = new Date()
+            returnDate.setMonth(now.getMonth() + 1)
 
             var data = {
               user_id: userId,
@@ -52,7 +120,7 @@ function borrowBook(bookId, userId) {
 
             var bezDeklaraciqNaTaziPromenlivaDolniqRedSeChupi;
 
-            ({ query, params } = dbUtils.insert('user_books', data));
+            ({ query, params } = dbUtils.insert('user_books', data))
             db.run(query, params, (err) => {
               if (err) {
                 reject(err)
@@ -69,4 +137,38 @@ function borrowBook(bookId, userId) {
       })
     })
   })
+}
+
+function returnBook (userId, bookId) {
+  return new Promise((resolve, reject) => {
+    db.serialize(function () {
+      let { query, params } = dbUtils.update('books', bookId, { 'borrowed': 0 })
+
+      db.run(query, params, (err) => {
+        if (err) {
+          reject(err)
+        }
+      })
+
+      query = dbUtils.deleteWhere('user_books', { user_id: userId, book_id: bookId })
+
+      db.run(query, [], (err) => {
+        if (err) {
+          reject(err)
+        } else {
+          resolve('Book successfully returned.')
+        }
+      })
+    })
+  })
+}
+
+module.exports = {
+  getBooks: getBooks,
+  getBook: getBook,
+  addBook: addBook,
+  editBook: editBook,
+  deleteBook: deleteBook,
+  borrowBook: borrowBook,
+  returnBook: returnBook
 }

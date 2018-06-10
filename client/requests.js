@@ -8,7 +8,7 @@ var auth = require('./auth')
 function getUserByID (id) {
   return axios.get(basePath + '/api/user/' + id)
     .then(function (response) {
-			auth.checkResponse(response)
+      auth.checkResponse(response)
       return response.data
     })
     .catch(function (error) {
@@ -19,11 +19,12 @@ function getUserByID (id) {
 function borrowBook (userID, bookID) {
   return axios.put(basePath + '/api/borrow/book/' + bookID + '/user/' + userID)
     .then(function (response) {
+      console.log('response', response)
       auth.checkResponse(response)
       return response.data
     })
     .catch(function (error) {
-			console.log('error', error)
+      console.log('error', error)
       // window.location = 'http://localhost:3000' + '/admin'
     })
 }
@@ -80,7 +81,7 @@ function getBooks () {
       return response.data
     })
     .catch(function (error) {
-			console.log(error)
+      console.log(error)
     })
 }
 
@@ -90,7 +91,7 @@ function getBookById (id) {
       return response.data
     })
     .catch(function (error) {
-			console.log(error)
+      console.log(error)
     })
 }
 
@@ -116,8 +117,8 @@ function postBook (data) {
 
 module.exports = {
   getUsers: getUsers,
-	getBooks: getBooks,
-	getBookById: getBookById,
+  getBooks: getBooks,
+  getBookById: getBookById,
   postBook: postBook,
   postUser: postUser,
   loginUser: loginUser,

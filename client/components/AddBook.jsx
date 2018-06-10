@@ -5,17 +5,17 @@ export class AddBook extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-     book:{
-         name: '',
-         author:'',
-         subject:'',
-         genre:'',
-         publisher:'',
-         edition: 1,
-         shelf_id: 0,
-         row:0,
-         column:0
-             }
+      book: {
+        name: '',
+        author: '',
+        subject: '',
+        genre: '',
+        publisher: '',
+        edition: 1,
+        shelf_id: 0,
+        row: 0,
+        column: 0
+      }
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -51,34 +51,30 @@ export class AddBook extends React.Component {
         <input type='text' className='form-control' value={this.state.book.author} name='author' required onChange={this.handleChange} />
       </div>
 
-         <div className='form-group'>
+      <div className='form-group'>
         <label>Subject</label>
         <input type='text' className='form-control' value={this.state.book.subject} name='subject' required onChange={this.handleChange} />
       </div>
 
-         <div className='form-group'>
+      <div className='form-group'>
         <label>Genre</label>
         <input type='text' className='form-control' value={this.state.book.genre} name='genre' required onChange={this.handleChange} />
       </div>
 
-     <div className='form-group'>
+      <div className='form-group'>
         <label>Publisher</label>
         <input type='text' className='form-control' value={this.state.book.publisher} name='publisher' required onChange={this.handleChange} />
       </div>
 
-           <div className='form-group'>
+      <div className='form-group'>
         <label>Edition</label>
         <input type='text' className='form-control' value={this.state.book.edition} name='edition' required onChange={this.handleChange} />
       </div>
 
-           <div className='form-group'>
+      <div className='form-group'>
         <label>Shelf Id</label>
         <input type='number' className='form-control' value={this.state.book.shelf_id} name='shelf_id' required onChange={this.handleChange} />
       </div>
-
-
-
-
 
       <button type='submit' className='btn btn-warning'>Submit</button>
 

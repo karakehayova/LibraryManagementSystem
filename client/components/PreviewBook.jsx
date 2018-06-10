@@ -6,23 +6,23 @@ import {getBookById} from '../requests'
 import history from '..//history'
 
 export class PreviewBook extends React.Component {
-	deletePost(id){
-		deletePostById(id)
-		.then(()=>{
-			getPosts()
-			.then((response)=>{
-				this.props.SetPosts(response.data)
-			})
-			.catch((error)=>{
-				console.log(error)
-			})
-	}) 
-	.catch((error)=>{
-		console.log(error)
-	})
-	}
+  deletePost (id) {
+    deletePostById(id)
+		.then(() => {
+  getPosts()
+			.then((response) => {
+  this.props.SetPosts(response.data)
+})
+			.catch((error) => {
+  console.log(error)
+})
+})
+	.catch((error) => {
+  console.log(error)
+})
+  }
   render () {
-		let post = this.props.data
+    let post = this.props.data
     let contentMd = markDown.render(post.content)
     let renderMd = { __html: contentMd }
     return (
@@ -30,8 +30,9 @@ export class PreviewBook extends React.Component {
         <div className='card-header'>
           {post.title}
           <span style={{'float': 'right'}}>
-						<span onClick={() => { this.deletePost(post.id)
-						}}> 
+            <span onClick={() => {
+              this.deletePost(post.id)
+            }}>
               <i className='material-icons'>delete</i>
             </span>
             <span onClick={() => {
