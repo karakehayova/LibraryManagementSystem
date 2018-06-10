@@ -16,8 +16,8 @@ import RegisterForm from './components/RegisterForm'
 import ErrorPage from './components/ErrorPage'
 import Info from './components/Info'
 import Home from './components/Home'
-import BooksTable from './components/BooksTable'
-import User from './components/User'
+import BooksTable from './components/Books/BooksTable'
+import User from './components/Users/User'
 import setAuthorizationToken from './setAuthorizationToken'
 
 if (localStorage.token) {

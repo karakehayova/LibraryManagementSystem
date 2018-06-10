@@ -4,8 +4,8 @@ import { Link } from 'react-router-dom'
 import { getUser, deauthenticateUser } from '../auth'
 
 // components
-import BooksTable from '../components/BooksTable'
-import UserTable from '../components/UserTable'
+import BooksTable from '../components/Books/BooksTable'
+import UserTable from '../components/Users/UserTable'
 import RegisterForm from '../components/RegisterForm'
 
 export class AdminHome extends React.Component {

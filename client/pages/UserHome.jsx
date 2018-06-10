@@ -1,4 +1,4 @@
-import BooksTable from '../components/BooksTable'
+import BooksTable from '../components/Books/BooksTable'
 import React from 'react'
 import history from '../history'
 import { Link } from 'react-router-dom'

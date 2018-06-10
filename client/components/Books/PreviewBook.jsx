@@ -1,9 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import Remarkable from 'remarkable'
-import { SetPosts } from '../../utils/actions/Blogs/blogs'
-import {getBookById} from '../requests'
-import history from '..//history'
+import {getBookById} from '../../requests'
+import history from '../../history'
 
 export class PreviewBook extends React.Component {
   deletePost (id) {

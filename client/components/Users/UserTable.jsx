@@ -1,9 +1,9 @@
 import React from 'react'
 import ReactTable from 'react-table'
-import { getUsers } from '../requests'
-import { capitalize, splitByCapital } from '../util'
-import { getUser } from '../auth'
-import history from '../history'
+import { getUsers } from '../../requests'
+import { capitalize, splitByCapital } from '../../util'
+import { getUser } from '../../auth'
+import history from '../../history'
 
 export class UserTable extends React.Component {
   constructor (props) {

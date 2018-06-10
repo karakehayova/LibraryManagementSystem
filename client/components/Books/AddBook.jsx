@@ -1,5 +1,5 @@
 import React from 'react'
-import {postBook} from '../requests'
+import {postBook} from '../../requests'
 
 export class AddBook extends React.Component {
   constructor (props) {

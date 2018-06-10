@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactTable from 'react-table'
-import { getBooks, borrowBook } from '../requests'
-import { capitalize, splitByCapital } from '../util'
-import { getUser } from '../auth'
+import { getBooks, borrowBook } from '../../requests'
+import { capitalize, splitByCapital } from '../../util'
+import { getUser } from '../../auth'
+
 export class BooksTable extends React.Component {
   constructor (props) {
     super(props)
