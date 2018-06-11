@@ -46,18 +46,18 @@ function getUser (userId) {
             if (errBooks) {
               reject(errBooks)
             } else {
-              let queryUserSubscription = dbUtils.getUserSubscription(userId)
+              // let queryUserSubscription = dbUtils.getUserSubscription(userId)
 
-              db.all(queryUserSubscription, [], (errSubscription, subscription) => {
-                if (errSubscription) {
-                  reject(errSubscription)
-                } else {
+              // db.all(queryUserSubscription, [], (errSubscription, subscription) => {
+              //   if (errSubscription) {
+              //     reject(errSubscription)
+              //   } else {
                   user[0].books = books
-                  user[0].subscription = subscription
+                  // user[0].subscription = subscription
                   resolve(user)
                 }
-              })
-            }
+              // })
+            // }
           })
         }
       })

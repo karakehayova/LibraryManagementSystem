@@ -6,6 +6,7 @@ import { getUser } from '../../auth'
 import history from '../../history'
 
 import BooksTable from '../Books/BooksTable'
+import BorrowedTable from '../Books/BorrowedTable'
 
 export class User extends React.Component {
 	constructor(props) {
@@ -20,8 +21,7 @@ export class User extends React.Component {
 		if (this.state.id) {
 			getUserByID(this.state.id)
 				.then((response) => {
-					console.log(response)
-					this.setState({ user: response })
+					this.setState({ user: response[0] })
 				})
 				.catch((error) => {
 					console.log(error)
@@ -37,7 +37,9 @@ export class User extends React.Component {
 	}
 
 	render() {
+		let borrowed = this.state.user && this.state.user.books ? <BorrowedTable id={this.state.id} books={this.state.user.books}/> : ''
 		return <div>
+			{borrowed}
 			<BooksTable userId={this.state.id} />
 		</div>
 	}
