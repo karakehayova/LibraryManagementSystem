@@ -40,6 +40,15 @@ function returnBook (userID, bookID) {
     })
 }
 
+function deleteBook(id){
+  return axios.delete(basePath + '/api/book/' + id)
+  .then(function(response){
+  })
+  .catch(function(error){
+    return 'Book cannot be deleted.'
+  })
+}
+
 function getUsers () {
   return axios.get(basePath + '/api/users')
     .then(function (response) {
@@ -124,5 +133,6 @@ module.exports = {
   loginUser: loginUser,
   getUserByID: getUserByID,
   borrowBook: borrowBook,
-  returnBook: returnBook
+  returnBook: returnBook,
+  deleteBook: deleteBook
 }

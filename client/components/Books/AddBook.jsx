@@ -76,6 +76,16 @@ export class AddBook extends React.Component {
         <input type='number' className='form-control' value={this.state.book.shelf_id} name='shelf_id' required onChange={this.handleChange} />
       </div>
 
+      <div className='form-group'>
+        <label>Row</label>
+        <input type='number' className='form-control' value={this.state.book.row} name='row' required onChange={this.handleChange} />
+      </div>
+
+      <div className='form-group'>
+        <label>Column</label>
+        <input type='number' className='form-control' value={this.state.book.column} name='column' required onChange={this.handleChange} />
+      </div>
+
       <button type='submit' className='btn btn-warning'>Submit</button>
 
     </form>
