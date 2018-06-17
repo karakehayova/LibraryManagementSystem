@@ -16,12 +16,24 @@ app.use(bodyParser.urlencoded({ extended: false }))
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('client/build'))
 }
+function errorHandler (err, req, res, next) {
+  var code = err.code
+  var message = err.message
+  res.writeHead(code, message, {'content-type': 'text/plain'})
+  res.end(message)
+}
 
+app.use(errorHandler)
 // ================authentication =================
-app.post('/api/login', (req, res) => {
+app.post('/api/login', (req, res, next) => {
   auth.login(req.body).then((resp) => {
     res.send(resp)
   })
+	.catch((error) => {
+  var err = new Error('Password or username are invalid')
+  err.code = 400
+  return next(err)
+})
 })
 
 var adminRoute = function (req, res, next) {
@@ -94,7 +106,7 @@ app.get('/api/user/:id', (req, res) => {
   })
 })
 
-app.post('/api/user', (req, res, next) => {
+app.post('/api/user', (req, res) => {
   users.addUser(req.body).then((resp) => {
     res.send(resp)
   })

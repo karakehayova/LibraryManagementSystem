@@ -24,17 +24,17 @@ function generateToken (user) {
 function login (data) {
   return new Promise((resolve, reject) => {
     users.getUserByUsername(data.username).then((user) => {
-      if (user) {
+      if (user && user[0] && user[0].password) {
         if (passwordHash.verify(data.password, user[0].password)) {
           var token = generateToken(user[0])
-
           resolve({ user: user[0], token: token })
         } else {
-          resolve({ error: true, message: 'Invalid Password' })
+          reject({ error: true, message: 'Invalid username or password' })
         }
-      } else {
-        resolve({ error: true, message: 'Invalid Username' })
       }
+    })
+    .catch((error) => {
+      reject({error: true, message: 'Invalid username or password'})
     })
   })
 }

@@ -41,11 +41,11 @@ function returnBook (userID, bookID) {
 
 function deleteBook (id) {
   return axios.delete(basePath + '/api/book/' + id)
-  .then(function (response) {
-  })
-  .catch(function (error) {
-    return 'Book cannot be deleted.'
-  })
+    .then(function (response) {
+    })
+    .catch(function (error) {
+      return 'Book cannot be deleted.'
+    })
 }
 
 function getUsers () {
@@ -78,8 +78,7 @@ function loginUser (data) {
       }
     })
     .catch(function (error) {
-      window.location = 'http://localhost:3000' + '/error'
-      return { error: error }
+      return { error: 'Username or password are invalid' }
     })
 }
 
@@ -109,7 +108,7 @@ function postUser (data) {
       return response.data
     })
     .catch(function (error) {
-			// window.location = basePath + '/register'
+      // window.location = basePath + '/register'
       return error
     })
 }

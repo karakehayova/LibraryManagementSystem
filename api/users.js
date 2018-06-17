@@ -21,7 +21,7 @@ function getUsers () {
 function getUserByUsername (username) {
   return new Promise((resolve, reject) => {
     db.serialize(function () {
-      let stmt = 'SELECT * from users WHERE username = "' + username + '"'
+      let stmt = 'SELECT * from users WHERE username = ' + 'username'
       db.all(stmt, [], (err, rows) => {
         if (err) {
           reject(err)

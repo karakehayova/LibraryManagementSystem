@@ -1,13 +1,14 @@
 import React from 'react'
-import {loginUser} from '../requests'
+import { loginUser } from '../requests'
+import { error } from 'util'
 
 export class LoginForm extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
       user: {
-			 username: '',
-			 password: ''
+        username: '',
+        password: ''
       }
     }
     this.handleChange = this.handleChange.bind(this)
@@ -29,10 +30,23 @@ export class LoginForm extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    loginUser(this.state.user)
+    loginUser(this.state.user).then(
+      (user) => {
+        if (user.error) {
+          this.setState({ error: user.error })
+        } else {
+          this.setState({ error: '' })
+        }
+      }
+    )
+      .catch((error) => {
+        console.log('error', error)
+      })
   }
 
   render () {
+    let error = this.state.error ? <div className='alert alert-danger' role='alert'>
+      {this.state.error} </div> : ''
     let form = <form onSubmit={this.handleSubmit}>
       <div className='form-group'>
         <label>Username</label>
@@ -49,6 +63,7 @@ export class LoginForm extends React.Component {
     </form>
 
     return <div>
+      {error}
       {form}
     </div>
   }

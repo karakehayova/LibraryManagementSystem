@@ -51,7 +51,6 @@ export class UserTable extends React.Component {
 
   render () {
     let user = getUser()
-    console.log(user)
     if (user && user.admin && this.state.users.length) {
       let users = this.prepareTableData()
       let columns = this.getColumns(users)
@@ -66,9 +65,15 @@ export class UserTable extends React.Component {
         />
       </div>
     } else {
-      return <div>
-        You are not authenticated
+      if (!user || !user.admin) {
+        return <div>
+          You are not authenticated
         </div>
+      } else {
+        return <div>
+          No books
+      </div>
+      }
     }
   }
 }
