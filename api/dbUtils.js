@@ -123,7 +123,7 @@ function selectWhere (tableName, conditions) {
 }
 
 function getBooks (conditions, id = null) {
-  let select = 'books.id, books.name, books.author, books.subject, books.genre, books.publisher, books.edition, books.borrowed, ' +
+  let select = 'books.id, books.name, books.author, books.subject, books.genre, books.publisher, books.edition, books.url, books.borrowed, ' +
     'books.shelf_id, books.row, books.column, ' +
     'user_books.return_date, user_books.borrow_date, user_books.returned, user_books.user_id'
 

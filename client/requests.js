@@ -93,7 +93,7 @@ function getBooks () {
 }
 
 function getBookById (id) {
-  return axios.get(basePath + '/api/books/' + id)
+  return axios.get(basePath + '/api/book/' + id)
     .then(function (response) {
       return response.data
     })
@@ -114,11 +114,12 @@ function postUser (data) {
 }
 
 function postBook (data) {
-  return axios.post(basePath + '/api/user', qs.stringify(data))
+  return axios.post(basePath + '/api/book', qs.stringify(data))
     .then(function (response) {
       return response.data
     })
     .catch(function (error) {
+      console.log(error)
       window.location = basePath + '/'
     })
 }

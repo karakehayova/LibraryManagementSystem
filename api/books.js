@@ -39,7 +39,7 @@ function getBook (id) {
             })
           }
         } else {
-          resolve('No such book')
+          reject('No such book')
         }
       })
     })

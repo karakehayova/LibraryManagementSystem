@@ -14,7 +14,8 @@ export class AddBook extends React.Component {
         edition: 1,
         shelf_id: 0,
         row: 0,
-        column: 0
+        column: 0,
+        url: ''
       }
     }
     this.handleChange = this.handleChange.bind(this)
@@ -44,7 +45,7 @@ export class AddBook extends React.Component {
       <div className='form-group row'>
         <label className='col-sm-1 col-form-label'>Title</label>
         <div className='col-sm-10'>
-          <input type='text' className='form-control form-control-sm' value={this.state.book.name} name='title' required onChange={this.handleChange} />
+          <input type='text' className='form-control form-control-sm' value={this.state.book.name} name='name' required onChange={this.handleChange} />
         </div>
       </div>
 
@@ -101,6 +102,13 @@ export class AddBook extends React.Component {
         <label className='col-sm-1 col-form-label'>Column</label>
         <div className='col-sm-10'>
           <input type='number' className='form-control form-control-sm' value={this.state.book.column} name='column' required onChange={this.handleChange} />
+        </div>
+      </div>
+
+      <div className='form-group row'>
+        <label className='col-sm-1 col-form-label'>Image URL</label>
+        <div className='col-sm-10'>
+          <input type='text' className='form-control form-control-sm' value={this.state.book.url} name='url' onChange={this.handleChange} />
         </div>
       </div>
 

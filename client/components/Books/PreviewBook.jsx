@@ -21,17 +21,18 @@ export class PreviewBook extends React.Component {
   componentDidMount () {
     if (this.state.id) {
       getBookById(this.state.id)
-				.then((response) => {
-  this.setState({ book: response[0] })
-})
-				.catch((error) => {
-  console.log(error)
-})
+        .then((response) => {
+          this.setState({ book: response[0] })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
   render () {
     let book = this.state.book
     let status = book.borrowed ? 'not available' : 'available'
+    let bookUrl = book.url ? <img className='media-object' src={book.url} /> : ''
 
     return (
       <div className='card text-center' style={{ 'width': '60%' }}>
@@ -45,8 +46,7 @@ export class PreviewBook extends React.Component {
             </span>
           </span>
         </div>
-
-        {/* <img className='media-object' src={book.url} /> */}
+        {bookUrl}
         <div className='card-body'>
           <h5 className='card-title'>{'By: ' + book.author}</h5>
           <h5 className='card-subtitle text-muted'>{'Status: ' + status}</h5>

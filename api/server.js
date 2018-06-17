@@ -29,11 +29,11 @@ app.post('/api/login', (req, res, next) => {
   auth.login(req.body).then((resp) => {
     res.send(resp)
   })
-	.catch((error) => {
-  var err = new Error('Password or username are invalid')
-  err.code = 400
-  return next(err)
-})
+  .catch((error) => {
+    var err = new Error('Password or username are invalid')
+    err.code = 400
+    return next(err)
+  })
 })
 
 var adminRoute = function (req, res, next) {
@@ -43,7 +43,7 @@ var adminRoute = function (req, res, next) {
       success: false,
       message: 'Unauthorized'
     })
-		// return next(); //if no token, continue
+    // return next(); //if no token, continue
   } else {
     token = token.replace('Bearer ', '')
     jwt.verify(token, 'asd', function (err, user) {
@@ -74,7 +74,7 @@ var userRoute = function (req, res, next) {
       success: false,
       message: 'Unauthorized'
     })
-		// return next(); //if no token, continue
+    // return next(); //if no token, continue
   } else {
     token = token.replace('Bearer ', '')
     jwt.verify(token, 'asd', function (err, user) {
@@ -110,9 +110,9 @@ app.post('/api/user', (req, res) => {
   users.addUser(req.body).then((resp) => {
     res.send(resp)
   })
-		.catch((error) => {
-  res.send(error)
-})
+    .catch((error) => {
+      res.send(error)
+    })
 })
 
 app.post('/api/user/:id/subscribe/:subscriptionId', userRoute, (req, res) => {
@@ -162,12 +162,18 @@ app.get('/api/book/:id', (req, res) => {
   books.getBook(req.params.id).then((resp) => {
     res.send(resp)
   })
+  .catch((error) => {
+    console.log('error', error)
+  })
 })
 
 app.post('/api/book', adminRoute, (req, res) => {
   console.log(req.body)
   books.addBook(req.body).then((resp) => {
     res.send(resp)
+  })
+  .catch((error) => {
+    console.log(error)
   })
 })
 
