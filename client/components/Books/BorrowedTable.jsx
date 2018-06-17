@@ -23,13 +23,12 @@ export class BorrowedTable extends React.Component {
     })
   }
 
-
   prepareTableData () {
     let user = getUser()
     if (user.admin) {
       return this.props.books.map((book) => {
         return {
-       id: book.id,
+          id: book.id,
           name: book.name,
           author: book.author,
           borrow_date: book.borrow_date,

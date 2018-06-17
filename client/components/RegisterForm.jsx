@@ -12,7 +12,8 @@ export class RegisterForm extends Component {
         last_name: '',
         email: '',
         admin: 0
-      }
+      },
+      error: ''
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -32,7 +33,15 @@ export class RegisterForm extends Component {
   handleSubmit (event) {
     event.preventDefault()
     postUser(this.state.data)
-    window.location = '/'
+      .then((response) => {
+        if (response.errno) {
+          this.setState({ error: 'This username or email are already taken.' })
+        } else {
+          if (this.state.error) {
+            this.setState({ error: '' })
+          }
+        }
+      })
   }
 
   login (event) {
@@ -40,9 +49,12 @@ export class RegisterForm extends Component {
   }
 
   render () {
+    let error = this.state.error ? <div className='alert alert-danger' role='alert'>
+      {this.state.error} </div> : ''
     return (
       <form onSubmit={this.handleSubmit} role='form'>
         <h2>Register</h2>
+        {error}
         <div className='form-group'>
           <input onChange={this.handleInputChange} type='text' name='first_name' className='form-control input-lg' placeholder='First Name' />
         </div>
@@ -68,7 +80,7 @@ export class RegisterForm extends Component {
           <input onChange={this.handleInputChange} type='submit' value='Register' className='btn btn-primary btn-block btn-lg' />
         </div>
         <a onClick={this.login} className='btn btn-success btn-block btn-lg'>
-					Login
+          Login
         </a>
       </form >
     )

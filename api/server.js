@@ -31,7 +31,7 @@ var adminRoute = function (req, res, next) {
       success: false,
       message: 'Unauthorized'
     })
-    // return next(); //if no token, continue
+		// return next(); //if no token, continue
   } else {
     token = token.replace('Bearer ', '')
     jwt.verify(token, 'asd', function (err, user) {
@@ -62,7 +62,7 @@ var userRoute = function (req, res, next) {
       success: false,
       message: 'Unauthorized'
     })
-    // return next(); //if no token, continue
+		// return next(); //if no token, continue
   } else {
     token = token.replace('Bearer ', '')
     jwt.verify(token, 'asd', function (err, user) {
@@ -94,10 +94,13 @@ app.get('/api/user/:id', (req, res) => {
   })
 })
 
-app.post('/api/user', (req, res) => {
+app.post('/api/user', (req, res, next) => {
   users.addUser(req.body).then((resp) => {
     res.send(resp)
   })
+		.catch((error) => {
+  res.send(error)
+})
 })
 
 app.post('/api/user/:id/subscribe/:subscriptionId', userRoute, (req, res) => {

@@ -19,6 +19,7 @@ import Home from './components/Home'
 import BooksTable from './components/Books/BooksTable'
 import User from './components/Users/User'
 import setAuthorizationToken from './setAuthorizationToken'
+import { PreviewBook } from './components/Books/PreviewBook'
 
 if (localStorage.token) {
   setAuthorizationToken(localStorage.token)
@@ -35,6 +36,8 @@ ReactDOM.render((
       <Route exact path='/admin' component={AdminHome} />
       <Route exact path='/books' component={BooksTable} />
       <Route exact path='/user/:id' component={User} />
+      <Route exact path='/book/:id' component={PreviewBook} />
+
     </Switch>
   </Router>
 ),

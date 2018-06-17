@@ -3,6 +3,7 @@ import ReactTable from 'react-table'
 import { getBooks, borrowBook } from '../../requests'
 import { capitalize, splitByCapital } from '../../util'
 import { getUser } from '../../auth'
+import history from '../../history'
 
 export class BooksTable extends React.Component {
   constructor (props) {
@@ -23,7 +24,6 @@ export class BooksTable extends React.Component {
 
   getColumns (books) {
     let columns = Object.keys(books[0])
-    console.log('columns', columns)
     return columns.map((col) => {
       return {
         minWidth: col.length * 20,
@@ -43,7 +43,7 @@ export class BooksTable extends React.Component {
       return this.state.books.map((book) => {
         return {
           id: book.id,
-          name: book.name,
+          name: <a className='text-primary' onClick={() => { history.push('/book/' + book.id) }}> {book.name} </a>,
           author: book.author,
           genre: book.genre,
           available: book.borrowed ? 'no' : 'yes',
@@ -54,7 +54,7 @@ export class BooksTable extends React.Component {
       return this.state.books.map((book) => {
         return {
           id: book.id,
-          name: book.name,
+          name: <a className='text-primary' onClick={() => { history.push('/book/' + book.id) }}> {book.name} </a>,
           author: book.author,
           genre: book.genre,
           available: book.borrowed ? 'no' : 'yes'

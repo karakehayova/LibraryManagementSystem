@@ -19,7 +19,6 @@ function getUserByID (id) {
 function borrowBook (userID, bookID) {
   return axios.put(basePath + '/api/borrow/book/' + bookID + '/user/' + userID)
     .then(function (response) {
-      console.log('response', response)
       auth.checkResponse(response)
       return response.data
     })
@@ -40,11 +39,11 @@ function returnBook (userID, bookID) {
     })
 }
 
-function deleteBook(id){
+function deleteBook (id) {
   return axios.delete(basePath + '/api/book/' + id)
-  .then(function(response){
+  .then(function (response) {
   })
-  .catch(function(error){
+  .catch(function (error) {
     return 'Book cannot be deleted.'
   })
 }
@@ -110,7 +109,8 @@ function postUser (data) {
       return response.data
     })
     .catch(function (error) {
-      window.location = basePath + '/register'
+			// window.location = basePath + '/register'
+      return error
     })
 }
 

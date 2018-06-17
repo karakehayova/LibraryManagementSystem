@@ -14,12 +14,12 @@ export class UserTable extends React.Component {
   }
   componentDidMount () {
     getUsers()
-			.then((response) => {
-  this.setState({ users: response })
-})
-			.catch((error) => {
-  console.log(error)
-})
+      .then((response) => {
+        this.setState({ users: response })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   getColumns (users) {
@@ -63,12 +63,12 @@ export class UserTable extends React.Component {
           className={'-striped -highlight'}
           showPagination={false}
           defaultPageSize={users.length}
-				/>
+        />
       </div>
-    }		else {
+    } else {
       return <div>
-				You are not authenticated
-				</div>
+        You are not authenticated
+        </div>
     }
   }
 }

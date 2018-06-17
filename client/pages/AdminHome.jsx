@@ -36,8 +36,8 @@ export class AdminHome extends React.Component {
                 this.setState({
                   showRegister: !this.state.showRegister,
                   showBooks: false,
-                  showUsers: false, 
-                  showBookForm:false
+                  showUsers: false,
+                  showBookForm: false
                 })
               }}>Register</a>
             </li>
@@ -47,7 +47,7 @@ export class AdminHome extends React.Component {
                   showBooks: !this.state.showBooks,
                   showRegister: false,
                   showBookForm: false,
-                  showUsers:false
+                  showUsers: false
                 })
               }}>Books</a>
             </li>
@@ -61,7 +61,7 @@ export class AdminHome extends React.Component {
                 })
               }}>Users</a>
             </li>
-                  <li className='nav-item'>
+            <li className='nav-item'>
               <a className='nav-link' onClick={() => {
                 this.setState({
                   showBookForm: !this.state.showBookForm,

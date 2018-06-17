@@ -52,10 +52,10 @@ function getUser (userId) {
               //   if (errSubscription) {
               //     reject(errSubscription)
               //   } else {
-                  user[0].books = books
+              user[0].books = books
                   // user[0].subscription = subscription
-                  resolve(user)
-                }
+              resolve(user)
+            }
               // })
             // }
           })
