@@ -45,7 +45,7 @@ module.exports = {
           fallback: 'style-loader',
           use: 'css-loader!sass-loader'
         })
-       // include: path.join(__dirname, 'node_modules/foundation-sites/scss/foundation.scss'),
+        // include: path.join(__dirname, 'node_modules/foundation-sites/scss/foundation.scss'),
         // include: path.join(__dirname, 'web/public/scss/app.scss')
       }
 

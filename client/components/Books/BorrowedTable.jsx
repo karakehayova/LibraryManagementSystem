@@ -64,7 +64,7 @@ export class BorrowedTable extends React.Component {
           className={'-striped -highlight'}
           showPagination={false}
           defaultPageSize={books.length}
-				/>
+        />
       </div>
     }		else {
       return ''

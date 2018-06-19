@@ -72,7 +72,7 @@ export class UserTable extends React.Component {
       } else {
         return <div>
           No books
-      </div>
+        </div>
       }
     }
   }

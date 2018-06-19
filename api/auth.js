@@ -33,9 +33,9 @@ function login (data) {
         }
       }
     })
-    .catch((error) => {
-      reject({error: true, message: 'Invalid username or password'})
-    })
+      .catch((error) => {
+        reject({error: true, message: 'Invalid username or password'})
+      })
   })
 }
 

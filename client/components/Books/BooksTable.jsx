@@ -14,12 +14,12 @@ export class BooksTable extends React.Component {
   }
   componentDidMount () {
     getBooks()
-			.then((response) => {
-  this.setState({ books: response })
-})
-			.catch((error) => {
-  console.log(error)
-})
+      .then((response) => {
+        this.setState({ books: response })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   getColumns (books) {
@@ -76,12 +76,12 @@ export class BooksTable extends React.Component {
           className={'-striped -highlight'}
           showPagination={false}
           defaultPageSize={books.length}
-				/>
+        />
       </div>
     }		else {
       return <div>
 				You are not authenticated
-				</div>
+      </div>
     }
   }
 }

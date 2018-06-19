@@ -53,10 +53,10 @@ function getUser (userId) {
               //     reject(errSubscription)
               //   } else {
               user[0].books = books
-                  // user[0].subscription = subscription
+              // user[0].subscription = subscription
               resolve(user)
             }
-              // })
+            // })
             // }
           })
         }

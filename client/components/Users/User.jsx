@@ -20,12 +20,12 @@ export class User extends React.Component {
   componentDidMount () {
     if (this.state.id) {
       getUserByID(this.state.id)
-				.then((response) => {
-  this.setState({ user: response[0] })
-})
-				.catch((error) => {
-  console.log(error)
-})
+        .then((response) => {
+          this.setState({ user: response[0] })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 

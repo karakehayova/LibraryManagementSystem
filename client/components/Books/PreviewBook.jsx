@@ -29,18 +29,32 @@ export class PreviewBook extends React.Component {
         })
     }
   }
+
+  delete (id) {
+    deleteBook(id).then((result) => {
+      this.setState({ book: {deleted: true} })
+    })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+
   render () {
     let book = this.state.book
     let status = book.borrowed ? 'not available' : 'available'
     let bookUrl = book.url ? <img className='media-object' src={book.url} /> : ''
 
+    if (book.deleted) {
+      return <div class='alert alert-success' role='alert'> The book was successfully deleted.</div>
+    }
+
     return (
-      <div className='card text-center' style={{ 'width': '60%' }}>
+      <div className='card text-center' style={{ 'width': '50%' }}>
         <div className='card-header'>
           {book.name}
           <span style={{ 'float': 'right' }}>
             <span onClick={() => {
-              deleteBook(book.id)
+              this.delete(book.id)
             }}>
               <i className='material-icons'>delete</i>
             </span>

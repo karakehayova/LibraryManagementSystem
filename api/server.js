@@ -29,11 +29,11 @@ app.post('/api/login', (req, res, next) => {
   auth.login(req.body).then((resp) => {
     res.send(resp)
   })
-  .catch((error) => {
-    var err = new Error('Password or username are invalid')
-    err.code = 400
-    return next(err)
-  })
+    .catch((error) => {
+      var err = new Error('Password or username are invalid')
+      err.code = 400
+      return next(err)
+    })
 })
 
 var adminRoute = function (req, res, next) {
@@ -162,9 +162,9 @@ app.get('/api/book/:id', (req, res) => {
   books.getBook(req.params.id).then((resp) => {
     res.send(resp)
   })
-  .catch((error) => {
-    console.log('error', error)
-  })
+    .catch((error) => {
+      console.log('error', error)
+    })
 })
 
 app.post('/api/book', adminRoute, (req, res) => {
@@ -172,9 +172,9 @@ app.post('/api/book', adminRoute, (req, res) => {
   books.addBook(req.body).then((resp) => {
     res.send(resp)
   })
-  .catch((error) => {
-    console.log(error)
-  })
+    .catch((error) => {
+      console.log(error)
+    })
 })
 
 app.put('/api/book/:id', adminRoute, (req, res) => {
