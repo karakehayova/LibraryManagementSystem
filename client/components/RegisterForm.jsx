@@ -11,7 +11,8 @@ export class RegisterForm extends Component {
         first_name: '',
         last_name: '',
         email: '',
-        admin: 0
+        admin: 0,
+        subscription: 1
       },
       error: ''
     }
@@ -33,15 +34,15 @@ export class RegisterForm extends Component {
   handleSubmit (event) {
     event.preventDefault()
     postUser(this.state.data)
-      .then((response) => {
-        if (response.errno) {
-          this.setState({ error: 'This username or email are already taken.' })
-        } else {
-          if (this.state.error) {
-            this.setState({ error: '' })
-          }
-        }
-      })
+			.then((response) => {
+  if (response.errno) {
+    this.setState({ error: 'This username or email are already taken.' })
+  } else {
+    if (this.state.error) {
+      this.setState({ error: '' })
+    }
+  }
+})
   }
 
   login (event) {
@@ -77,10 +78,13 @@ export class RegisterForm extends Component {
           <input onChange={this.handleInputChange} type='text' name='admin' className='form-control input-lg' placeholder='Admin role' />
         </div>
         <div className='form-group'>
+          <input onChange={this.handleInputChange} type='number' name='subscription' className='form-control input-lg' placeholder='Subscription' />
+        </div>
+        <div className='form-group'>
           <input onChange={this.handleInputChange} type='submit' value='Register' className='btn btn-primary btn-block btn-lg' />
         </div>
         <a onClick={this.login} className='btn btn-success btn-block btn-lg'>
-          Login
+					Login
         </a>
       </form >
     )

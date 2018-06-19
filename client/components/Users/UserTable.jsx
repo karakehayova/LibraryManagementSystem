@@ -4,6 +4,7 @@ import { getUsers } from '../../requests'
 import { capitalize, splitByCapital } from '../../util'
 import { getUser } from '../../auth'
 import history from '../../history'
+import moment from 'moment'
 
 export class UserTable extends React.Component {
   constructor (props) {
@@ -14,12 +15,12 @@ export class UserTable extends React.Component {
   }
   componentDidMount () {
     getUsers()
-      .then((response) => {
-        this.setState({ users: response })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+			.then((response) => {
+  this.setState({ users: response })
+})
+			.catch((error) => {
+  console.log(error)
+})
   }
 
   getColumns (users) {
@@ -37,14 +38,20 @@ export class UserTable extends React.Component {
     let users = this.state.users.filter((user) => {
       return user.admin === 0
     })
-
     return users.map((user) => {
+      let startDate = moment.unix(user.start_date)
+      let endDate = moment.unix(user.start_date).add(user.subscription, 'months')
+      let result = endDate.from(startDate)
+      let active = endDate > moment()
+
       return {
         id: user.id,
         username: <a className='text-primary' onClick={() => { history.push('/user/' + user.id) }}> {user.username} </a>,
         firstName: user.first_name,
         lastName: user.last_name,
-        email: user.email
+        email: user.email,
+        active: active ? <span className='alert alert-success'>Yes</span> : <span className='alert alert-danger'> No</span>,
+        expires: result
       }
     })
   }
@@ -53,25 +60,31 @@ export class UserTable extends React.Component {
     let user = getUser()
     if (user && user.admin && this.state.users.length) {
       let users = this.prepareTableData()
-      let columns = this.getColumns(users)
+      if (users.length) {
+        let columns = this.getColumns(users)
 
-      return <div>
-        <ReactTable
-          data={users}
-          columns={columns}
-          className={'-striped -highlight'}
-          showPagination={false}
-          defaultPageSize={users.length}
-        />
-      </div>
-    } else {
+        return <div>
+          <ReactTable
+            data={users}
+            columns={columns}
+            className={'-striped -highlight'}
+            showPagination={false}
+            defaultPageSize={users.length}
+					/>
+        </div>
+      }			else {
+        return <div>
+					No users
+        </div>
+      }
+    }		else {
       if (!user || !user.admin) {
         return <div>
-          You are not authenticated
+					You are not authenticated
         </div>
       } else {
         return <div>
-          No books
+					No users
         </div>
       }
     }

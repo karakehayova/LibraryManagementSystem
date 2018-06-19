@@ -115,17 +115,6 @@ app.post('/api/user', (req, res) => {
     })
 })
 
-app.post('/api/user/:id/subscribe/:subscriptionId', userRoute, (req, res) => {
-  var data = {
-    userId: req.params.id,
-    subscriptionId: req.params.subscriptionId,
-    payment: req.body
-  }
-  users.addUserSubscription(data).then((resp) => {
-    res.send(resp)
-  })
-})
-
 app.delete('/api/borrow/book/:bookId/user/:userId', adminRoute, (req, res) => {
   books.returnBook(req.params.userId, req.params.bookId).then((resp) => {
     res.send(resp)
@@ -234,43 +223,6 @@ app.delete('/api/shelf/:id', adminRoute, (req, res) => {
   })
 })
 // ==========shelves=======
-
-// =========subscriptions=======
-app.get('/api/subscriptions/', (req, res) => {
-  subscriptions.getSubscriptionPlans().then((resp) => {
-    res.send(resp)
-  })
-})
-
-app.get('/api/subscription/:id', (req, res) => {
-  subscriptions.getSubscriptionPlan(req.params.id).then((resp) => {
-    res.send(resp)
-  })
-})
-
-app.put('/api/subscription/:id', adminRoute, (req, res) => {
-  var data = {
-    id: req.params.id,
-    data: req.body
-  }
-  subscriptions.editSubscriptionPlan(data).then((resp) => {
-    res.send(resp)
-  })
-})
-
-app.post('/api/subscription', (req, res) => {
-  subscriptions.addSubscriptionPlan(req.body).then((resp) => {
-    res.send(resp)
-  })
-})
-
-app.delete('/api/subscription/:id', adminRoute, (req, res) => {
-  subscriptions.deleteSubscriptionPlan(req.params.id).then((resp) => {
-    res.send(resp)
-  })
-})
-// =========subscriptions=======
-
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`) // eslint-disable-line no-console
 })

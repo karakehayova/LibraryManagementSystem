@@ -181,7 +181,7 @@ function getBooksForUser (id) {
 }
 
 function getUser (id) {
-  let select = 'users.id, users.username, users.first_name, users.last_name, users.email, users.admin, ' +
+  let select = 'users.id, users.username, users.first_name, users.last_name, users.email, users.admin, users.start_date, users.subscription, ' +
     'books.id as bookId, books.name, books.author, books.subject, books.genre, books.publisher, books.edition, books.borrowed, ' +
     'books.shelf_id, books.row, books.column, ' +
     'user_books.return_date, user_books.borrow_date, user_books.returned '
