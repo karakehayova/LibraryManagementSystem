@@ -1,4 +1,5 @@
 import BooksTable from '../components/Books/BooksTable'
+import PersonalInfo from '../components/Users/PersonalInfo'
 import React from 'react'
 import history from '../history'
 import { Link } from 'react-router-dom'
@@ -8,7 +9,8 @@ export class UserHome extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      showBooks: false
+      showBooks: false,
+      personalInfo: false
     }
   }
 
@@ -25,12 +27,18 @@ export class UserHome extends React.Component {
             </li>
             <li className='nav-item'>
               <a className='nav-link' onClick={() => {
-                this.setState({ showBooks: !this.state.showBooks })
+                this.setState({ showBooks: !this.state.showBooks, personalInfo: false })
               }}>Books</a>
+            </li>
+            <li className='nav-item'>
+              <a className='nav-link' onClick={() => {
+                this.setState({ personalInfo: !this.state.personalInfo, showBooks: false })
+              }}>Personal Info</a>
             </li>
           </ul>
         </nav>
         {this.state.showBooks ? <BooksTable /> : ''}
+        {this.state.personalInfo ? <PersonalInfo /> : ''}
       </div>
     )
   }

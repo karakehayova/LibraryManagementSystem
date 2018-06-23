@@ -14,12 +14,12 @@ export class BooksTable extends React.Component {
   }
   componentDidMount () {
     getBooks()
-      .then((response) => {
-        this.setState({ books: response })
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    .then((response) => {
+      this.setState({ books: response })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
   }
 
   getColumns (books) {
@@ -39,7 +39,7 @@ export class BooksTable extends React.Component {
 
   prepareTableData () {
     let user = getUser()
-    if (user.admin) {
+    if (user.admin && this.props.userId) {
       return this.state.books.map((book) => {
         return {
           id: book.id,
@@ -50,7 +50,7 @@ export class BooksTable extends React.Component {
           borrow: book.borrowed ? '' : <button onClick={() => { this.borrow(book.id) }}>Borrow</button>
         }
       })
-    }	else {
+    } else {
       return this.state.books.map((book) => {
         return {
           id: book.id,
@@ -76,11 +76,11 @@ export class BooksTable extends React.Component {
           className={'-striped -highlight'}
           showPagination={false}
           defaultPageSize={books.length}
-        />
+    />
       </div>
-    }		else {
+    } else {
       return <div>
-				You are not authenticated
+    You are not authenticated
       </div>
     }
   }

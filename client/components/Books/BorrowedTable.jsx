@@ -37,7 +37,7 @@ export class BorrowedTable extends React.Component {
           returnBook: book.returned ? '' : <button onClick={() => { returnBook(this.props.id, book.id) }}>Return</button>
         }
       })
-    }	else {
+    } else {
       return this.props.books.map((book) => {
         return {
           id: book.id,
@@ -66,7 +66,7 @@ export class BorrowedTable extends React.Component {
           defaultPageSize={books.length}
         />
       </div>
-    }		else {
+    } else {
       return ''
     }
   }

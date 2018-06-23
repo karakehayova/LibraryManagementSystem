@@ -15,12 +15,12 @@ export class UserTable extends React.Component {
   }
   componentDidMount () {
     getUsers()
-			.then((response) => {
-  this.setState({ users: response })
-})
-			.catch((error) => {
-  console.log(error)
-})
+      .then((response) => {
+        this.setState({ users: response })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   getColumns (users) {
@@ -29,7 +29,23 @@ export class UserTable extends React.Component {
       return {
         minWidth: col.length * 20,
         Header: capitalize(col),
-        accessor: col
+        accessor: col,
+        getProps:
+          (state, rowInfo) => {
+            if (col === 'active') {
+              return {
+                style: {
+                  backgroundColor: (rowInfo.row.active === 'No' ? 'red' : 'green')
+                }
+              }
+            } else {
+              return {
+                style: {
+                  backgroundColor: null
+                }
+              }
+            }
+          }
       }
     })
   }
@@ -50,7 +66,7 @@ export class UserTable extends React.Component {
         firstName: user.first_name,
         lastName: user.last_name,
         email: user.email,
-        active: active ? <span className='alert alert-success'>Yes</span> : <span className='alert alert-danger'> No</span>,
+        active: active ? 'Yes' : 'No',
         expires: result
       }
     })
@@ -70,21 +86,21 @@ export class UserTable extends React.Component {
             className={'-striped -highlight'}
             showPagination={false}
             defaultPageSize={users.length}
-					/>
-        </div>
-      }			else {
-        return <div>
-					No users
-        </div>
-      }
-    }		else {
-      if (!user || !user.admin) {
-        return <div>
-					You are not authenticated
+          />
         </div>
       } else {
         return <div>
-					No users
+          No users
+        </div>
+      }
+    } else {
+      if (!user || !user.admin) {
+        return <div>
+          You are not authenticated
+        </div>
+      } else {
+        return <div>
+          No users
         </div>
       }
     }

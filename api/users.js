@@ -58,6 +58,9 @@ function getUser (userId) {
 
 function addUser (userData) {
   return new Promise((resolve, reject) => {
+    if (userData.password !== userData.password_confirmation) {
+      reject('The password and password confirmation are different!')
+    }
     var hashedPassword = passwordHash.generate(userData.password)
     userData.password = hashedPassword
     delete userData.password_confirmation
@@ -75,6 +78,10 @@ function addUser (userData) {
 }
 
 function updateUser (userData) {
+  if (userData.data.password) {
+    let hashedPassword = passwordHash.generate(userData.data.password)
+    userData.data.password = hashedPassword
+  }
   return new Promise((resolve, reject) => {
     db.serialize(function () {
       let { query, params } = dbUtils.update('users', userData.id, userData.data)

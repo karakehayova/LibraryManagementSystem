@@ -8,7 +8,7 @@ export class ErrorPage extends React.Component {
   }
   render () {
     return <div>
-		You should go to librarian to register you!
+    You should go to librarian to register you!
     </div>
   }
 }

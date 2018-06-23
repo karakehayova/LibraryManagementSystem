@@ -2,7 +2,7 @@
 var axios = require('axios')
 var basePath = 'http://localhost:3001'
 var qs = require('qs')
-
+var passwordHash = require('password-hash')
 var auth = require('./auth')
 
 function getUserByID (id) {
@@ -124,6 +124,27 @@ function postBook (data) {
     })
 }
 
+function updatePassword (userId, newPass) {
+  if (!passwordHash.verify(newPass.oldPass, newPass.current)) {
+    return new Promise((resolve, reject) => {
+      reject({error: 'Old password is wrong!'})
+    })
+  }
+  if (newPass.newPass !== newPass.repeatPass) {
+    return new Promise((resolve, reject) => {
+      reject({error: 'Password don`t match'})
+    })
+  }
+  let updateData = {password: newPass.newPass}
+  return axios.put(basePath + '/api/user/' + userId, qs.stringify(updateData))
+    .then(function (response) {
+      return response.data
+    })
+    .catch(function (error) {
+      console.log(error)
+    })
+}
+
 module.exports = {
   getUsers: getUsers,
   getBooks: getBooks,
@@ -134,5 +155,6 @@ module.exports = {
   getUserByID: getUserByID,
   borrowBook: borrowBook,
   returnBook: returnBook,
-  deleteBook: deleteBook
+  deleteBook: deleteBook,
+  updatePassword: updatePassword
 }

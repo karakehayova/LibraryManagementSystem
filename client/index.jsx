@@ -18,6 +18,7 @@ import Info from './components/Info'
 import Home from './components/Home'
 import BooksTable from './components/Books/BooksTable'
 import User from './components/Users/User'
+import UpdatePassForm from './components/Users/UpdatePassForm'
 import setAuthorizationToken from './setAuthorizationToken'
 import { PreviewBook } from './components/Books/PreviewBook'
 
@@ -37,7 +38,7 @@ ReactDOM.render((
       <Route exact path='/books' component={BooksTable} />
       <Route exact path='/user/:id' component={User} />
       <Route exact path='/book/:id' component={PreviewBook} />
-
+      <Route exact path='/update/user/:id' component={UpdatePassForm} />
     </Switch>
   </Router>
 ),
