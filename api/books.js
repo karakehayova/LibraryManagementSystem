@@ -70,7 +70,7 @@ function editBook (data) {
         if (err) {
           reject(err)
         }
-        resolve('Book successfully edidted.')
+        resolve('Book successfully edited.')
       })
     })
   })

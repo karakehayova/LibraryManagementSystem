@@ -30,12 +30,12 @@ export class UpdatePassForm extends React.Component {
   componentDidMount () {
     if (this.state.id) {
       getUserByID(this.state.id)
-				.then((response) => {
-  this.setState({ passwords: Object.assign(this.state.passwords, {current: response[0].password })})
-})
-				.catch((error) => {
-  console.log(error)
-})
+        .then((response) => {
+          this.setState({ passwords: Object.assign(this.state.passwords, {current: response[0].password })})
+        })
+        .catch((error) => {
+          console.log(error)
+        })
     }
   }
 
@@ -55,15 +55,15 @@ export class UpdatePassForm extends React.Component {
   handleSubmit (e) {
     e.preventDefault()
     updatePassword(this.state.id, this.state.passwords).then(
-			(user) => {
-  if (user) {
-    history.push('/info')
-  }
-}
-		)
-			.catch((error) => {
-  console.log(error)
-})
+      (user) => {
+        if (user) {
+          history.push('/info')
+        }
+      }
+    )
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   render () {
