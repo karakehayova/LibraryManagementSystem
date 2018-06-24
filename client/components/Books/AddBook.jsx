@@ -1,5 +1,6 @@
 import React from 'react'
-import { postBook } from '../../requests'
+import { postBook, getBookById, editBook } from '../../requests'
+import history from '../../history'
 
 export class AddBook extends React.Component {
   constructor (props) {
@@ -16,10 +17,32 @@ export class AddBook extends React.Component {
         row: 0,
         column: 0,
         url: ''
-      }
+      },
+      id: ''
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+  }
+
+  static getDerivedStateFromProps (nextProps, prevState) {
+    if (Object.keys(nextProps).length) {
+      if (prevState.id !== nextProps.match.params.id) {
+        return { id: nextProps.match.params.id }
+      }
+    }
+    return null
+  }
+
+  componentDidMount () {
+    if (this.state.id) {
+      getBookById(this.state.id)
+        .then((response) => {
+          this.setState({ book: response[0] })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 
   handleChange (e) {
@@ -37,7 +60,21 @@ export class AddBook extends React.Component {
 
   handleSubmit (e) {
     e.preventDefault()
-    postBook(this.state.book)
+    if (this.state.id) {
+      let editedBook = this.state.book
+      delete editedBook.borrow_date
+      delete editedBook.borrowed
+      delete editedBook.likes
+      delete editedBook.return_date
+      delete editedBook.returned
+      delete editedBook.user
+      delete editedBook.user_id
+
+      editBook(this.state.book)
+      history.push(`/book/${this.state.id}`)
+    } else {
+      postBook(this.state.book)
+    }
   }
 
   render () {

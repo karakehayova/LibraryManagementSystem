@@ -92,21 +92,32 @@ export class PreviewBook extends React.Component {
       </span>
     </span> : ''
 
+    let edit = getUser().admin ? <span style={{ 'float': 'right' }}>
+      <span onClick={() => {
+        history.push(`/book/edit/${this.state.id}`)
+      }}>
+        <i className='material-icons'>edit</i>
+      </span>
+    </span> : ''
+
     if (book.deleted) {
       return <div class='alert alert-success' role='alert'> The book was successfully deleted.</div>
     }
 
     return (
-      <div className='card text-center' style={{ 'width': '50%' }}>
+      <div className='card text-center' style={{ 'width': '70%' }}>
         <div className='card-header'>
           {book.name}
           {deleteBook}
+          {edit}
           {rate}
         </div>
         {bookUrl}
         <div className='card-body'>
           <h5 className='card-title'>{'By: ' + book.author}</h5>
           <h5 className='card-subtitle text-muted'>{'Status: ' + status}</h5>
+          <p class='card-text'>{'Publisher: ' + book.publisher}</p>
+          <p class='card-text'>{'Description: ' + book.subject}</p>
         </div>
       </div>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { loginUser, postUser } from '../requests'
+import { loginUser, postUser, getUserByID, updateUser } from '../requests'
 
 export class RegisterForm extends Component {
   constructor (props) {
@@ -14,12 +14,33 @@ export class RegisterForm extends Component {
         admin: 0,
         subscription: 1
       },
-      error: ''
+      error: '',
+      id: ''
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.login = this.login.bind(this)
+  }
+
+  static getDerivedStateFromProps (nextProps, prevState) {
+    if (Object.keys(nextProps).length) {
+      if (prevState.id !== nextProps.match.params.id) {
+        return { id: nextProps.match.params.id }
+      }
+    }
+    return null
+  }
+
+  componentDidMount () {
+    if (this.state.id) {
+      getUserByID(this.state.id)
+        .then((response) => {
+          this.setState({ data: response[0] })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    }
   }
 
   handleInputChange (event) {
@@ -33,7 +54,8 @@ export class RegisterForm extends Component {
 
   handleSubmit (event) {
     event.preventDefault()
-    postUser(this.state.data)
+    if (!this.state.id) {
+      postUser(this.state.data)
       .then((response) => {
         if (response.errno) {
           this.setState({ error: 'This username or email are already taken.' })
@@ -43,30 +65,40 @@ export class RegisterForm extends Component {
           }
         }
       })
-  }
-
-  login (event) {
-    window.location = '/'
+    } else {
+      let updateData = this.state.data
+      delete updateData.books
+      delete updateData.start_date
+      updateUser(this.state.data)
+      .then((response) => {
+        console.log(response)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+    }
   }
 
   render () {
     let error = this.state.error ? <div className='alert alert-danger' role='alert'>
       {this.state.error} </div> : ''
+
+    let buttonText = this.state.id ? 'Update' : 'Register'
     return (
       <form onSubmit={this.handleSubmit} role='form'>
-        <h2>Register</h2>
+        <h2>{buttonText}</h2>
         {error}
         <div className='form-group'>
-          <input onChange={this.handleInputChange} type='text' name='first_name' className='form-control input-lg' placeholder='First Name' />
+          <input onChange={this.handleInputChange} type='text' value={this.state.data.first_name} name='first_name' className='form-control input-lg' placeholder='First Name' />
         </div>
         <div className='form-group'>
-          <input onChange={this.handleInputChange} type='text' name='last_name' className='form-control input-lg' placeholder='Last Name' />
+          <input onChange={this.handleInputChange} type='text' value={this.state.data.last_name} name='last_name' className='form-control input-lg' placeholder='Last Name' />
         </div>
         <div className='form-group'>
-          <input onChange={this.handleInputChange} type='text' name='username' className='form-control input-lg' placeholder='Username' />
+          <input onChange={this.handleInputChange} type='text' value={this.state.data.username} name='username' className='form-control input-lg' placeholder='Username' />
         </div>
         <div className='form-group'>
-          <input onChange={this.handleInputChange} type='email' name='email' className='form-control input-lg' placeholder='Email Address' />
+          <input onChange={this.handleInputChange} type='email' value={this.state.data.email} name='email' className='form-control input-lg' placeholder='Email Address' />
         </div>
         <div className='form-group'>
           <input onChange={this.handleInputChange} type='password' name='password' className='form-control input-lg' placeholder='Password' />
@@ -75,13 +107,13 @@ export class RegisterForm extends Component {
           <input onChange={this.handleInputChange} type='password' name='password_confirmation' className='form-control input-lg' placeholder='Confirm Password' />
         </div>
         <div className='form-group'>
-          <input onChange={this.handleInputChange} type='text' name='admin' className='form-control input-lg' placeholder='Admin role' />
+          <input onChange={this.handleInputChange} type='text' value={this.state.data.admin} name='admin' className='form-control input-lg' placeholder='Admin role' />
         </div>
         <div className='form-group'>
           <input onChange={this.handleInputChange} type='number' name='subscription' className='form-control input-lg' placeholder='Subscription' />
         </div>
         <div className='form-group'>
-          <input onChange={this.handleInputChange} type='submit' value='Register' className='btn btn-primary btn-block btn-lg' />
+          <input onChange={this.handleInputChange} type='submit' value={buttonText} className='btn btn-primary btn-block btn-lg' />
         </div>
       </form >
     )

@@ -79,6 +79,12 @@ function addUser (userData) {
 
 function updateUser (userData) {
   if (userData.data.password) {
+    if (userData.data.password_confirmation) {
+      if (userData.password !== userData.password_confirmation) {
+        reject('The password and password confirmation are different!')
+      }
+      delete userData.data.password_confirmation
+    }
     let hashedPassword = passwordHash.generate(userData.data.password)
     userData.data.password = hashedPassword
   }

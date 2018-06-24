@@ -108,9 +108,18 @@ function postUser (data) {
       return response.data
     })
     .catch(function (error) {
-      // window.location = basePath + '/register'
       return error
     })
+}
+
+function updateUser (data) {
+  return axios.put(basePath + '/api/user/' + data.id, qs.stringify(data))
+  .then(function (response) {
+    return response.data
+  })
+  .catch(function (error) {
+    return error
+  })
 }
 
 function postBook (data) {
@@ -121,6 +130,16 @@ function postBook (data) {
     .catch(function (error) {
       console.log(error)
       window.location = basePath + '/'
+    })
+}
+
+function editBook (data) {
+  return axios.put(basePath + '/api/book/' + data.id, qs.stringify(data))
+    .then(function (response) {
+      return response.data
+    })
+    .catch(function (error) {
+      console.log(error)
     })
 }
 
@@ -172,7 +191,9 @@ module.exports = {
   getBooks: getBooks,
   getBookById: getBookById,
   postBook: postBook,
+  editBook: editBook,
   postUser: postUser,
+  updateUser: updateUser,
   loginUser: loginUser,
   getUserByID: getUserByID,
   borrowBook: borrowBook,

@@ -16,6 +16,7 @@ import RegisterForm from './components/RegisterForm'
 import ErrorPage from './components/ErrorPage'
 import Info from './components/Info'
 import Home from './components/Home'
+import AddBook from './components/Books/AddBook'
 import BooksTable from './components/Books/BooksTable'
 import User from './components/Users/User'
 import UpdatePassForm from './components/Users/UpdatePassForm'
@@ -38,6 +39,8 @@ ReactDOM.render((
       <Route exact path='/books' component={BooksTable} />
       <Route exact path='/user/:id' component={User} />
       <Route exact path='/book/:id' component={PreviewBook} />
+      <Route exact path='/book/edit/:id' component={AddBook} />
+      <Route exact path='/user/edit/:id' component={RegisterForm} />
       <Route exact path='/update/user/:id' component={UpdatePassForm} />
     </Switch>
   </Router>

@@ -74,7 +74,7 @@ function editBook (data) {
         if (err) {
           reject(err)
         }
-        resolve('Book successfully edited.')
+        resolve(rows)
       })
     })
   })

@@ -67,7 +67,8 @@ export class UserTable extends React.Component {
         lastName: user.last_name,
         email: user.email,
         active: active ? 'Yes' : 'No',
-        expires: result
+        expires: result,
+        subscription: <a className='text-primary' onClick={() => { history.push('/user/edit/' + user.id) }}> Edit                                 </a>
       }
     })
   }
