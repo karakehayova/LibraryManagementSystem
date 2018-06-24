@@ -4,6 +4,7 @@ var users = require('./users.js')
 var auth = require('./auth.js')
 const cors = require('cors')
 var books = require('./books.js')
+var rating = require('./rating.js')
 // var shelves = require('./shelves.js')
 // var subscriptions = require('./subscriptions.js')
 const bodyParser = require('body-parser')
@@ -136,6 +137,20 @@ app.delete('/api/user/:id', adminRoute, (req, res) => {
   var id = req.params.id
 
   users.deleteUser(id).then((resp) => {
+    res.send(resp)
+  })
+})
+
+// ratings
+app.post('/api/:book_id/:user_id', (req, res) => {
+  console.log('req', req.params)
+  rating.like(req.params.book_id, req.params.user_id).then((resp) => {
+    res.send(resp)
+  })
+})
+
+app.delete('/api/:book_id/:user_id', (req, res) => {
+  rating.dislike(req.params.book_id, req.params.user_id).then((resp) => {
     res.send(resp)
   })
 })

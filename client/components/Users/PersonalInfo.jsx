@@ -16,18 +16,18 @@ export class PersonalInfo extends React.Component {
   componentDidMount () {
     let user = getUser()
     getUserByID(user.id)
-			.then((response) => {
-  console.log(response[0])
-  this.setState({ user: response[0] })
-})
-			.catch((error) => {
-  console.log(error)
-})
+      .then((response) => {
+        console.log(response[0])
+        this.setState({ user: response[0] })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
 
   render () {
     if (Object.keys(this.state.user).length) {
-      let books = this.state.user.books.length ? 	<BorrowedTable id={this.state.id} books={this.state.user.books} /> : 'You have no borrowed books'
+      let books = this.state.user.books.length ? <BorrowedTable id={this.state.id} books={this.state.user.books} /> : 'You have no borrowed books'
 
       return <div>
         <div className='card' style={{ width: '18rem' }}>

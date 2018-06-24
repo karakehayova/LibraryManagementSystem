@@ -1,6 +1,7 @@
 var sqlite3 = require('sqlite3').verbose()
 var dbUtils = require('./dbUtils')
 var users = require('./users')
+var rating = require('./rating')
 var utils = require('./utils')
 var db = new sqlite3.Database('./library.db')
 var _ = require('lodash')
@@ -34,8 +35,11 @@ function getBook (id) {
             resolve(book)
           } else {
             users.getUser(book[0].user_id).then((user) => {
-              book[0].user = user
-              resolve(book)
+              rating.getRating(book[0].id).then((rows) => {
+                book[0].likes = rows
+                book[0].user = user
+                resolve(book)
+              })
             })
           }
         } else {

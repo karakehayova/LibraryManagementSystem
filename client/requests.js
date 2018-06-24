@@ -145,6 +145,28 @@ function updatePassword (userId, newPass) {
     })
 }
 
+function likeBook (bookId, userId) {
+  return axios.post(basePath + '/api/' + bookId + '/' + userId)
+  .then(function (response) {
+    return response.data
+  })
+  .catch(function (error) {
+    console.log(error)
+    return error
+  })
+}
+
+function dislikeBook (bookId, userId) {
+  return axios.delete(basePath + '/api/' + bookId + '/' + userId)
+  .then(function (response) {
+    return response.data
+  })
+  .catch(function (error) {
+    console.log(error)
+    return error
+  })
+}
+
 module.exports = {
   getUsers: getUsers,
   getBooks: getBooks,
@@ -156,5 +178,7 @@ module.exports = {
   borrowBook: borrowBook,
   returnBook: returnBook,
   deleteBook: deleteBook,
+  likeBook: likeBook,
+  dislikeBook: dislikeBook,
   updatePassword: updatePassword
 }

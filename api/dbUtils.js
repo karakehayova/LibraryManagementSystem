@@ -7,6 +7,7 @@ module.exports = {
   selectWhere: selectWhere,
   getBooks: getBooks,
   getUser: getUser,
+  getByBookId: getByBookId,
   getBooksForUser: getBooksForUser,
   getUserSubscription: getUserSubscription,
   getSubscription: getSubscription,
@@ -15,7 +16,8 @@ module.exports = {
   borrowBook: borrowBook,
   returnBook: returnBook,
   checkBookStatus: checkBookStatus,
-  deleteWhere: deleteWhere
+  deleteWhere: deleteWhere,
+  deleteByUserBookIds: deleteByUserBookIds
 }
 var _ = require('lodash')
 var utils = require('./utils')
@@ -129,7 +131,7 @@ function getBooks (conditions, id = null) {
 
   let query = 'SELECT ' + select + ' FROM books ' +
     'LEFT JOIN user_books ' +
-    'ON books.id = user_books.book_id '
+        'ON books.id = user_books.book_id '
 
   let textSearchFields = [
     'name',
@@ -238,5 +240,15 @@ function borrowBook (bookId, userId) {
 function checkBookStatus (bookId, status = 'borrowed') {
   let query = 'SELECT * FROM books WHERE borrowed = ' + (status === 'borrowed' ? 1 : 0) + ' AND id = ' + bookId
 
+  return query
+}
+
+function deleteByUserBookIds (tableName, bookId, userId) {
+  var query = 'DELETE FROM ' + tableName + ' WHERE USER_ID = ' + userId + ' AND BOOK_ID = ' + bookId
+  return query
+}
+
+function getByBookId (tableName, bookId) {
+  var query = 'SELECT * FROM ' + tableName + ' WHERE BOOK_ID = ' + bookId
   return query
 }
