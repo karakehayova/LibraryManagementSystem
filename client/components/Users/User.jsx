@@ -1,9 +1,5 @@
 import React from 'react'
-import ReactTable from 'react-table'
 import { getUserByID } from '../../requests'
-import { capitalize, splitByCapital } from '../../util'
-import { getUser } from '../../auth'
-import history from '../../history'
 
 import BooksTable from '../Books/BooksTable'
 import BorrowedTable from '../Books/BorrowedTable'

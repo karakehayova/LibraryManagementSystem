@@ -1,9 +1,6 @@
 var sqlite3 = require('sqlite3').verbose()
 var dbUtils = require('./dbUtils')
-var users = require('./users')
-var utils = require('./utils')
 var db = new sqlite3.Database('./library.db')
-var _ = require('lodash')
 
 function like (book, user) {
   return new Promise((resolve, reject) => {

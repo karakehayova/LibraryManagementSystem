@@ -13,8 +13,6 @@ module.exports = {
   getSubscription: getSubscription,
   getUserActiveSubscription: getUserActiveSubscription,
   getSubscriptionPlans: getSubscriptionPlans,
-  borrowBook: borrowBook,
-  returnBook: returnBook,
   checkBookStatus: checkBookStatus,
   deleteWhere: deleteWhere,
   deleteByUserBookIds: deleteByUserBookIds
@@ -169,7 +167,7 @@ function getBooks (conditions, id = null) {
 }
 
 function getBooksForUser (id) {
-  let select = 'books.id, books.name, books.author_name, books.subject, books.genre, books.publisher, books.edition, books.borrowed, ' +
+  let select = 'books.id, books.name, books.author, books.subject, books.genre, books.publisher, books.edition, books.borrowed, ' +
     'books.shelf_id, books.row, books.column, ' +
     'user_books.return_date, user_books.borrow_date, user_books.returned'
   let query = 'SELECT ' + select + ' FROM books ' +
@@ -227,14 +225,6 @@ function getSubscriptionPlans (id = null) {
   }
 
   return query
-}
-
-function returnBook (bookId, userId) {
-  let query = 'SELECT * FROM '
-}
-
-function borrowBook (bookId, userId) {
-  let query = 'SELECT * FROM '
 }
 
 function checkBookStatus (bookId, status = 'borrowed') {

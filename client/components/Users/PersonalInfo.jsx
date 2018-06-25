@@ -27,7 +27,6 @@ export class PersonalInfo extends React.Component {
   render () {
     if (Object.keys(this.state.user).length) {
       let books = this.state.user.books.length ? <BorrowedTable id={this.state.id} books={this.state.user.books} /> : 'You have no borrowed books'
-      let startDate = moment.unix(this.state.user.start_date)
       let endDate = moment.unix(this.state.user.start_date).add(this.state.user.subscription, 'months')
       let result = endDate.from(this.state.startDate)
       let active = endDate > moment()

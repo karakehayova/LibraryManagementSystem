@@ -1,14 +1,15 @@
 import React from 'react'
 import ReactTable from 'react-table'
 import { returnBook } from '../../requests'
-import { capitalize, splitByCapital } from '../../util'
+import { capitalize } from '../../util'
 import { getUser } from '../../auth'
 
 export class BorrowedTable extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      books: []
+      books: [],
+      returned: ''
     }
   }
 
@@ -34,7 +35,11 @@ export class BorrowedTable extends React.Component {
           borrow_date: book.borrow_date,
           return_date: book.return_date,
           returned: book.returned ? 'yes' : 'no',
-          returnBook: book.returned ? '' : <button onClick={() => { returnBook(this.props.id, book.id) }}>Return</button>
+          returnBook: book.returned ? '' : <button onClick={() => {
+            returnBook(this.props.id, book.id).then(() => {
+              this.setState({ returned: 'returned' })
+            })
+          }}>Return</button>
         }
       })
     } else {
@@ -52,6 +57,9 @@ export class BorrowedTable extends React.Component {
   }
 
   render () {
+    if (this.state.returned) {
+      return <div className='alert alert-success' role='alert'> The book was successfully returned.</div>
+    }
     let user = getUser()
     if (user && this.props.books.length) {
       let books = this.prepareTableData()

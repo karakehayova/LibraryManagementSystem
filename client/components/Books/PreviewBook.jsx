@@ -47,8 +47,8 @@ export class PreviewBook extends React.Component {
       })
   }
 
-  rateBook (book_id, user_id) {
-    likeBook(book_id, user_id).then((result) => {
+  rateBook (bookId, userId) {
+    likeBook(bookId, userId).then((result) => {
       this.setState({ liked: true, rating: this.state.rating + 1 })
     })
       .catch((err) => {
@@ -56,8 +56,8 @@ export class PreviewBook extends React.Component {
       })
   }
 
-  downvoteBook (book_id, user_id) {
-    dislikeBook(book_id, user_id).then((result) => {
+  downvoteBook (bookId, userId) {
+    dislikeBook(bookId, userId).then((result) => {
       this.setState({ liked: false, rating: this.state.rating - 1 })
     })
       .catch((err) => {

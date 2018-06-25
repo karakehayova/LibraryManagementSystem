@@ -3,9 +3,6 @@ var jwt = require('jsonwebtoken')
 var users = require('./users.js')
 var passwordHash = require('password-hash')
 
-var sqlite3 = require('sqlite3').verbose()
-var dbUtils = require('./util')
-var db = new sqlite3.Database('./library.db')
 function generateToken (user) {
   // 1. Dont use password and other sensitive fields
   // 2. Use fields that are useful in other parts of the
@@ -16,7 +13,7 @@ function generateToken (user) {
     admin: user.admin,
     _id: user.id.toString()
   }
-  return token = jwt.sign(u, 'asd', {
+  return jwt.sign(u, 'asd', {
     expiresIn: 60 * 60 * 24 // expires in 24 hours
   })
 }

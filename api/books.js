@@ -4,7 +4,6 @@ var users = require('./users')
 var rating = require('./rating')
 var utils = require('./utils')
 var db = new sqlite3.Database('./library.db')
-var _ = require('lodash')
 
 function getBooks (condition) {
   return new Promise((resolve, reject) => {
@@ -32,6 +31,7 @@ function getBook (id) {
         }
         if (book !== undefined && book.length !== 0) {
           if (!book[0].user_id) {
+            book[0].likes = []
             resolve(book)
           } else {
             users.getUser(book[0].user_id).then((user) => {
@@ -101,7 +101,7 @@ function borrowBook (bookId, userId) {
       getBook(bookId).then((book) => {
         // resolve(book)
         if (book !== undefined && book.length !== 0) {
-          if (book[0].borrowed == 0) {
+          if (book[0].borrowed === 0) {
             let { query, params } = dbUtils.update('books', book[0].id, { 'borrowed': 1 })
 
             db.run(query, params, (err) => {
@@ -122,10 +122,8 @@ function borrowBook (bookId, userId) {
               returned: 0
             }
 
-            var bezDeklaraciqNaTaziPromenlivaDolniqRedSeChupi;
-
-            ({ query, params } = dbUtils.insert('user_books', data))
-            db.run(query, params, (err) => {
+            let userBooksData = dbUtils.insert('user_books', data)
+            db.run(userBooksData.query, userBooksData.params, (err) => {
               if (err) {
                 reject(err)
               } else {
@@ -136,7 +134,7 @@ function borrowBook (bookId, userId) {
             resolve('Book already borrowed')
           }
         } else {
-          resolve('No such book')
+          reject('No such book')
         }
       })
     })

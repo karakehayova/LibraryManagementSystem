@@ -1,7 +1,6 @@
 var sqlite3 = require('sqlite3').verbose()
-var dbUtils = require('./util')
+var dbUtils = require('./dbUtils')
 var db = new sqlite3.Database('./library.db')
-var utils = require('./utility')
 var passwordHash = require('password-hash')
 
 function getUsers () {
@@ -58,8 +57,12 @@ function getUser (userId) {
 
 function addUser (userData) {
   return new Promise((resolve, reject) => {
+    if (userData.password.length < 8) {
+      reject({err: 'Password should be at least 8 symbols'})
+    }
+
     if (userData.password !== userData.password_confirmation) {
-      reject('The password and password confirmation are different!')
+      reject({err: 'The password and password confirmation are different!'})
     }
     var hashedPassword = passwordHash.generate(userData.password)
     userData.password = hashedPassword
@@ -78,17 +81,18 @@ function addUser (userData) {
 }
 
 function updateUser (userData) {
-  if (userData.data.password) {
-    if (userData.data.password_confirmation) {
-      if (userData.password !== userData.password_confirmation) {
-        reject('The password and password confirmation are different!')
-      }
-      delete userData.data.password_confirmation
-    }
-    let hashedPassword = passwordHash.generate(userData.data.password)
-    userData.data.password = hashedPassword
-  }
   return new Promise((resolve, reject) => {
+    if (userData.data.password) {
+      if (userData.data.password_confirmation) {
+        if (userData.password !== userData.password_confirmation) {
+          reject('The password and password confirmation are different!')
+        }
+        delete userData.data.password_confirmation
+      }
+      let hashedPassword = passwordHash.generate(userData.data.password)
+      userData.data.password = hashedPassword
+    }
+
     db.serialize(function () {
       let { query, params } = dbUtils.update('users', userData.id, userData.data)
 

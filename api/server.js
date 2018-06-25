@@ -5,8 +5,6 @@ var auth = require('./auth.js')
 const cors = require('cors')
 var books = require('./books.js')
 var rating = require('./rating.js')
-// var shelves = require('./shelves.js')
-// var subscriptions = require('./subscriptions.js')
 const bodyParser = require('body-parser')
 var jwt = require('jsonwebtoken')
 
@@ -141,20 +139,6 @@ app.delete('/api/user/:id', adminRoute, (req, res) => {
   })
 })
 
-// ratings
-app.post('/api/:book_id/:user_id', (req, res) => {
-  console.log('req', req.params)
-  rating.like(req.params.book_id, req.params.user_id).then((resp) => {
-    res.send(resp)
-  })
-})
-
-app.delete('/api/:book_id/:user_id', (req, res) => {
-  rating.dislike(req.params.book_id, req.params.user_id).then((resp) => {
-    res.send(resp)
-  })
-})
-
 // books
 app.get('/api/books', (req, res) => {
   books.getBooks(req.query).then((resp) => {
@@ -203,41 +187,18 @@ app.put('/api/borrow/book/:bookId/user/:userId', adminRoute, (req, res) => {
   })
 })
 
-// ==========shelves=======
-app.get('/api/shelves/', (req, res) => {
-  shelves.getShelves(req.params.id).then((resp) => {
+// ratings
+app.post('/api/:book_id/:user_id', (req, res) => {
+  rating.like(req.params.book_id, req.params.user_id).then((resp) => {
     res.send(resp)
   })
 })
 
-app.get('/api/shelf/:id', (req, res) => {
-  shelves.getShelf(req.params.id).then((resp) => {
+app.delete('/api/:book_id/:user_id', (req, res) => {
+  rating.dislike(req.params.book_id, req.params.user_id).then((resp) => {
     res.send(resp)
   })
 })
-
-app.put('/api/shelf/:id', adminRoute, (req, res) => {
-  var data = {
-    id: req.params.id,
-    data: req.body
-  }
-  shelves.editShelf(data).then((resp) => {
-    res.send(resp)
-  })
-})
-
-app.post('/api/shelf', adminRoute, (req, res) => {
-  shelves.addShelf(req.body).then((resp) => {
-    res.send(resp)
-  })
-})
-
-app.delete('/api/shelf/:id', adminRoute, (req, res) => {
-  shelves.deleteShelf(req.params.id).then((resp) => {
-    res.send(resp)
-  })
-})
-// ==========shelves=======
 app.listen(app.get('port'), () => {
   console.log(`Find the server at: http://localhost:${app.get('port')}/`) // eslint-disable-line no-console
 })

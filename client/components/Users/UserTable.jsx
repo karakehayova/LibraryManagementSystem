@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactTable from 'react-table'
 import { getUsers } from '../../requests'
-import { capitalize, splitByCapital } from '../../util'
+import { capitalize } from '../../util'
 import { getUser } from '../../auth'
 import history from '../../history'
 import moment from 'moment'
@@ -68,7 +68,7 @@ export class UserTable extends React.Component {
         email: user.email,
         active: active ? 'Yes' : 'No',
         expires: result,
-        subscription: <a className='text-primary' onClick={() => { history.push('/user/edit/' + user.id) }}> Edit                                 </a>
+        subscription: <a className='text-primary' onClick={() => { history.push('/user/edit/' + user.id) }}> Edit</a>
       }
     })
   }

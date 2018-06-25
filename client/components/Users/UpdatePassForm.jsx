@@ -31,7 +31,7 @@ export class UpdatePassForm extends React.Component {
     if (this.state.id) {
       getUserByID(this.state.id)
         .then((response) => {
-          this.setState({ passwords: Object.assign(this.state.passwords, {current: response[0].password })})
+          this.setState({passwords: Object.assign(this.state.passwords, { current: response[0].password })})
         })
         .catch((error) => {
           console.log(error)

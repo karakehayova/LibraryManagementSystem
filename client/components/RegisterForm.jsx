@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { loginUser, postUser, getUserByID, updateUser } from '../requests'
+import { postUser, getUserByID, updateUser } from '../requests'
 
 export class RegisterForm extends Component {
   constructor (props) {
@@ -8,6 +8,7 @@ export class RegisterForm extends Component {
       data: {
         username: '',
         password: '',
+        password_confirmation: '',
         first_name: '',
         last_name: '',
         email: '',
@@ -15,7 +16,9 @@ export class RegisterForm extends Component {
         subscription: 1
       },
       error: '',
-      id: ''
+      id: '',
+      added: false,
+      updated: false
     }
 
     this.handleInputChange = this.handleInputChange.bind(this)
@@ -34,12 +37,12 @@ export class RegisterForm extends Component {
   componentDidMount () {
     if (this.state.id) {
       getUserByID(this.state.id)
-        .then((response) => {
-          this.setState({ data: response[0] })
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+    .then((response) => {
+      this.setState({ data: response[0] })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
     }
   }
 
@@ -56,30 +59,39 @@ export class RegisterForm extends Component {
     event.preventDefault()
     if (!this.state.id) {
       postUser(this.state.data)
-      .then((response) => {
-        if (response.errno) {
-          this.setState({ error: 'This username or email are already taken.' })
-        } else {
-          if (this.state.error) {
-            this.setState({ error: '' })
-          }
-        }
-      })
+    .then((response) => {
+      if (response.errno) {
+        this.setState({ error: 'This username or email are already taken.' })
+      } else if (response.err) {
+        this.setState({ error: response.err })
+      } else {
+        this.setState({ added: response, error: '' })
+      }
+    })
+    .catch((error) => {
+      console.log('err', error)
+    })
     } else {
       let updateData = this.state.data
       delete updateData.books
       delete updateData.start_date
       updateUser(this.state.data)
-      .then((response) => {
-        console.log(response)
-      })
-      .catch((error) => {
-        console.log(error)
-      })
+    .then((response) => {
+      this.setState({ updated: response, error: '' })
+    })
+    .catch((error) => {
+      console.log(error)
+    })
     }
   }
 
   render () {
+    if (this.state.added) {
+      return <div class='alert alert-success' role='alert'> The user was successfully registered.</div>
+    }
+    if (this.state.updated) {
+      return <div class='alert alert-success' role='alert'> The user was successfully updated.</div>
+    }
     let error = this.state.error ? <div className='alert alert-danger' role='alert'>
       {this.state.error} </div> : ''
 

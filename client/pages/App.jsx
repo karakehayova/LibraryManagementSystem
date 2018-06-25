@@ -2,7 +2,6 @@ import LoginForm from '../components/LoginForm'
 import BooksTable from '../components/Books/BooksTable'
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { getUser } from '../auth'
 
 export class App extends React.Component {
   constructor (props) {

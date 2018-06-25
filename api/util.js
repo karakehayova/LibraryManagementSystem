@@ -18,7 +18,7 @@ module.exports = {
   deleteWhere: deleteWhere
 }
 var _ = require('lodash')
-var utils = require('./utility')
+var utils = require('./utils')
 
 function insert (tableName, data) {
   var params = []

@@ -1,7 +1,6 @@
 import React from 'react'
 import history from '../history'
-import { Link } from 'react-router-dom'
-import { getUser, deauthenticateUser } from '../auth'
+import { deauthenticateUser } from '../auth'
 
 // components
 import BooksTable from '../components/Books/BooksTable'

@@ -24,7 +24,6 @@ function borrowBook (userID, bookID) {
     })
     .catch(function (error) {
       console.log('error', error)
-      // window.location = 'http://localhost:3000' + '/admin'
     })
 }
 
@@ -35,7 +34,7 @@ function returnBook (userID, bookID) {
       return response.data
     })
     .catch(function (error) {
-      window.location = 'http://localhost:3000' + '/admin'
+      return error
     })
 }
 
@@ -55,7 +54,7 @@ function getUsers () {
       return response.data
     })
     .catch(function (error) {
-      window.location = 'http://localhost:3000' + '/'
+      return error
     })
 }
 

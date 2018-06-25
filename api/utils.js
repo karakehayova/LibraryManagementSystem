@@ -48,5 +48,5 @@ function validatePayment (price, userPaymentData) {
 
 function isNumeric (x) {
   return !(isNaN(x)) && (typeof x !== 'object') &&
-    (x != Number.POSITIVE_INFINITY) && (x != Number.NEGATIVE_INFINITY)
+    (x !== Number.POSITIVE_INFINITY) && (x !== Number.NEGATIVE_INFINITY)
 }

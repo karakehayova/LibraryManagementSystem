@@ -1,6 +1,5 @@
 import React from 'react'
 import { loginUser } from '../requests'
-import { error } from 'util'
 
 export class LoginForm extends React.Component {
   constructor (props) {

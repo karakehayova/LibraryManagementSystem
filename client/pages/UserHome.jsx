@@ -2,8 +2,7 @@ import BooksTable from '../components/Books/BooksTable'
 import PersonalInfo from '../components/Users/PersonalInfo'
 import React from 'react'
 import history from '../history'
-import { Link } from 'react-router-dom'
-import { getUser, deauthenticateUser } from '../auth'
+import { deauthenticateUser } from '../auth'
 
 export class UserHome extends React.Component {
   constructor (props) {
