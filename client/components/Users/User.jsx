@@ -1,44 +1,30 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { getUserByID } from '../../requests'
+import { useParams } from 'react-router-dom'
 
 import BooksTable from '../Books/BooksTable'
 import BorrowedTable from '../Books/BorrowedTable'
 
-export class User extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      user: {},
-      id: ''
-    }
-  }
+export default function User() {
+  const { id } = useParams()
 
-  componentDidMount () {
-    if (this.state.id) {
-      getUserByID(this.state.id)
+  const [user, setUser] = useState({})
+
+  useEffect(() => {
+    if (id) {
+      getUserByID(id)
         .then((response) => {
-          this.setState({ user: response[0] })
+          setUser(response)
         })
         .catch((error) => {
           console.log(error)
         })
     }
-  }
+  }, []);
 
-  static getDerivedStateFromProps (nextProps, prevState) {
-    if (prevState.id !== nextProps.match.params.id) {
-      return { id: nextProps.match.params.id }
-    }
-    return null
-  }
-
-  render () {
-    let borrowed = this.state.user && this.state.user.books ? <BorrowedTable id={this.state.id} books={this.state.user.books} /> : ''
-    return <div>
-      {borrowed}
-      <BooksTable userId={this.state.id} />
-    </div>
-  }
+  let borrowed = user && user.books ? <BorrowedTable id={id} books={user.books} /> : ''
+  return <div>
+    {borrowed}
+    <BooksTable userId={id} />
+  </div>
 }
-
-export default User

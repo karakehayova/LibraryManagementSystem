@@ -7,7 +7,7 @@ function isUserAuthenticated () {
 }
 
 function deauthenticateUser () {
-  var basePath = window.location.origin
+  let basePath = window.location.origin
   localStorage.removeItem('token')
   localStorage.removeItem('user')
 }

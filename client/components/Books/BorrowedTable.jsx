@@ -1,19 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactTable from 'react-table'
 import { returnBook } from '../../requests'
-import { capitalize } from '../../util'
+import { capitalize } from '../../utils/util'
 import { getUser } from '../../auth'
 
-export class BorrowedTable extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      books: [],
-      returned: ''
-    }
-  }
+export default function BorrowedTable(id, books) {
+  const [returned, setReturned] = useState('')
 
-  getColumns (books) {
+  function getColumns(books) {
     let columns = Object.keys(books[0])
     return columns.map((col) => {
       return {
@@ -24,10 +18,10 @@ export class BorrowedTable extends React.Component {
     })
   }
 
-  prepareTableData () {
+  function prepareTableData() {
     let user = getUser()
     if (user.admin) {
-      return this.props.books.map((book) => {
+      return books.map((book) => {
         return {
           id: book.id,
           name: book.name,
@@ -36,14 +30,14 @@ export class BorrowedTable extends React.Component {
           return_date: book.return_date,
           returned: book.returned ? 'yes' : 'no',
           returnBook: book.returned ? '' : <button onClick={() => {
-            returnBook(this.props.id, book.id).then(() => {
-              this.setState({ returned: 'returned' })
+            returnBook(id, book.id).then(() => {
+              setReturned('returned')
             })
           }}>Return</button>
         }
       })
     } else {
-      return this.props.books.map((book) => {
+      return books.map((book) => {
         return {
           id: book.id,
           name: book.name,
@@ -56,28 +50,24 @@ export class BorrowedTable extends React.Component {
     }
   }
 
-  render () {
-    if (this.state.returned) {
-      return <div className='alert alert-success' role='alert'> The book was successfully returned.</div>
-    }
-    let user = getUser()
-    if (user && this.props.books.length) {
-      let books = this.prepareTableData()
-      let columns = this.getColumns(books)
+  if (returned) {
+    return <div className='alert alert-success' role='alert'> The book was successfully returned.</div>
+  }
+  let user = getUser()
+  if (user && books.length) {
+    let books = prepareTableData()
+    let columns = getColumns(books)
 
-      return <div>
-        <ReactTable
-          data={books}
-          columns={columns}
-          className={'-striped -highlight'}
-          showPagination={false}
-          defaultPageSize={books.length}
-        />
-      </div>
-    } else {
-      return ''
-    }
+    return <div>
+      <ReactTable
+        data={books}
+        columns={columns}
+        className={'-striped -highlight'}
+        showPagination={false}
+        defaultPageSize={books.length}
+      />
+    </div>
+  } else {
+    return ''
   }
 }
-
-export default BorrowedTable

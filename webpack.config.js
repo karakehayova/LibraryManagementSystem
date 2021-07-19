@@ -1,6 +1,6 @@
-var path = require('path')
-var combineLoaders = require('webpack-combine-loaders')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path')
+const combineLoaders = require('webpack-combine-loaders')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
   entry: {

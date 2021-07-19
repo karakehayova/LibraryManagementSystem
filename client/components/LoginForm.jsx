@@ -1,40 +1,33 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { loginUser } from '../requests'
 
-export class LoginForm extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      user: {
-        username: '',
-        password: ''
-      }
-    }
-    this.handleChange = this.handleChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-  }
+export default function LoginForm() {
 
-  handleChange (e) {
+  const [user, setUser] = useState({
+    username: '',
+    password: ''
+  })
+  const [error, setError] = useState('')
+
+  function handleChange(e) {
     if (e) {
       const target = e.target
       const value = target ? target.value : e.value
       const name = target ? target.name : ''
-      let fields = Object.assign({}, this.state.user)
+      let fields = Object.assign({}, user)
       fields[name] = value
-      this.setState({
-        user: fields
-      })
+      setUser(fields)
     }
   }
 
-  handleSubmit (e) {
+  function handleSubmit(e) {
     e.preventDefault()
-    loginUser(this.state.user).then(
-      (user) => {
-        if (user.error) {
-          this.setState({ error: user.error })
+    loginUser(user).then(
+      (result) => {
+        if (result.error) {
+          setError(result.error)
         } else {
-          this.setState({ error: '' })
+          setError('')
         }
       }
     )
@@ -43,28 +36,25 @@ export class LoginForm extends React.Component {
       })
   }
 
-  render () {
-    let error = this.state.error ? <div className='alert alert-danger' role='alert'>
-      {this.state.error} </div> : ''
-    let form = <form onSubmit={this.handleSubmit}>
-      <div className='form-group'>
-        <label>Username</label>
-        <input type='text' className='form-control' value={this.state.user.username} name='username' required onChange={this.handleChange} />
-      </div>
-
-      <div className='form-group'>
-        <label>Password</label>
-        <input type='password' className='form-control' value={this.state.user.password} name='password' required onChange={this.handleChange} />
-      </div>
-
-      <button type='submit' className='btn btn-warning'>Submit</button>
-
-    </form>
-
-    return <div>
-      {error}
-      {form}
+  let renderError = error ? <div className='alert alert-danger' role='alert'>
+    {error} </div> : ''
+  let form = <form onSubmit={handleSubmit}>
+    <div className='form-group'>
+      <label>Username</label>
+      <input type='text' className='form-control' value={user.username} name='username' required onChange={handleChange} />
     </div>
-  }
+
+    <div className='form-group'>
+      <label>Password</label>
+      <input type='password' className='form-control' value={user.password} name='password' required onChange={handleChange} />
+    </div>
+
+    <button type='submit' className='btn btn-warning'>Submit</button>
+
+  </form>
+
+  return <div>
+    {renderError}
+    {form}
+  </div>
 }
-export default LoginForm

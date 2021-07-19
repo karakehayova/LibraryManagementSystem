@@ -1,5 +1,5 @@
-import React from 'react'
-import history from '../history'
+import React, { useState } from 'react'
+import history from '../utils/history'
 import { deauthenticateUser } from '../auth'
 
 // components
@@ -8,18 +8,12 @@ import AddBook from '../components/Books/AddBook'
 import UserTable from '../components/Users/UserTable'
 import RegisterForm from '../components/RegisterForm'
 
-export class AdminHome extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      showBooks: false,
-      showRegister: false,
-      showUsers: false,
-      showBookForm: false
-    }
-  }
+export default function AdminHome () {
+  const [showBooks, setShowBooks] = useState(false)
+  const [showRegister, setShowRegister] = useState(false)
+  const [showUsers, setShowUsers] = useState(false)
+  const [showBookForm, setShowBookForm] = useState(false)
 
-  render () {
     return (
       <div>
         <nav className='navbar navbar-expand-lg navbar-light bg-light'>
@@ -32,54 +26,43 @@ export class AdminHome extends React.Component {
             </li>
             <li className='nav-item'>
               <a className='nav-link' onClick={() => {
-                this.setState({
-                  showRegister: !this.state.showRegister,
-                  showBooks: false,
-                  showUsers: false,
-                  showBookForm: false
-                })
+                setShowRegister(!showRegister)
+                setShowBooks(false)
+                setShowUsers(false)
+                setShowBookForm(false)
               }}>Register</a>
             </li>
             <li className='nav-item'>
               <a className='nav-link' onClick={() => {
-                this.setState({
-                  showBooks: !this.state.showBooks,
-                  showRegister: false,
-                  showBookForm: false,
-                  showUsers: false
-                })
+                setShowBooks(!showBooks)
+                setShowRegister(false)
+                setShowUsers(false)
+                setShowBookForm(false)
               }}>Books</a>
             </li>
             <li className='nav-item'>
               <a className='nav-link' onClick={() => {
-                this.setState({
-                  showUsers: !this.state.showUsers,
-                  showRegister: false,
-                  showBooks: false,
-                  showBookForm: false
-                })
+                setShowUsers(!showUsers)
+                setShowBooks(false)
+                setShowRegister(false)
+                setShowBookForm(false)
               }}>Users</a>
             </li>
             <li className='nav-item'>
               <a className='nav-link' onClick={() => {
-                this.setState({
-                  showBookForm: !this.state.showBookForm,
-                  showUsers: false,
-                  showRegister: false,
-                  showBooks: false
-                })
+                setShowBookForm(!showBookForm)
+                setShowUsers(false)
+                setShowBooks(false)
+                setShowRegister(false)
               }}>Add Book</a>
             </li>
           </ul>
         </nav>
-        {this.state.showBooks ? <BooksTable /> : ''}
-        {this.state.showRegister ? <RegisterForm /> : ''}
-        {this.state.showUsers ? <UserTable /> : ''}
-        {this.state.showBookForm ? <AddBook /> : ''}
+        {showBooks ? <BooksTable /> : null}
+        {showRegister ? <RegisterForm /> : null}
+        {showUsers ? <UserTable /> : null}
+        {showBookForm ? <AddBook /> : null}
 
       </div>
     )
-  }
 }
-
-export default AdminHome

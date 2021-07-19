@@ -1,4 +1,4 @@
-import history from './history'
+import history from './utils/history'
 import React from 'react'
 import ReactDOM from 'react-dom'
 import {Router, Route, Switch} from 'react-router-dom'
@@ -17,9 +17,8 @@ import ErrorPage from './components/ErrorPage'
 import AddBook from './components/Books/AddBook'
 import BooksTable from './components/Books/BooksTable'
 import User from './components/Users/User'
-import UpdatePassForm from './components/Users/UpdatePassForm'
 import setAuthorizationToken from './setAuthorizationToken'
-import { PreviewBook } from './components/Books/PreviewBook'
+import PreviewBook from './components/Books/PreviewBook'
 
 if (localStorage.token) {
   setAuthorizationToken(localStorage.token)
@@ -39,7 +38,6 @@ ReactDOM.render((
       <Route exact path='/book/:id' component={PreviewBook} />
       <Route exact path='/book/edit/:id' component={AddBook} />
       <Route exact path='/user/edit/:id' component={RegisterForm} />
-      <Route exact path='/update/user/:id' component={UpdatePassForm} />
     </Switch>
   </Router>
 ),

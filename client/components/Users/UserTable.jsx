@@ -1,29 +1,25 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import ReactTable from 'react-table'
 import { getUsers } from '../../requests'
-import { capitalize } from '../../util'
+import { capitalize } from '../../utils/util'
 import { getUser } from '../../auth'
-import history from '../../history'
-import moment from 'moment'
+import history from '../../utils/history'
 
-export class UserTable extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      users: []
-    }
-  }
-  componentDidMount () {
+export default function UserTable() {
+
+  const [users, setUsers] = useState([])
+
+  useEffect(() => {
     getUsers()
       .then((response) => {
-        this.setState({ users: response })
+        setUsers(response)
       })
       .catch((error) => {
         console.log(error)
       })
-  }
+  }, []);
 
-  getColumns (users) {
+  function getColumns(users) {
     let columns = Object.keys(users[0])
     return columns.map((col) => {
       return {
@@ -50,62 +46,51 @@ export class UserTable extends React.Component {
     })
   }
 
-  prepareTableData () {
-    let users = this.state.users.filter((user) => {
+  function prepareTableData() {
+    let userData = users.filter((user) => {
       return user.admin === 0
     })
-    return users.map((user) => {
-      let startDate = moment.unix(user.start_date)
-      let endDate = moment.unix(user.start_date).add(user.subscription, 'months')
-      let result = endDate.from(startDate)
-      let active = endDate > moment()
-
+    return userData.map((user) => {
       return {
         id: user.id,
         username: <a className='text-primary' onClick={() => { history.push('/user/' + user.id) }}> {user.username} </a>,
         firstName: user.first_name,
         lastName: user.last_name,
         email: user.email,
-        active: active ? 'Yes' : 'No',
-        expires: result,
         subscription: <a className='text-primary' onClick={() => { history.push('/user/edit/' + user.id) }}> Edit</a>
       }
     })
   }
 
-  render () {
-    let user = getUser()
-    if (user && user.admin && this.state.users.length) {
-      let users = this.prepareTableData()
-      if (users.length) {
-        let columns = this.getColumns(users)
+  let user = getUser()
+  if (user && user.admin && users.length) {
+    let userData = prepareTableData()
+    if (userData.length) {
+      let columns = getColumns(userData)
 
-        return <div>
-          <ReactTable
-            data={users}
-            columns={columns}
-            className={'-striped -highlight'}
-            showPagination={false}
-            defaultPageSize={users.length}
-          />
-        </div>
-      } else {
-        return <div>
-          No users
-        </div>
-      }
+      return <div>
+        <ReactTable
+          data={userData}
+          columns={columns}
+          className={'-striped -highlight'}
+          showPagination={false}
+          defaultPageSize={userData.length}
+        />
+      </div>
     } else {
-      if (!user || !user.admin) {
-        return <div>
-          You are not authenticated
+      return <div>
+        No users
         </div>
-      } else {
-        return <div>
-          No users
+    }
+  } else {
+    if (!user || !user.admin) {
+      return <div>
+        You are not authenticated
         </div>
-      }
+    } else {
+      return <div>
+        No users
+        </div>
     }
   }
 }
-
-export default UserTable

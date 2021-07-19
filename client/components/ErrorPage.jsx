@@ -1,15 +1,7 @@
 import React from 'react'
 
-export class ErrorPage extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-    }
-  }
-  render () {
+export default function ErrorPage() {
     return <div>
     You should go to librarian to register you!
     </div>
-  }
 }
-export default ErrorPage

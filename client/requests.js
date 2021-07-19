@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
-var axios = require('axios')
-var basePath = 'http://localhost:3001'
-var qs = require('qs')
-var passwordHash = require('password-hash')
-var auth = require('./auth')
+import axios from 'axios'
+import passwordHash from 'password-hash'
+import auth from './auth'
+import jwt from 'jsonwebtoken'
+const basePath = 'http://localhost:3001/api'
 
-function getUserByID (id) {
-  return axios.get(basePath + '/api/user/' + id)
+function getUserByID(id) {
+  return axios.get(`${basePath}/user/${id}`)
     .then(function (response) {
       auth.checkResponse(response)
       return response.data
@@ -16,8 +16,8 @@ function getUserByID (id) {
     })
 }
 
-function borrowBook (userID, bookID) {
-  return axios.put(basePath + '/api/borrow/book/' + bookID + '/user/' + userID)
+function borrowBook(userID, bookID) {
+  return axios.post(`${basePath}/user/${userID}/book/${bookID}/borrow`)
     .then(function (response) {
       auth.checkResponse(response)
       return response.data
@@ -27,8 +27,8 @@ function borrowBook (userID, bookID) {
     })
 }
 
-function returnBook (userID, bookID) {
-  return axios.delete(basePath + '/api/borrow/book/' + bookID + '/user/' + userID)
+function returnBook(userID, bookID) {
+  return axios.post(`${basePath}/user/${userID}/book/${bookID}/return`)
     .then(function (response) {
       auth.checkResponse(response)
       return response.data
@@ -38,8 +38,8 @@ function returnBook (userID, bookID) {
     })
 }
 
-function deleteBook (id) {
-  return axios.delete(basePath + '/api/book/' + id)
+function deleteBook(id) {
+  return axios.delete(`${basePath}/book/id`)
     .then(function (response) {
     })
     .catch(function (error) {
@@ -47,8 +47,8 @@ function deleteBook (id) {
     })
 }
 
-function getUsers () {
-  return axios.get(basePath + '/api/users')
+function getUsers() {
+  return axios.get(`${basePath}/users`)
     .then(function (response) {
       auth.checkResponse(response)
       return response.data
@@ -58,18 +58,16 @@ function getUsers () {
     })
 }
 
-function loginUser (data) {
-  return axios.post(basePath + '/api/login', qs.stringify(data))
+function loginUser(data) {
+  console.log(data)
+  return axios.post(`${basePath}/login`, data)
     .then(function (response) {
-      localStorage.setItem('token', response.data.token)
-      let user = {
-        username: response.data.user.username,
-        name: response.data.user.first_name + response.data.user.last_name,
-        email: response.data.user.email,
-        admin: response.data.user.admin,
-        id: response.data.user.id
-      }
-      localStorage.setItem('user', JSON.stringify(user))
+      const user = jwt.verify(response.data.access_token, 'J1vO0dwYPuyGeAnt35yzefnOhgRHRKfw');
+      localStorage.setItem('token', response.data.access_token)
+      localStorage.setItem('user', JSON.stringify({
+        ...user,
+        ...{ name: `${user.first_name} ${user.last_name}` }
+      }))
       if (user.admin) {
         window.location = 'http://localhost:3000' + '/admin'
       } else {
@@ -81,8 +79,8 @@ function loginUser (data) {
     })
 }
 
-function getBooks () {
-  return axios.get(basePath + '/api/books')
+function getBooks() {
+  return axios.get(`${basePath}/books`)
     .then(function (response) {
       return response.data
     })
@@ -91,8 +89,8 @@ function getBooks () {
     })
 }
 
-function getBookById (id) {
-  return axios.get(basePath + '/api/book/' + id)
+function getBookById(id) {
+  return axios.get(`${basePath}/book/${id}`)
     .then(function (response) {
       return response.data
     })
@@ -101,8 +99,8 @@ function getBookById (id) {
     })
 }
 
-function postUser (data) {
-  return axios.post(basePath + '/api/user', qs.stringify(data))
+function postUser(data) {
+  return axios.post(`${basePath}/register`, data)
     .then(function (response) {
       return response.data
     })
@@ -111,18 +109,18 @@ function postUser (data) {
     })
 }
 
-function updateUser (data) {
-  return axios.put(basePath + '/api/user/' + data.id, qs.stringify(data))
-  .then(function (response) {
-    return response.data
-  })
-  .catch(function (error) {
-    return error
-  })
+function updateUser(data) {
+  return axios.put(`${basePath}/user/${data.id}`, data)
+    .then(function (response) {
+      return response.data
+    })
+    .catch(function (error) {
+      return error
+    })
 }
 
-function postBook (data) {
-  return axios.post(basePath + '/api/book', qs.stringify(data))
+function postBook(data) {
+  return axios.post(`${basePath}/book`, data)
     .then(function (response) {
       return response.data
     })
@@ -132,8 +130,8 @@ function postBook (data) {
     })
 }
 
-function editBook (data) {
-  return axios.put(basePath + '/api/book/' + data.id, qs.stringify(data))
+function editBook(data) {
+  return axios.put(`${basePath}/book/${data.id}`, data)
     .then(function (response) {
       return response.data
     })
@@ -142,19 +140,19 @@ function editBook (data) {
     })
 }
 
-function updatePassword (userId, newPass) {
+function updatePassword(userId, newPass) {
   if (!passwordHash.verify(newPass.oldPass, newPass.current)) {
     return new Promise((resolve, reject) => {
-      reject({error: 'Old password is wrong!'})
+      reject({ error: 'Old password is wrong!' })
     })
   }
   if (newPass.newPass !== newPass.repeatPass) {
     return new Promise((resolve, reject) => {
-      reject({error: 'Password don`t match'})
+      reject({ error: 'Password don`t match' })
     })
   }
-  let updateData = {password: newPass.newPass}
-  return axios.put(basePath + '/api/user/' + userId, qs.stringify(updateData))
+  let updateData = { password: newPass.newPass }
+  return axios.put(basePath + '/user/' + userId, updateData)
     .then(function (response) {
       return response.data
     })
@@ -163,26 +161,26 @@ function updatePassword (userId, newPass) {
     })
 }
 
-function likeBook (bookId, userId) {
-  return axios.post(basePath + '/api/' + bookId + '/' + userId)
-  .then(function (response) {
-    return response.data
-  })
-  .catch(function (error) {
-    console.log(error)
-    return error
-  })
+function likeBook(bookId, userId) {
+  return axios.post(`${basePath}/user/${userId}/book/${bookId}/like`)
+    .then(function (response) {
+      return response.data
+    })
+    .catch(function (error) {
+      console.log(error)
+      return error
+    })
 }
 
-function dislikeBook (bookId, userId) {
-  return axios.delete(basePath + '/api/' + bookId + '/' + userId)
-  .then(function (response) {
-    return response.data
-  })
-  .catch(function (error) {
-    console.log(error)
-    return error
-  })
+function dislikeBook(bookId, userId) {
+  return axios.post(`${basePath}/user/${userId}/book/${bookId}/dislike`)
+    .then(function (response) {
+      return response.data
+    })
+    .catch(function (error) {
+      console.log(error)
+      return error
+    })
 }
 
 module.exports = {
